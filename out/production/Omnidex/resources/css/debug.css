@@ -1,0 +1,5 @@
+.borders {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-fill: green;
+}
