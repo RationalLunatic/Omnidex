@@ -10,10 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import resources.ResourceManager;
 import resources.StringFormatUtility;
+import ui.components.*;
+import ui.components.interviewcommunications.ViewRequest;
+import ui.components.interviewcommunications.ViewRequestHandler;
+import ui.components.scalingcomponents.ScalingLabel;
+import ui.components.scalingcomponents.ScalingStackPane;
+import ui.components.scalingcomponents.ViewBindingsPack;
 import ui.custombindings.ScaledDoubleBinding;
-import ui.components.ScalingLabel;
-import ui.components.ScalingStackPane;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,21 +34,14 @@ public class DayTile extends ScalingStackPane {
     private HBox topRow;
     private HBox midRow;
     private HBox lowRow;
-    private final Color DEFAULT_BORDER = Color.BLACK;
-    private final Color DEFAULT_HIGHLIGHT = Color.AQUA;
-    private final Color DEFAULT_CLICK = Color.AZURE;
-    private final double TOP_ROW_MID_WIDTH = 2.0/3;
-    private final double TOP_ROW_CORNER_WIDTH = 1.0/6;
-    private final double DAY_OF_MONTH_SCALING_FACTOR = 1.5;
-    private final double DAY_OF_WEEK_SCALING_FACTOR = 6;
     private ScaledDoubleBinding cornerScale;
     private ScaledDoubleBinding centerScale;
 
-    public DayTile(ScaledDoubleBinding width, ScaledDoubleBinding height, LocalDate date) {
-        super(width, height);
+    public DayTile(ViewRequestHandler commLink, ViewBindingsPack viewBindings, LocalDate date, PaneKeys key) {
+        super(commLink, viewBindings, key);
         this.date = date;
-        cornerScale = new ScaledDoubleBinding(width, TOP_ROW_CORNER_WIDTH);
-        centerScale = new ScaledDoubleBinding(width, TOP_ROW_MID_WIDTH);
+        cornerScale = new ScaledDoubleBinding(viewBindings.widthProperty(), getResourceManager().dayTileTopRowCornerWidth());
+        centerScale = new ScaledDoubleBinding(viewBindings.widthProperty(), getResourceManager().dayTileTopRowMidWidth());
         initStackPane();
         initContainer();
         init();
@@ -54,7 +52,7 @@ public class DayTile extends ScalingStackPane {
         border.widthProperty().bind(this.prefWidthProperty());
         border.heightProperty().bind(this.prefHeightProperty());
         border.setFill(Color.TRANSPARENT);
-        border.setStroke(DEFAULT_BORDER);
+        border.setStroke(getResourceManager().dayTileDefaultBorder());
         border.setStrokeWidth(1.0);
         this.getChildren().add(border);
         this.setOnMouseEntered(e -> highlight());
@@ -63,11 +61,11 @@ public class DayTile extends ScalingStackPane {
     }
 
     private void highlight() {
-        border.setStroke(DEFAULT_HIGHLIGHT);
+        border.setStroke(getResourceManager().dayTileDefaultHighlight());
     }
 
     private void resetHighlight() {
-        border.setStroke(DEFAULT_BORDER);
+        border.setStroke(getResourceManager().dayTileDefaultBorder());
     }
 
     private StrokeTransition generateBorderAnimation(Color fromColor, Color toColor, Duration duration) {
@@ -82,9 +80,10 @@ public class DayTile extends ScalingStackPane {
 
     private void openDay() {
         SequentialTransition borderFlash = new SequentialTransition();
-        borderFlash.getChildren().add(generateBorderAnimation(DEFAULT_HIGHLIGHT, DEFAULT_CLICK, Duration.millis(50)));
+        borderFlash.getChildren().add(generateBorderAnimation(getResourceManager().dayTileDefaultHighlight(), getResourceManager().dayTileDefaultClick(), Duration.millis(50)));
         borderFlash.setCycleCount(1);
         borderFlash.play();
+        sendViewRequest(new ViewRequest(getPersonalKey(), date));
     }
 
 
@@ -103,19 +102,17 @@ public class DayTile extends ScalingStackPane {
 
 
     private void init() {
-        String weekDay = StringFormatUtility.capitalize(date.getDayOfWeek().toString());
-        int dayOfMonth = date.getDayOfMonth();
         HBox left = new HBox();
-        left.prefWidthProperty().bind(cornerScale);
         HBox mid = new HBox();
-        mid.prefWidthProperty().bind(centerScale);
         HBox right = new HBox();
+        left.prefWidthProperty().bind(cornerScale);
+        mid.prefWidthProperty().bind(centerScale);
         right.prefWidthProperty().bind(cornerScale);
-        mid.getChildren().add(new ScalingLabel(centerScale, DAY_OF_WEEK_SCALING_FACTOR, weekDay));
-        mid.setAlignment(Pos.CENTER);
-        right.getChildren().add(new ScalingLabel(cornerScale, DAY_OF_MONTH_SCALING_FACTOR,"" + dayOfMonth));
-        right.setAlignment(Pos.CENTER_LEFT);
+        mid.getChildren().add(new ScalingLabel(centerScale, StringFormatUtility.capitalize(date.getDayOfWeek().toString())));
+        right.getChildren().add(new ScalingLabel(cornerScale,"" + date.getDayOfMonth()));
         topRow.getChildren().addAll(left, mid, right);
+        mid.setAlignment(Pos.CENTER);
+        right.setAlignment(Pos.CENTER_LEFT);
         topRow.setAlignment(Pos.CENTER);
     }
 

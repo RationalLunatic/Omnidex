@@ -10,8 +10,8 @@ import ui.custombindings.DirectDoubleBinding;
  * Created by shaev_000 on 5/8/2016.
  */
 public class ApplicationMaster {
-    public static final double INITIAL_WIDTH = 800;
-    public static final double INITIAL_HEIGHT = 600;
+    public static final double INITIAL_WIDTH = 1200;
+    public static final double INITIAL_HEIGHT = 900;
 
     private Stage mainStage;
     private Scene mainScene;

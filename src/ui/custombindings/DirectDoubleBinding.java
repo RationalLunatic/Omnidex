@@ -3,14 +3,12 @@ package ui.custombindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 
-/**
- * Created by shaev_000 on 5/10/2016.
- */
-public class DirectDoubleBinding extends DoubleBinding {
+
+public class DirectDoubleBinding extends ScaledDoubleBinding {
     private DoubleProperty doubleProperty;
 
     public DirectDoubleBinding(DoubleProperty doubleProperty) {
-        super.bind(doubleProperty);
+        super(doubleProperty, 1);
         this.doubleProperty = doubleProperty;
     }
 

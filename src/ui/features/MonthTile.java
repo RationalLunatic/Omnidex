@@ -5,7 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import resources.StringFormatUtility;
-import ui.components.ScalingAnchorPane;
+import ui.components.PaneKeys;
+import ui.components.scalingcomponents.ScalingAnchorPane;
+import ui.components.interviewcommunications.ViewRequestHandler;
+import ui.components.scalingcomponents.ViewBindingsPack;
 import ui.custombindings.ScaledDoubleBinding;
 
 import java.time.DayOfWeek;
@@ -13,23 +16,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by shaev_000 on 5/8/2016.
- */
 public class MonthTile extends ScalingAnchorPane {
-    public static double DAY_TILE_FRACTION = 1.0/7;
-
     private ScaledDoubleBinding tileWidthBinding;
     private ScaledDoubleBinding tileHeightBinding;
-
     private LocalDate referenceDate;
     private VBox monthContainer;
     private List<DayTile> days;
 
-    public MonthTile(ScaledDoubleBinding width, ScaledDoubleBinding height, LocalDate referenceDate) {
-        super(width, height);
-        tileWidthBinding = new ScaledDoubleBinding(width, DAY_TILE_FRACTION);
-        tileHeightBinding = new ScaledDoubleBinding(height, DAY_TILE_FRACTION);
+    public MonthTile(ViewRequestHandler commLink, ViewBindingsPack viewBindings, LocalDate referenceDate, PaneKeys key) {
+        super(commLink, viewBindings, key);
+        tileWidthBinding = new ScaledDoubleBinding(viewBindings.widthProperty(), getResourceManager().monthTileDayTileFraction());
+        tileHeightBinding = new ScaledDoubleBinding(viewBindings.heightProperty(), getResourceManager().monthTileDayTileFraction());
         monthContainer = new VBox();
         days = new ArrayList<>();
         this.referenceDate = referenceDate;
@@ -56,7 +53,8 @@ public class MonthTile extends ScalingAnchorPane {
     }
 
     private LocalDate addTile(HBox currentBox, LocalDate currentDay) {
-        DayTile tile = new DayTile(tileWidthBinding, tileHeightBinding, currentDay);
+        ViewBindingsPack tileBindings = new ViewBindingsPack(tileWidthBinding, tileHeightBinding);
+        DayTile tile = new DayTile(getRequestSender(), tileBindings, currentDay, PaneKeys.DAY);
         days.add(tile);
         currentBox.getChildren().add(tile);
         return LocalDate.ofEpochDay(currentDay.toEpochDay() + 1);

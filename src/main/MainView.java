@@ -1,40 +1,67 @@
 package main;
 
 import javafx.scene.layout.BorderPane;
+import resources.sqlite.SQLiteJDBC;
+import ui.components.interviewcommunications.MainViewCommLink;
+import ui.components.mainpanes.CenterPanes;
+import ui.components.mainpanes.NorthPanes;
+import ui.components.scalingcomponents.CenterParentScalingStackPane;
+import ui.components.scalingcomponents.ScalingHBox;
+import ui.components.scalingcomponents.ScalingVBox;
+import ui.components.scalingcomponents.ViewBindingsPack;
 import ui.custombindings.DirectDoubleBinding;
 import ui.custombindings.ScaledDoubleBinding;
-import ui.components.CenterPanes;
-import ui.components.ScalingHBox;
-import ui.components.ScalingStackPane;
-import ui.components.ScalingVBox;
 import resources.ResourceManager;
 
-/**
- * Created by shaev_000 on 7/27/2016.
- */
+import java.time.LocalDateTime;
+
 public class MainView extends BorderPane {
     private ScalingVBox west;
     private ScalingVBox east;
     private ScalingHBox north;
     private ScalingHBox south;
-    private ScalingStackPane center;
+    private CenterParentScalingStackPane center;
     private ResourceManager bundleLoader;
     private CenterPanes centerPanes;
+    private NorthPanes northPanes;
     private boolean debugMode;
+    private MainViewCommLink commLink;
+    private DirectDoubleBinding width;
+    private DirectDoubleBinding height;
 
     public MainView(DirectDoubleBinding width, DirectDoubleBinding height) {
-       init(width, height);
+        this.width = width;
+        this.height = height;
+        init();
     }
 
-    private void init(DirectDoubleBinding width, DirectDoubleBinding height) {
+    private void init() {
         loadResources();
-        initScalingPanes(width, height);
+        initScalingPanes();
+        commLink = new MainViewCommLink();
+        initCenterPanes();
+        initNorthPanes();
         setScalingPanes();
-        centerPanes = new CenterPanes(new ScaledDoubleBinding(width, bundleLoader.centerPaneScalingFactor()),
-                new ScaledDoubleBinding(height, bundleLoader.centerPaneScalingFactor()));
-        center.getChildren().add(centerPanes.getCalendar());
+        commLink.addCenterPanes(centerPanes, center);
+        commLink.addNorthPanes(northPanes, north);
+        commLink.init();
         debugMode = false;
         toggleBorders();
+    }
+
+    private void initCenterPanes() {
+        ScaledDoubleBinding widthBinding = new ScaledDoubleBinding(width, bundleLoader.centerPaneScalingFactor());
+        ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, bundleLoader.centerPaneScalingFactor());
+        ViewBindingsPack centerPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
+        center = new CenterParentScalingStackPane(centerPanesBindingPack);
+        centerPanes = new CenterPanes(commLink, centerPanesBindingPack);
+    }
+
+    private void initNorthPanes() {
+        ScaledDoubleBinding widthBinding = new ScaledDoubleBinding(width, 1);
+        ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 0.125);
+        ViewBindingsPack northPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
+        northPanes = new NorthPanes(commLink, northPanesBindingPack);
     }
 
     private void loadResources() {
@@ -50,13 +77,11 @@ public class MainView extends BorderPane {
         this.setBottom(south);
     }
 
-    private void initScalingPanes(DirectDoubleBinding width, DirectDoubleBinding height) {
+    private void initScalingPanes() {
         west = new ScalingVBox(new ScaledDoubleBinding(width, bundleLoader.westPaneScalingFactor()));
         east = new ScalingVBox(new ScaledDoubleBinding(width, bundleLoader.eastPaneScalingFactor()));
         north = new ScalingHBox(new ScaledDoubleBinding(height, bundleLoader.northPaneScalingFactor()));
         south = new ScalingHBox(new ScaledDoubleBinding(height, bundleLoader.southPaneScalingFactor()));
-        center = new ScalingStackPane(new ScaledDoubleBinding(width, bundleLoader.centerPaneScalingFactor()),
-                new ScaledDoubleBinding(height, bundleLoader.centerPaneScalingFactor()));
     }
 
     private void showBorders() {
