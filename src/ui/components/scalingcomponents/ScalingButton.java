@@ -18,4 +18,14 @@ public class ScalingButton extends Button {
         this.prefHeightProperty().bind(buttonBindings.heightProperty());
         this.prefWidthProperty().bind(buttonBindings.widthProperty());
     }
+    public ScalingButton(ViewBindingsPack buttonBindings, double desiredPercentageScale) {
+        this.prefHeightProperty().bind(buttonBindings.heightProperty());
+        this.prefWidthProperty().bind(new ScaledDoubleBinding(buttonBindings.widthProperty(), desiredPercentageScale));
+    }
+
+    public ScalingButton(String text, ViewBindingsPack buttonBindings, double desiredPercentageScale) {
+        super(text);
+        this.prefHeightProperty().bind(buttonBindings.heightProperty());
+        this.prefWidthProperty().bind(new ScaledDoubleBinding(buttonBindings.widthProperty(), desiredPercentageScale));
+    }
 }

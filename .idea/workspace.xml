@@ -2,76 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_19_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/engine/components/schedule/ToDoListTask.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/DBCore.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/DBIOTaskTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/testpackage/CreateSQLiteJDBC.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/testpackage/InsertSQLiteJDBC.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/testpackage/SelectSQLiteJDBC.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/testpackage/TableSQLiteJDBC.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/EditableLabel/ScalingEditableLabel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/EditableLabel/ScalingEditableLabelBehavior.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/EditableLabel/ScalingEditableLabelSkin.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/MainViewCommLink.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/SubViewCommLink.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/ViewRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/ViewRequestHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/PaneKeys.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/ScalingComponents/CenterParentScalingStackPane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingAnchorPane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingStackPane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/editablelabel/editablelabel.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/CenterPanes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/EastPanes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/NorthPanes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/SouthPanes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/WestPanes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/scalingcomponents/ViewBindingsPack.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/custombindings/StrLenBinding.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/DayView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/HourTile.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/AcademyView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/BeaconView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/GymnasiumView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/VaultView.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/CenterPanes.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/ScalingAnchorPane.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/ScalingHBox.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/ScalingLabel$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/ScalingLabel.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/ScalingStackPane.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/ScalingVBox.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/Calendar.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ui/components/CenterPanes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ui/components/ScalingAnchorPane.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ui/components/ScalingLabel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ui/components/ScalingStackPane.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/main/Launcher.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/main/Launcher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/main/MainView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/main/MainView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/ResourceManager.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/ResourceManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/StringFormatUtility.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/StringFormatUtility.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/custombindings/DirectDoubleBinding.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/custombindings/DirectDoubleBinding.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/DayTile.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/DayTile.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/MonthTile.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/MonthTile.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Omnidex.iml" afterPath="$PROJECT_DIR$/Omnidex.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/property_files/layout_data.properties" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/property_files/layout_data.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/ApplicationMaster.java" afterPath="$PROJECT_DIR$/src/main/ApplicationMaster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Launcher.java" afterPath="$PROJECT_DIR$/src/main/Launcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/ResourceManager.java" afterPath="$PROJECT_DIR$/src/resources/ResourceManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/StringFormatUtility.java" afterPath="$PROJECT_DIR$/src/resources/StringFormatUtility.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/property_files/layout_data.properties" afterPath="$PROJECT_DIR$/src/resources/property_files/layout_data.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/custombindings/DirectDoubleBinding.java" afterPath="$PROJECT_DIR$/src/ui/custombindings/DirectDoubleBinding.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/omnidex.db" afterPath="$PROJECT_DIR$/omnidex.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java" afterPath="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/DayTile.java" afterPath="$PROJECT_DIR$/src/ui/features/DayTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/MonthTile.java" afterPath="$PROJECT_DIR$/src/ui/features/MonthTile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/components/ScalingHBox.java" afterPath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingHBox.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/components/ScalingVBox.java" afterPath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingVBox.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/features/Calendar.java" afterPath="$PROJECT_DIR$/src/ui/features/MonthView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/DayView.java" afterPath="$PROJECT_DIR$/src/ui/features/DayView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/HourTile.java" afterPath="$PROJECT_DIR$/src/ui/features/HourTile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -146,8 +82,28 @@
       <file leaf-file-name="ScalingLabel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingLabel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="20" column="73" selection-start-line="20" selection-start-column="73" selection-end-line="20" selection-end-column="73" />
+            <state relative-caret-position="170">
+              <caret line="17" column="113" selection-start-line="17" selection-start-column="113" selection-end-line="17" selection-end-column="113" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScalingEditableLabel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="30" column="93" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScaledDoubleBinding.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/custombindings/ScaledDoubleBinding.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -157,41 +113,8 @@
         <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
-              <caret line="34" column="62" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
+              <caret line="34" column="75" selection-start-line="34" selection-start-column="75" selection-end-line="34" selection-end-column="75" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DayTile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/features/DayTile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MonthTile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/features/MonthTile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StrLenBinding.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/custombindings/StrLenBinding.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
-              <folding>
-                <element signature="e#734#735#0" expanded="true" />
-                <element signature="e#815#816#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -199,12 +122,22 @@
       <file leaf-file-name="DayView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/features/DayView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-793">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state relative-caret-position="875">
+              <caret line="149" column="83" selection-start-line="149" selection-start-column="83" selection-end-line="149" selection-end-column="83" />
               <folding>
-                <element signature="e#4546#4547#0" expanded="true" />
-                <element signature="e#4619#4620#0" expanded="true" />
+                <element signature="e#4589#4590#0" expanded="true" />
+                <element signature="e#4662#4663#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DayTile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/features/DayTile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="89" column="34" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -212,8 +145,8 @@
       <file leaf-file-name="ScalingButton.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+            <state relative-caret-position="255">
+              <caret line="17" column="72" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -222,13 +155,13 @@
       <file leaf-file-name="HourTile.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ui/features/HourTile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+            <state relative-caret-position="346">
+              <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="35" />
               <folding>
-                <element signature="e#3547#3548#0" expanded="true" />
-                <element signature="e#3588#3589#0" expanded="true" />
-                <element signature="e#3639#3640#0" expanded="true" />
-                <element signature="e#3677#3678#0" expanded="true" />
+                <element signature="e#4395#4396#0" expanded="true" />
+                <element signature="e#4436#4437#0" expanded="true" />
+                <element signature="e#4487#4488#0" expanded="true" />
+                <element signature="e#4525#4526#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -280,7 +213,6 @@
         <option value="$PROJECT_DIR$/src/ui/components/InterViewCommunications/ViewRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/resources/css/editablelabel.css" />
-        <option value="$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabel.java" />
         <option value="$PROJECT_DIR$/src/resources/property_files/layout_data.properties" />
         <option value="$PROJECT_DIR$/src/resources/ResourceManager.java" />
         <option value="$PROJECT_DIR$/src/ui/components/PaneKeys.java" />
@@ -315,14 +247,15 @@
         <option value="$PROJECT_DIR$/src/resources/sqlite/DBCore.java" />
         <option value="$PROJECT_DIR$/src/main/ApplicationMaster.java" />
         <option value="$PROJECT_DIR$/src/main/MainView.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java" />
         <option value="$PROJECT_DIR$/src/ui/custombindings/StrLenBinding.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingLabel.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/DayTile.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" />
         <option value="$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/DayView.java" />
         <option value="$PROJECT_DIR$/src/resources/sqlite/DBIOTaskTable.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabel.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingLabel.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/DayTile.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/DayView.java" />
         <option value="$PROJECT_DIR$/src/ui/features/HourTile.java" />
       </list>
     </option>
@@ -1041,13 +974,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="40" column="64" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/SouthPanes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1149,14 +1075,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/custombindings/ScaledDoubleBinding.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1399,14 +1317,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/custombindings/StrLenBinding.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1418,34 +1328,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingLabel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="20" column="73" selection-start-line="20" selection-start-column="73" selection-end-line="20" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/DayTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/features/MonthTile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="62" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1460,17 +1346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/DayView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-793">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <element signature="e#4546#4547#0" expanded="true" />
-            <element signature="e#4619#4620#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/sqlite/DBIOTaskTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -1481,15 +1356,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="72" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/custombindings/ScaledDoubleBinding.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="30" column="93" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="75" selection-start-line="34" selection-start-column="75" selection-end-line="34" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingLabel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="17" column="113" selection-start-line="17" selection-start-column="113" selection-end-line="17" selection-end-column="113" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/DayTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="89" column="34" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/DayView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="875">
+          <caret line="149" column="83" selection-start-line="149" selection-start-column="83" selection-end-line="149" selection-end-column="83" />
+          <folding>
+            <element signature="e#4589#4590#0" expanded="true" />
+            <element signature="e#4662#4663#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/features/HourTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        <state relative-caret-position="346">
+          <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="35" />
           <folding>
-            <element signature="e#3547#3548#0" expanded="true" />
-            <element signature="e#3588#3589#0" expanded="true" />
-            <element signature="e#3639#3640#0" expanded="true" />
-            <element signature="e#3677#3678#0" expanded="true" />
+            <element signature="e#4395#4396#0" expanded="true" />
+            <element signature="e#4436#4437#0" expanded="true" />
+            <element signature="e#4487#4488#0" expanded="true" />
+            <element signature="e#4525#4526#0" expanded="true" />
           </folding>
         </state>
       </provider>

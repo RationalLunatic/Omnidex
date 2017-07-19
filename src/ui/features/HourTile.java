@@ -1,7 +1,5 @@
 package ui.features;
 
-import engine.components.schedule.ToDoListTask;
-import javafx.beans.binding.DoubleBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -17,7 +15,6 @@ import ui.components.scalingcomponents.ScalingLabel;
 import ui.components.scalingcomponents.ScalingStackPane;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.ViewBindingsPack;
-import ui.custombindings.ScaledDoubleBinding;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,20 +29,32 @@ public class HourTile extends ScalingStackPane {
     private LocalTime currentHour;
     private Rectangle border;
     private ViewBindingsPack viewBindings;
-     
+    private ScalingButton completeTask;
+    private ScalingButton removeTask;
 
     public HourTile(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key, LocalDateTime currentDateTime) {
         super(commLink, viewBindings, key);
         this.viewBindings = viewBindings;
         this.localDateTime = currentDateTime;
-        hourInfo = new ScalingEditableLabel(viewBindings.widthProperty());
-        hourLabel = new ScalingLabel(viewBindings.widthProperty(), "10:00 A.M.");
         this.currentHour = currentDateTime.toLocalTime();
-        initStackPane();
-        init();
-        initHourInfo();
         this.setAlignment(Pos.CENTER);
-        this.getChildren().add(mainContainer);
+        init();
+    }
+
+    private void init() {
+        initUIElements();
+        initButtonBehavior();
+        initBorder();
+        initContainers();
+        initHourInfo();
+        addChildrenToContainers();
+    }
+
+    private void initUIElements() {
+        this.hourInfo = new ScalingEditableLabel(viewBindings.widthProperty(), 0.8);
+        this.hourLabel = new ScalingLabel(viewBindings.widthProperty(), "10:00 A.M.", 0.2);
+        this.completeTask = new ScalingButton("Complete Task", viewBindings, 0.3);
+        this.removeTask = new ScalingButton("Remove Task", viewBindings, 0.3);
     }
 
     private void initHourInfo() {
@@ -66,7 +75,7 @@ public class HourTile extends ScalingStackPane {
         }
     }
 
-    private void initStackPane() {
+    private void initBorder() {
         border = new Rectangle(0, 0);
         border.setFill(Color.TRANSPARENT);
         border.setStroke(Color.BLACK);
@@ -74,16 +83,34 @@ public class HourTile extends ScalingStackPane {
         this.getChildren().add(border);
     }
 
-    private void init() {
+    private void initContainers() {
         mainContainer = new HBox();
         hourLabelContainer = new HBox();
-        hourLabelContainer.setAlignment(Pos.CENTER);
         hourInfoContainer = new HBox();
         hourLabel.setText(StringFormatUtility.convertToHour(currentHour));
+        hourLabelContainer.setAlignment(Pos.CENTER);
+    }
+
+    private void addChildrenToContainers() {
         hourLabelContainer.getChildren().add(hourLabel);
         hourInfoContainer.getChildren().add(hourInfo);
         mainContainer.getChildren().add(hourLabelContainer);
         mainContainer.getChildren().add(hourInfoContainer);
+        mainContainer.getChildren().add(completeTask);
+        mainContainer.getChildren().add(removeTask);
+        this.getChildren().add(mainContainer);
+    }
+
+    private void initButtonBehavior() {
+        completeTask.setOnMouseClicked(e -> deleteTask());
+        removeTask.setOnMouseClicked(e -> deleteTask());
+    }
+
+    private void deleteTask() {
+        if(SQLiteJDBC.getInstance().hasTask(localDateTime)) {
+            SQLiteJDBC.getInstance().deleteTask(localDateTime);
+            setTaskDescription("");
+        }
     }
 
     public String getTaskDescription() {

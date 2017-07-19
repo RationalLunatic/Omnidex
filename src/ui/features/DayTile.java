@@ -108,8 +108,8 @@ public class DayTile extends ScalingStackPane {
         left.prefWidthProperty().bind(cornerScale);
         mid.prefWidthProperty().bind(centerScale);
         right.prefWidthProperty().bind(cornerScale);
-        mid.getChildren().add(new ScalingLabel(centerScale, StringFormatUtility.capitalize(date.getDayOfWeek().toString())));
-        right.getChildren().add(new ScalingLabel(cornerScale,"" + date.getDayOfMonth()));
+        mid.getChildren().add(new ScalingLabel(centerScale, StringFormatUtility.capitalize(date.getDayOfWeek().toString()), 1));
+        right.getChildren().add(new ScalingLabel(cornerScale,"" + date.getDayOfMonth(), 1));
         topRow.getChildren().addAll(left, mid, right);
         mid.setAlignment(Pos.CENTER);
         right.setAlignment(Pos.CENTER_LEFT);

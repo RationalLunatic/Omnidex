@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import resources.StringFormatUtility;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.PaneKeys;
 import ui.components.scalingcomponents.ScalingButton;
@@ -121,7 +122,7 @@ public class DayView extends ScalingStackPane {
     }
 
     private void initTitle() {
-        dayTitle = new ScalingLabel(viewBindings.widthProperty(), "Init Title");
+        dayTitle = new ScalingLabel(viewBindings.widthProperty(), "Init Title", 0.4);
         dayTitle.setAlignment(Pos.CENTER);
         dayTitle.prefWidthProperty().bind(this.prefWidthProperty());
     }
@@ -145,7 +146,10 @@ public class DayView extends ScalingStackPane {
 
     public void setDate(LocalDate date) {
         today = date;
-        dayTitle.setText(today.toString());
+        dayTitle.setText(
+                StringFormatUtility.capitalize(today.getDayOfWeek().toString()) + " " +
+                StringFormatUtility.capitalize(today.getMonth().toString()) + " " +
+                today.getDayOfMonth() + ", " + today.getYear());
 
     }
 

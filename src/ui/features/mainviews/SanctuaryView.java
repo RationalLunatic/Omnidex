@@ -30,9 +30,9 @@ public class SanctuaryView extends ScalingStackPane {
     }
 
     private void initLabels() {
-        name = new ScalingLabel(viewBindings.widthProperty(), "Jack");
-        age = new ScalingLabel(viewBindings.widthProperty(), "21");
-        gender = new ScalingLabel(viewBindings.widthProperty(), "Male");
+        name = new ScalingLabel(viewBindings.widthProperty(), "Jack", 0.3);
+        age = new ScalingLabel(viewBindings.widthProperty(), "21", 0.2);
+        gender = new ScalingLabel(viewBindings.widthProperty(), "Male", 0.3);
         profileDisplay.getChildren().addAll(name, age, gender);
     }
 }

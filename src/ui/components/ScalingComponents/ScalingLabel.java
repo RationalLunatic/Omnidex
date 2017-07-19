@@ -13,9 +13,9 @@ import ui.custombindings.StrLenBinding;
  * Created by shaev_000 on 5/9/2016.
  */
 public class ScalingLabel extends Label {
-    public ScalingLabel(ScaledDoubleBinding width, String text) {
+    public ScalingLabel(ScaledDoubleBinding width, String text, double desiredScalingPercentage) {
         super(text);
-        this.prefWidthProperty().bind(new StrLenBinding(width.getDoubleProperty(), this.textProperty()));
+        this.prefWidthProperty().bind(new ScaledDoubleBinding(width.getDoubleProperty(), desiredScalingPercentage));
         ObjectProperty<Font> fontProperty = new SimpleObjectProperty<>();
         this.fontProperty().bind(fontProperty);
         fontProperty.set(Font.font(this.prefWidthProperty().get() / (this.textProperty().get().length()) / 4 - 6));

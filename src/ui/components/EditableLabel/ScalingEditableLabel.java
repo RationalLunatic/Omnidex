@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
+import ui.custombindings.ScaledDoubleBinding;
 
 import java.net.URL;
 
@@ -14,14 +15,25 @@ public class ScalingEditableLabel extends TextField {
     private IntegerProperty clicksThreshold;
     private StringProperty baseText;
 
-    public ScalingEditableLabel(DoubleBinding width) {
+    public ScalingEditableLabel(ScaledDoubleBinding width) {
         this(width, "");
         this.prefWidthProperty().bind(width);
     }
 
-    public ScalingEditableLabel(DoubleBinding width, String text) {
+    public ScalingEditableLabel(ScaledDoubleBinding width, String text) {
         super(text);
         this.prefWidthProperty().bind(width);
+        init();
+    }
+
+    public ScalingEditableLabel(ScaledDoubleBinding width, double desiredScalingPercentage) {
+        this(width, "");
+        this.prefWidthProperty().bind(new ScaledDoubleBinding(width, desiredScalingPercentage));
+    }
+
+    public ScalingEditableLabel(ScaledDoubleBinding width, String text, double desiredScalingPercentage) {
+        super(text);
+        this.prefWidthProperty().bind(new ScaledDoubleBinding(width, desiredScalingPercentage));
         init();
     }
 
