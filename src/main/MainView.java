@@ -5,6 +5,7 @@ import resources.sqlite.SQLiteJDBC;
 import ui.components.interviewcommunications.MainViewCommLink;
 import ui.components.mainpanes.CenterPanes;
 import ui.components.mainpanes.NorthPanes;
+import ui.components.mainpanes.WestPanes;
 import ui.components.scalingcomponents.CenterParentScalingStackPane;
 import ui.components.scalingcomponents.ScalingHBox;
 import ui.components.scalingcomponents.ScalingVBox;
@@ -24,6 +25,7 @@ public class MainView extends BorderPane {
     private ResourceManager bundleLoader;
     private CenterPanes centerPanes;
     private NorthPanes northPanes;
+    private WestPanes westPanes;
     private boolean debugMode;
     private MainViewCommLink commLink;
     private DirectDoubleBinding width;
@@ -41,10 +43,11 @@ public class MainView extends BorderPane {
         commLink = new MainViewCommLink();
         initCenterPanes();
         initNorthPanes();
+        initWestPanes();
         setScalingPanes();
         commLink.addCenterPanes(centerPanes, center);
         commLink.addNorthPanes(northPanes, north);
-        commLink.init();
+        commLink.addWestPanes(westPanes, west);
         debugMode = false;
         toggleBorders();
     }
@@ -54,14 +57,21 @@ public class MainView extends BorderPane {
         ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, bundleLoader.centerPaneScalingFactor());
         ViewBindingsPack centerPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
         center = new CenterParentScalingStackPane(centerPanesBindingPack);
-        centerPanes = new CenterPanes(commLink, centerPanesBindingPack);
+        centerPanes = new CenterPanes(center, commLink, centerPanesBindingPack);
     }
 
     private void initNorthPanes() {
         ScaledDoubleBinding widthBinding = new ScaledDoubleBinding(width, 1);
         ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 0.125);
         ViewBindingsPack northPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
-        northPanes = new NorthPanes(commLink, northPanesBindingPack);
+        northPanes = new NorthPanes(north, commLink, northPanesBindingPack);
+    }
+
+    private void initWestPanes() {
+        ScaledDoubleBinding widthBinding = new ScaledDoubleBinding(width, 0.125);
+        ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 1);
+        ViewBindingsPack westPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
+        westPanes = new WestPanes(west, commLink, westPanesBindingPack);
     }
 
     private void loadResources() {
@@ -78,10 +88,14 @@ public class MainView extends BorderPane {
     }
 
     private void initScalingPanes() {
-        west = new ScalingVBox(new ScaledDoubleBinding(width, bundleLoader.westPaneScalingFactor()));
-        east = new ScalingVBox(new ScaledDoubleBinding(width, bundleLoader.eastPaneScalingFactor()));
-        north = new ScalingHBox(new ScaledDoubleBinding(height, bundleLoader.northPaneScalingFactor()));
-        south = new ScalingHBox(new ScaledDoubleBinding(height, bundleLoader.southPaneScalingFactor()));
+        ViewBindingsPack westViewBindings = new ViewBindingsPack(new ScaledDoubleBinding(width, bundleLoader.westPaneScalingFactor()), height);
+        ViewBindingsPack eastViewBindings = new ViewBindingsPack(new ScaledDoubleBinding(width, bundleLoader.eastPaneScalingFactor()), height);
+        ViewBindingsPack northViewBindings = new ViewBindingsPack(width, new ScaledDoubleBinding(height, bundleLoader.northPaneScalingFactor()));
+        ViewBindingsPack southViewBindings = new ViewBindingsPack(width, new ScaledDoubleBinding(height, bundleLoader.southPaneScalingFactor()));
+        west = new ScalingVBox(westViewBindings);
+        east = new ScalingVBox(eastViewBindings);
+        north = new ScalingHBox(northViewBindings);
+        south = new ScalingHBox(southViewBindings);
     }
 
     private void showBorders() {

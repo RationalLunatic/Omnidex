@@ -1,4 +1,4 @@
-package ui.features;
+package ui.features.beaconviews;
 
 import engine.components.schedule.Deadline;
 import javafx.animation.SequentialTransition;

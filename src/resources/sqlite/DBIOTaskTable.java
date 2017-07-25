@@ -15,7 +15,7 @@ public class DBIOTaskTable extends DBCore {
 
     public DBIOTaskTable() {
         super();
-        generatedID = getGeneratedID();
+        generatedID = getGeneratedID("TASK");
     }
 
     public Map<Integer, ToDoListTask> getTasksForDay(LocalDate localDate) {
@@ -135,48 +135,7 @@ public class DBIOTaskTable extends DBCore {
         return true;
     }
 
-    private void closeDownDBAction(Statement stmt, ResultSet rs) {
-        try {
-            if(stmt != null) stmt.close();
-            if(rs != null) rs.close();
-            closeConnection();
-        } catch(SQLException e) {
-            closeConnection();
-            e.printStackTrace();
-        }
-    }
-
-    private void closeDownDBAction(Statement stmt) {
-        try{
-            if(stmt != null) stmt.close();
-            closeConnection();
-        } catch(SQLException e) {
-            closeConnection();
-            e.printStackTrace();
-        }
-    }
-
-    private int getGeneratedID() {
-        establishConnection();
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            stmt = getConnection().createStatement();
-            String sql = "SELECT COUNT(*) AS recordcount FROM TASK";
-            rs = stmt.executeQuery(sql);
-            int numRecords = rs.getInt("recordcount");
-            return numRecords;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
-        } finally {
-            closeDownDBAction(stmt, rs);
-        }
-    }
-
     private void updateGeneratedID() {
-        generatedID += 10;
-        Random rand = new Random();
-        generatedID += rand.nextInt(100);
+        generatedID += 1;
     }
 }

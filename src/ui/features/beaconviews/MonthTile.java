@@ -1,4 +1,4 @@
-package ui.features;
+package ui.features.beaconviews;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

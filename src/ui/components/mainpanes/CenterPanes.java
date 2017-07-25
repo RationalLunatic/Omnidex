@@ -1,17 +1,18 @@
 package ui.components.mainpanes;
 
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.ScalingStackPane;
 import ui.components.scalingcomponents.ViewBindingsPack;
+import ui.features.beaconviews.*;
 import ui.features.mainviews.*;
-import ui.features.DayView;
-import ui.features.MonthView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CenterPanes {
+public class CenterPanes extends PanePack {
     private SanctuaryView sanctuaryView;
     private BeaconView beaconView;
     private AcademyView academyView;
@@ -19,26 +20,30 @@ public class CenterPanes {
     private GymnasiumView gymnasiumView;
     private MonthView calendarMonthDisplay;
     private DayView  calendarDayDisplay;
-    private Map<PaneKeys, ScalingStackPane> centerPanes;
-    private ViewRequestHandler commLink;
-    private ViewBindingsPack viewBindings;
+    private GoalView goalView;
+    private LiteratureView literatureView;
+    private GoalCreatorView goalCreatorView;
+    private Map<PaneKeys, Node> centerPanes;
 
-    public CenterPanes(ViewRequestHandler commLink, ViewBindingsPack viewBindings) {
+    public CenterPanes(Pane corePane, ViewRequestHandler commLink, ViewBindingsPack viewBindings) {
+        super(corePane, viewBindings, commLink);
         centerPanes = new HashMap<>();
-        this.commLink = commLink;
-        this.viewBindings = viewBindings;
         initPanes();
         mapPanes();
+        corePane.getChildren().add(beaconView);
     }
 
     private void initPanes() {
-        calendarMonthDisplay = new MonthView(commLink, viewBindings);
-        calendarDayDisplay = new DayView(commLink, viewBindings);
-        beaconView = new BeaconView(commLink, viewBindings, PaneKeys.BEACON);
-        sanctuaryView = new SanctuaryView(commLink, viewBindings, PaneKeys.SANCTUARY);
-        academyView = new AcademyView(commLink, viewBindings, PaneKeys.ACADEMY);
-        vaultView = new VaultView(commLink, viewBindings, PaneKeys.VAULT);
-        gymnasiumView = new GymnasiumView(commLink, viewBindings, PaneKeys.GYMNASIUM);
+        calendarMonthDisplay = new MonthView(getRequestHandler(), getViewBindings());
+        calendarDayDisplay = new DayView(getRequestHandler(), getViewBindings());
+        beaconView = new BeaconView(getRequestHandler(), getViewBindings(), PaneKeys.BEACON);
+        sanctuaryView = new SanctuaryView(getRequestHandler(), getViewBindings(), PaneKeys.SANCTUARY);
+        academyView = new AcademyView(getRequestHandler(), getViewBindings(), PaneKeys.ACADEMY);
+        vaultView = new VaultView(getRequestHandler(), getViewBindings(), PaneKeys.VAULT);
+        gymnasiumView = new GymnasiumView(getRequestHandler(), getViewBindings(), PaneKeys.GYMNASIUM);
+        goalView = new GoalView(getRequestHandler(), getViewBindings(), PaneKeys.GOALS);
+        literatureView = new LiteratureView(getRequestHandler(), getViewBindings(), PaneKeys.LITERATURE);
+        goalCreatorView = new GoalCreatorView(getRequestHandler(), getViewBindings(), PaneKeys.GOAL_CREATOR);
     }
 
     private void mapPanes() {
@@ -49,9 +54,17 @@ public class CenterPanes {
         centerPanes.put(PaneKeys.ACADEMY, academyView);
         centerPanes.put(PaneKeys.VAULT, vaultView);
         centerPanes.put(PaneKeys.GYMNASIUM, gymnasiumView);
+        centerPanes.put(PaneKeys.GOALS, goalView);
+        centerPanes.put(PaneKeys.LITERATURE, literatureView);
+        centerPanes.put(PaneKeys.GOAL_CREATOR, goalCreatorView);
     }
 
-    public ScalingStackPane getCenterPane(PaneKeys key) {
+    public void switchPane(PaneKeys key) {
+        getCorePane().getChildren().clear();
+        getCorePane().getChildren().add(centerPanes.get(key));
+    }
+
+    public Node getPane(PaneKeys key) {
         return centerPanes.get(key);
     }
 }

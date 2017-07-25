@@ -10,10 +10,12 @@ import java.util.Map;
 
 public class SQLiteJDBC {
     private DBIOTaskTable taskIO;
+    private DBIOLibrarian libraryIO;
     private static SQLiteJDBC sInstance;
 
     private SQLiteJDBC() {
         taskIO = new DBIOTaskTable();
+        libraryIO = new DBIOLibrarian();
     }
 
     public static SQLiteJDBC getInstance() {
@@ -25,6 +27,26 @@ public class SQLiteJDBC {
 
     public void addTask(String taskName, String taskDesc, String taskDate) {
         taskIO.insertTask("'" + taskName + "', '" + taskDesc + "', '" + taskDate + "'");
+    }
+
+    public void addToLibrary(String text, InventoryCategories category, String parentName) {
+        libraryIO.addElementToCategory(text, category, parentName);
+    }
+
+    public List<String> getChildrenOfLibraryItem(String parentName) {
+        return libraryIO.getChildrenOfLibraryItem(parentName);
+    }
+
+    public List<String> getItemsOfLibraryCategory(String category) {
+        return libraryIO.getItemsOfCategory(category);
+    }
+
+    public InventoryCategories checkLibraryCategory(String name) {
+        return libraryIO.checkCategory(name);
+    }
+
+    public void addToLibrary(String name, String desc, String category) {
+        libraryIO.addElementToCategory(name, desc, category);
     }
 
     public Map<Integer, ToDoListTask> getTasksForDay(LocalDate day) { return taskIO.getTasksForDay(day); }

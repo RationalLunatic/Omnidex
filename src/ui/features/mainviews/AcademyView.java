@@ -19,7 +19,7 @@ public class AcademyView extends ScalingStackPane {
 
     public AcademyView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
-        mainContainer = new ScalingHBox(viewBindings.heightProperty());
+        mainContainer = new ScalingHBox(viewBindings);
         init(viewBindings);
     }
 

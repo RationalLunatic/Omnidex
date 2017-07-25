@@ -4,32 +4,61 @@ import javafx.beans.binding.DoubleBinding;
 import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
-import ui.components.scalingcomponents.ScalingButton;
-import ui.components.scalingcomponents.ScalingHBox;
-import ui.components.scalingcomponents.ScalingStackPane;
-import ui.components.scalingcomponents.ViewBindingsPack;
+import ui.components.scalingcomponents.*;
 
 import java.time.LocalDate;
 
 public class BeaconView extends ScalingStackPane {
 
-    private ScalingHBox mainContainer;
+    private ScalingVBox mainContainer;
+    private ScalingHBox topRow;
+    private ScalingHBox bottomRow;
+    private ScalingButton monthLink;
+    private ScalingButton todayLink;
+    private ScalingButton goalLink;
 
     public BeaconView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
-        mainContainer = new ScalingHBox(viewBindings.heightProperty());
-        init(viewBindings);
+        init();
     }
 
-    private void init(ViewBindingsPack viewBindings) {
-        ScalingButton monthLink = new ScalingButton(viewBindings);
+    private void init() {
+        initContainers();
+        initButtons();
+        initButtonText();
+        initButtonBehavior();
+        addUIElementsToContainers();
+    }
+
+    private void initContainers() {
+        mainContainer = new ScalingVBox(getViewBindings());
+        topRow = new ScalingHBox(getViewBindings());
+        bottomRow = new ScalingHBox(getViewBindings());
+    }
+
+    private void initButtons() {
+        goalLink = new ScalingButton(getViewBindings());
+        monthLink = new ScalingButton(getViewBindings());
+        todayLink = new ScalingButton(getViewBindings());
+    }
+
+    private void initButtonText() {
+        goalLink.setText("View Goals");
         monthLink.setText("This Month");
+        todayLink.setText("Today");
+    }
+
+    private void initButtonBehavior() {
+        goalLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.GOALS)));
         monthLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.MONTH)));
-        ScalingButton dayLink = new ScalingButton(viewBindings);
-        dayLink.setText("Today");
-        dayLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.DAY, LocalDate.now())));
-        mainContainer.getChildren().add(monthLink);
-        mainContainer.getChildren().add(dayLink);
+        todayLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.DAY, LocalDate.now())));
+    }
+
+    private void addUIElementsToContainers() {
+        topRow.getChildren().add(goalLink);
+        bottomRow.getChildren().add(monthLink);
+        bottomRow.getChildren().add(todayLink);
+        mainContainer.getChildren().addAll(topRow, bottomRow);
         this.getChildren().add(mainContainer);
     }
 }

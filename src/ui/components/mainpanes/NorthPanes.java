@@ -1,6 +1,7 @@
 package ui.components.mainpanes;
 
 import javafx.beans.binding.DoubleBinding;
+import javafx.scene.layout.Pane;
 import resources.StringFormatUtility;
 import skeletonkey.Palace;
 import ui.components.PaneKeys;
@@ -12,7 +13,7 @@ import ui.components.scalingcomponents.ScalingVBox;
 import ui.components.scalingcomponents.ViewBindingsPack;
 import ui.custombindings.ScaledDoubleBinding;
 
-public class NorthPanes {
+public class NorthPanes extends PanePack {
     private ScalingVBox mainContainer;
     private ScalingHBox buttonBarContainer;
     private ScalingButton sanctuaryLink;
@@ -20,16 +21,14 @@ public class NorthPanes {
     private ScalingButton academyLink;
     private ScalingButton vaultLink;
     private ScalingButton gymnasiumLink;
-    private ViewRequestHandler commLink;
-    private ViewBindingsPack viewBindings;
 
-    public NorthPanes(ViewRequestHandler commLink, ViewBindingsPack viewBindings) {
-        this.viewBindings = viewBindings;
-        this.commLink = commLink;
-        mainContainer = new ScalingVBox(viewBindings.widthProperty());
-        buttonBarContainer = new ScalingHBox(viewBindings.heightProperty());
+    public NorthPanes(Pane corePane, ViewRequestHandler commLink, ViewBindingsPack viewBindings) {
+        super(corePane, viewBindings, commLink);
+        mainContainer = new ScalingVBox(viewBindings);
+        buttonBarContainer = new ScalingHBox(viewBindings);
         initButtons();
         mainContainer.getChildren().add(buttonBarContainer);
+        corePane.getChildren().add(mainContainer);
     }
 
     private void initButtons() {
@@ -56,18 +55,28 @@ public class NorthPanes {
     }
 
     private void instantiateButtons() {
-        sanctuaryLink = new ScalingButton(viewBindings);
-        beaconLink = new ScalingButton(viewBindings);
-        academyLink = new ScalingButton(viewBindings);
-        vaultLink = new ScalingButton(viewBindings);
-        gymnasiumLink = new ScalingButton(viewBindings);
+        sanctuaryLink = new ScalingButton(getViewBindings());
+        beaconLink = new ScalingButton(getViewBindings());
+        academyLink = new ScalingButton(getViewBindings());
+        vaultLink = new ScalingButton(getViewBindings());
+        gymnasiumLink = new ScalingButton(getViewBindings());
     }
 
     private void sendViewRequest(PaneKeys key) {
-        commLink.handleRequest(new ViewRequest(key));
+        getRequestHandler().handleRequest(new ViewRequest(key));
     }
 
     public ScalingVBox getNorth() {
         return mainContainer;
+    }
+
+    @Override
+    public void switchPane(PaneKeys key) {
+        // TODO: Add more panes to NorthPanes
+    }
+
+    @Override
+    public Pane getPane(PaneKeys key) {
+        return getCorePane();
     }
 }

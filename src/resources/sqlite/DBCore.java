@@ -57,74 +57,35 @@ public class DBCore {
         }
     }
 
-    private boolean alreadyExists() {
-        if(connectionEstablished) {
-            String[] requiredTables = { "TASK" };
-            try {
-                boolean alreadyExists = true;
-                for(String table : requiredTables) {
-                    if(!tableExists(table)) {
-                        alreadyExists = false;
-                    }
-                }
-                return alreadyExists;
-            } catch ( Exception e ) {
-                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            }
-        } else {
-            notConnectedMessage("alreadyExists");
-        }
-        return false;
-    }
-
-    private boolean tableExists(String tableName) {
-        if(connectionEstablished) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                boolean alreadyExists = false;
-                stmt = dbConnection.createStatement();
-                String sql = "SELECT COUNT(*) AS tablecount FROM sqlite_master WHERE type='table' AND name=" +
-                        "'" + tableName.toUpperCase() +"'";
-                rs = stmt.executeQuery(sql);
-                if(rs.getInt("tablecount") == 1) {
-                    alreadyExists = true;
-                    System.out.println(tableName + " table exists");
-                }
-                return alreadyExists;
-            } catch ( Exception e ) {
-                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            } finally {
-                try {
-                    if(stmt != null) stmt.close();
-                    if(rs != null) rs.close();
-                    closeConnection();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            notConnectedMessage("tableExists");
-        }
-        return false;
-    }
-
     private void initializeDatabase() {
-        if(!alreadyExists()) {
-            System.out.println("TASK table does not exist.  Creating table...");
-            openTableStatement();
-            setTableName("TASK");
-            addTableColumn("NAME           TEXT    NOT NULL");
-            addTableColumn("DESCRIPTION    TEXT    NOT NULL");
-            addTableColumn("SCHEDULE   DATETIME");
-            addTableColumn("COMPLETED   BOOLEAN");
-            createTable();
-        }
+        createTaskTable();
+        createInventoryTable();
+    }
+
+    private void generateTableEssentials(String tableName) {
+        openTableStatement();
+        setTableName(tableName.toUpperCase());
+        addTableColumn("NAME           TEXT    NOT NULL");
+        addTableColumn("DESCRIPTION    TEXT    NOT NULL");
+    }
+
+    private void createInventoryTable() {
+        generateTableEssentials("INVENTORY");
+        addTableColumn("CATEGORY   TEXT   NOT NULL");
+        addTableColumn("PARENT   TEXT");
+        createTable();
+    }
+
+    private void createTaskTable() {
+        generateTableEssentials("TASK");
+        addTableColumn("SCHEDULE   DATETIME");
+        addTableColumn("COMPLETED   BOOLEAN");
+        createTable();
     }
 
     private void openTableStatement() {
         if(currentStatementStatus == StatementStatus.EMPTY) {
-            cumulativeStatement = "CREATE TABLE ";
+            cumulativeStatement = "CREATE TABLE IF NOT EXISTS ";
             currentStatementStatus = StatementStatus.SETTING_TABLE_NAME;
         } else {
             invalidStatementMessage();
@@ -195,6 +156,47 @@ public class DBCore {
             }
         } else {
             notConnectedMessage("createTable");
+        }
+    }
+
+    protected int getGeneratedID(String tableName) {
+
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = getConnection().createStatement();
+            String sql = "SELECT MAX(id) AS max_id FROM " + tableName.toUpperCase();
+            rs = stmt.executeQuery(sql);
+            int numRecords = rs.getInt("max_id");
+            return numRecords + 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+    }
+
+
+    protected void closeDownDBAction(Statement stmt, ResultSet rs) {
+        try {
+            if(stmt != null) stmt.close();
+            if(rs != null) rs.close();
+            closeConnection();
+        } catch(SQLException e) {
+            closeConnection();
+            e.printStackTrace();
+        }
+    }
+
+    protected void closeDownDBAction(Statement stmt) {
+        try{
+            if(stmt != null) stmt.close();
+            closeConnection();
+        } catch(SQLException e) {
+            closeConnection();
+            e.printStackTrace();
         }
     }
 

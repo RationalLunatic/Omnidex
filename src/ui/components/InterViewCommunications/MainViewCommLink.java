@@ -9,49 +9,64 @@ package ui.components.interviewcommunications;
 import ui.components.mainpanes.CenterPanes;
 import ui.components.PaneKeys;
 import ui.components.mainpanes.NorthPanes;
+import ui.components.mainpanes.PanePack;
+import ui.components.mainpanes.WestPanes;
 import ui.components.scalingcomponents.CenterParentScalingStackPane;
 import ui.components.scalingcomponents.ScalingHBox;
-import ui.features.DayView;
+import ui.components.scalingcomponents.ScalingVBox;
+import ui.features.beaconviews.DayView;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class MainViewCommLink extends ViewRequestHandler {
-
     private CenterPanes centerPanes;
     private CenterParentScalingStackPane center;
     private NorthPanes northPanes;
     private ScalingHBox north;
+    private WestPanes westPanes;
+    private ScalingVBox west;
+    private Map<PaneKeys.PaneLocation, PanePack> actionToLocationRouter;
 
     public MainViewCommLink() {
-
+        init();
     }
 
     public void addCenterPanes(CenterPanes centerPanes, CenterParentScalingStackPane center) {
         this.centerPanes = centerPanes;
         this.center = center;
+        actionToLocationRouter.put(PaneKeys.PaneLocation.CENTER, centerPanes);
     }
 
     public void addNorthPanes(NorthPanes northPanes, ScalingHBox north) {
         this.northPanes = northPanes;
         this.north = north;
+        actionToLocationRouter.put(PaneKeys.PaneLocation.NORTH, northPanes);
     }
 
-    public void init() {
-        center.getChildren().clear();
-        center.getChildren().add(centerPanes.getCenterPane(PaneKeys.BEACON));
-        north.getChildren().clear();
-        north.getChildren().add(northPanes.getNorth());
+    public void addWestPanes(WestPanes westPanes, ScalingVBox west) {
+        this.westPanes = westPanes;
+        this.west = west;
+        actionToLocationRouter.put(PaneKeys.PaneLocation.WEST, westPanes);
+    }
+
+
+    private void init() {
+        actionToLocationRouter = new HashMap<>();
     }
 
     @Override
     public void handleRequest(ViewRequest request) {
-        center.getChildren().clear();
-        center.getChildren().add(centerPanes.getCenterPane(request.getTargetView()));
+        actionToLocationRouter.get(request.getTargetView().getLocation()).switchPane(request.getTargetView());
         if(request.getTargetView() == PaneKeys.DAY) {
             setDate(request);
         }
+
     }
 
     private void setDate(ViewRequest request) {
-        DayView dayView = (DayView)centerPanes.getCenterPane(PaneKeys.DAY);
+        DayView dayView = (DayView)centerPanes.getPane(PaneKeys.DAY);
         dayView.setDate(request.getLocalDate());
     }
 }

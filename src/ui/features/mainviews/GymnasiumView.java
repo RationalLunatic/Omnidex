@@ -30,9 +30,9 @@ public class GymnasiumView extends ScalingStackPane {
     }
 
     private void initContainers() {
-        topRow = new ScalingHBox(getViewBindings().heightProperty());
-        bottomRow = new ScalingHBox(getViewBindings().heightProperty());
-        mainContainer = new ScalingVBox(getViewBindings().widthProperty());
+        topRow = new ScalingHBox(getViewBindings());
+        bottomRow = new ScalingHBox(getViewBindings());
+        mainContainer = new ScalingVBox(getViewBindings());
     }
 
     private void initButtons() {

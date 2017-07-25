@@ -1,4 +1,4 @@
-package ui.features;
+package ui.features.beaconviews;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

@@ -1,12 +1,10 @@
-package ui.features;
+package ui.features.beaconviews;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import resources.ResourceManager;
 import ui.components.*;
-import ui.components.interviewcommunications.MainViewCommLink;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.ScalingStackPane;
 import ui.components.scalingcomponents.ViewBindingsPack;
@@ -15,7 +13,6 @@ import ui.custombindings.ScaledDoubleBinding;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Created by shaev_000 on 5/8/2016.

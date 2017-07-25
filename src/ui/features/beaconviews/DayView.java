@@ -1,7 +1,6 @@
-package ui.features;
+package ui.features.beaconviews;
 
 import engine.components.schedule.ToDoListTask;
-import javafx.beans.binding.DoubleBinding;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -15,13 +14,11 @@ import ui.components.scalingcomponents.ScalingStackPane;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.ViewBindingsPack;
-import ui.custombindings.ScaledDoubleBinding;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 

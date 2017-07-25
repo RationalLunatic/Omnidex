@@ -22,8 +22,8 @@ public class SanctuaryView extends ScalingStackPane {
     }
 
     private void init() {
-        profileDisplay = new ScalingVBox(viewBindings.widthProperty());
-        mainContainer = new ScalingHBox(viewBindings.heightProperty());
+        profileDisplay = new ScalingVBox(viewBindings);
+        mainContainer = new ScalingHBox(viewBindings);
         initLabels();
         mainContainer.getChildren().add(profileDisplay);
         this.getChildren().add(mainContainer);
