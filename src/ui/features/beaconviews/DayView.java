@@ -136,6 +136,11 @@ public class DayView extends ScalingStackPane {
 
     private void updateDayData() {
         clearDayData();
+        for(int i = 0; i < 24; i++) {
+            LocalTime currentHour = LocalTime.of(i, 0);
+            LocalDateTime newDateTime = LocalDateTime.of(today, currentHour);
+            hourMap.get(i).updateDateTime(newDateTime);
+        }
         for(int hour : taskList.keySet()) {
             hourMap.get(hour).setTaskDescription(taskList.get(hour).getDescription());
         }

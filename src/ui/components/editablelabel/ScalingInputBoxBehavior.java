@@ -6,16 +6,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 /**
- * The Behavior Class for ScalingEditableLabel
+ * The Behavior Class for ScalingInputBox
  *
- * @sa ScalingEditableLabel, ScalingEditableLabelSkin
+ * @sa ScalingInputBox, ScalingInputBoxSkin
  */
-public class ScalingEditableLabelBehavior extends TextFieldBehavior {
+public class ScalingInputBoxBehavior extends TextFieldBehavior {
 
-    private ScalingEditableLabel editableLabel;
+    private ScalingInputBox editableLabel;
     private Boolean focusTraversable;
 
-    public ScalingEditableLabelBehavior(final ScalingEditableLabel editableLabel) {
+    public ScalingInputBoxBehavior(final ScalingInputBox editableLabel) {
         super(editableLabel);
         this.editableLabel = editableLabel;
         init();

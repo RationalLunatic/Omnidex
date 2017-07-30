@@ -1,13 +1,14 @@
 package ui.components;
 
-/**
- * Created by shaev_000 on 7/7/2017.
- */
 public enum PaneKeys {
     LITERATURE (PaneLocation.CENTER),
     GENRES (PaneLocation.WEST),
+    EXERCISES (PaneLocation.WEST),
+    EXERCISE_ROUTINE_BUILDER (PaneLocation.CENTER),
     GOALS (PaneLocation.CENTER),
     GOAL_CREATOR (PaneLocation.CENTER),
+    SCRATCH (PaneLocation.CENTER),
+    CITATION (PaneLocation.CENTER),
     MONTH (PaneLocation.CENTER),
     DAY (PaneLocation.CENTER),
     HOUR (PaneLocation.CENTER),

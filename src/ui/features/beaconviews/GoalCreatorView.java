@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import resources.sqlite.SQLiteJDBC;
 import skeletonkey.QuaternalParadigms;
 import ui.components.PaneKeys;
-import ui.components.editablelabel.ScalingEditableLabel;
+import ui.components.inputcomponents.LabeledInputBox;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.*;
 import ui.custombindings.ScaledDoubleBinding;
@@ -15,10 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GoalCreatorView extends ScalingScrollPane {
-    private ScalingEditableLabel goalName;
-    private ScalingEditableLabel goalDescription;
-    private Label enterGoalName;
-    private Label enterGoalDescription;
+    private LabeledInputBox goalName;
+    private LabeledInputBox goalDescription;
     private ChoiceBox<QuaternalParadigms> goalCategory;
     private ScalingButton submitGoal;
     private ScalingVBox bodyContainer;
@@ -28,8 +26,6 @@ public class GoalCreatorView extends ScalingScrollPane {
     private ScalingVBox mainContainer;
     private ScalingHBox upper;
     private ScalingVBox lower;
-    private ScalingHBox nameContainer;
-    private ScalingHBox descriptionContainer;
     private Map<QuaternalParadigms, ScalingVBox> listSelector;
 
     public GoalCreatorView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
@@ -47,9 +43,7 @@ public class GoalCreatorView extends ScalingScrollPane {
 
     private void addElementsToContainers() {
         mainContainer.getChildren().addAll(upper, lower);
-        nameContainer.getChildren().addAll(enterGoalName, goalName);
-        descriptionContainer.getChildren().addAll(enterGoalDescription, goalDescription);
-        lower.getChildren().addAll(nameContainer, descriptionContainer, goalCategory, submitGoal);
+        lower.getChildren().addAll(goalName, goalDescription, goalCategory, submitGoal);
         upper.getChildren().addAll(bodyContainer, mindContainer, soulContainer, spiritContainer);
         this.setContent(mainContainer);
     }
@@ -69,13 +63,6 @@ public class GoalCreatorView extends ScalingScrollPane {
         spiritContainer.getChildren().add(new Label("Spirit"));
     }
 
-    private void initDialogueContainers() {
-        nameContainer = new ScalingHBox(getViewBindings());
-        descriptionContainer = new ScalingHBox(getViewBindings());
-        nameContainer.setAlignment(Pos.CENTER);
-        descriptionContainer.setAlignment(Pos.CENTER);
-    }
-
     private void initOuterContainers() {
         mainContainer = new ScalingVBox(getViewBindings());
         upper = new ScalingHBox(getViewBindings());
@@ -87,15 +74,12 @@ public class GoalCreatorView extends ScalingScrollPane {
 
     private void initContainers() {
         initOuterContainers();
-        initDialogueContainers();
         initGoalContainers();
     }
 
     private void initElements() {
-        goalName = new ScalingEditableLabel(getViewBindings().widthProperty(), 0.6);
-        goalDescription = new ScalingEditableLabel(getViewBindings().widthProperty(), 0.6);
-        enterGoalName = new Label("Enter Goal Name: ");
-        enterGoalDescription = new Label("Enter Goal Description: ");
+        goalName = new LabeledInputBox("Enter Goal Name: ", getViewBindings());
+        goalDescription = new LabeledInputBox("Enter Goal Description: ", getViewBindings());
         goalCategory = new ChoiceBox();
         ScaledDoubleBinding buttonHeightBinding = new ScaledDoubleBinding(getViewBindings().heightProperty(), 0.2);
         ViewBindingsPack scalingButtonBindingsPack = new ViewBindingsPack(getViewBindings().widthProperty(), buttonHeightBinding);
@@ -126,11 +110,11 @@ public class GoalCreatorView extends ScalingScrollPane {
     }
 
     private void submitGoal() {
-        if(!goalName.getText().isEmpty()) {
+        if(!goalName.isEmpty()) {
             if(goalCategory.getSelectionModel().getSelectedItem() != null) {
-                Label newGoal = new Label(goalName.getText());
+                Label newGoal = new Label(goalName.getInput());
                 listSelector.get(goalCategory.getSelectionModel().getSelectedItem()).getChildren().add(newGoal);
-                SQLiteJDBC.getInstance().addToLibrary(goalName.getText(), goalDescription.getText(), goalCategory.getSelectionModel().getSelectedItem().toString());
+                SQLiteJDBC.getInstance().addToLibrary(goalName.getInput(), goalDescription.getInput(), goalCategory.getSelectionModel().getSelectedItem().toString());
             }
         }
     }

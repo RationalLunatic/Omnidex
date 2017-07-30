@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import resources.StringFormatUtility;
 import resources.sqlite.SQLiteJDBC;
-import ui.components.editablelabel.ScalingEditableLabel;
+import ui.components.editablelabel.ScalingInputBox;
 import ui.components.PaneKeys;
 import ui.components.scalingcomponents.ScalingButton;
 import ui.components.scalingcomponents.ScalingLabel;
@@ -24,13 +24,14 @@ public class HourTile extends ScalingStackPane {
     private HBox hourLabelContainer;
     private HBox hourInfoContainer;
     private ScalingLabel hourLabel;
-    private ScalingEditableLabel hourInfo;
+    private ScalingInputBox hourInfo;
     private LocalDateTime localDateTime;
     private LocalTime currentHour;
     private Rectangle border;
     private ViewBindingsPack viewBindings;
     private ScalingButton completeTask;
     private ScalingButton removeTask;
+    private ChangeListener<String> currentListener;
 
     public HourTile(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key, LocalDateTime currentDateTime) {
         super(commLink, viewBindings, key);
@@ -39,6 +40,12 @@ public class HourTile extends ScalingStackPane {
         this.currentHour = currentDateTime.toLocalTime();
         this.setAlignment(Pos.CENTER);
         init();
+    }
+
+    public void updateDateTime(LocalDateTime dateTime) {
+        this.localDateTime = dateTime;
+        hourInfo.baseTextProperty().removeListener(currentListener);
+        initHourInfo();
     }
 
     private void init() {
@@ -51,14 +58,15 @@ public class HourTile extends ScalingStackPane {
     }
 
     private void initUIElements() {
-        this.hourInfo = new ScalingEditableLabel(viewBindings.widthProperty(), 0.8);
+        this.hourInfo = new ScalingInputBox(viewBindings.widthProperty(), 0.8);
         this.hourLabel = new ScalingLabel(viewBindings.widthProperty(), "10:00 A.M.", 0.2);
         this.completeTask = new ScalingButton("Complete Task", viewBindings, 0.3);
         this.removeTask = new ScalingButton("Remove Task", viewBindings, 0.3);
     }
 
     private void initHourInfo() {
-        hourInfo.baseTextProperty().addListener(new ChangeListener<String>() {
+        System.out.println(localDateTime);
+        currentListener = new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 String name = hourLabel.getText();
@@ -69,7 +77,9 @@ public class HourTile extends ScalingStackPane {
                 }
                 SQLiteJDBC.getInstance().addTask(name, description, dateTime);
             }
-        });
+        };
+
+        hourInfo.baseTextProperty().addListener(currentListener);
         if(SQLiteJDBC.getInstance().hasTask(localDateTime)) {
             hourInfo.setBaseText(SQLiteJDBC.getInstance().getTask(localDateTime).getDescription());
         }

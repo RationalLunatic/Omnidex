@@ -15,6 +15,7 @@ import ui.components.scalingcomponents.CenterParentScalingStackPane;
 import ui.components.scalingcomponents.ScalingHBox;
 import ui.components.scalingcomponents.ScalingVBox;
 import ui.features.beaconviews.DayView;
+import ui.features.gymnasiumviews.RoutineBuilderWest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,11 +59,27 @@ public class MainViewCommLink extends ViewRequestHandler {
 
     @Override
     public void handleRequest(ViewRequest request) {
+        if(request.getRequestType() == ViewRequestKeys.LIST_UPDATE && request.getTargetView() == PaneKeys.EXERCISES) {
+            RoutineBuilderWest view = (RoutineBuilderWest)actionToLocationRouter.get(request.getTargetView().getLocation()).getPane(PaneKeys.EXERCISES);
+            view.loadExercises();
+            return;
+        }
+
+
         actionToLocationRouter.get(request.getTargetView().getLocation()).switchPane(request.getTargetView());
         if(request.getTargetView() == PaneKeys.DAY) {
             setDate(request);
         }
 
+    }
+
+    @Override
+    public String handleDataRequest(ViewRequest request) {
+        if(request.getRequestType() == ViewRequestKeys.DATA_REQUEST && request.getTargetView() == PaneKeys.EXERCISES) {
+            RoutineBuilderWest view = (RoutineBuilderWest)actionToLocationRouter.get(request.getTargetView().getLocation()).getPane(PaneKeys.EXERCISES);
+            return view.getSelectedExercise();
+        }
+        return "";
     }
 
     private void setDate(ViewRequest request) {

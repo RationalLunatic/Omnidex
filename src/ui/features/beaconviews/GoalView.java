@@ -16,7 +16,7 @@ public class GoalView extends ScalingStackPane {
     private ScalingHBox bottomRow;
     private ScalingButton readingList;
     private ScalingButton goalCreator;
-    private ScalingButton skillList;
+    private ScalingButton scratchList;
 
     public GoalView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
@@ -40,25 +40,25 @@ public class GoalView extends ScalingStackPane {
     private void initButtons() {
         goalCreator = new ScalingButton(getViewBindings());
         readingList = new ScalingButton(getViewBindings());
-        skillList = new ScalingButton(getViewBindings());
+        scratchList = new ScalingButton(getViewBindings());
     }
 
     private void initButtonText() {
         goalCreator.setText("Create New Goals");
         readingList.setText("Books to Read");
-        skillList.setText("Skills to Practice");
+        scratchList.setText("Scratch List");
     }
 
     private void initButtonBehavior() {
         goalCreator.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.GOAL_CREATOR)));
         readingList.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.LITERATURE)));
-        skillList.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.DAY, LocalDate.now())));
+        scratchList.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.SCRATCH)));
     }
 
     private void addUIElementsToContainers() {
         topRow.getChildren().add(goalCreator);
         bottomRow.getChildren().add(readingList);
-        bottomRow.getChildren().add(skillList);
+        bottomRow.getChildren().add(scratchList);
         mainContainer.getChildren().addAll(topRow, bottomRow);
         this.getChildren().add(mainContainer);
     }

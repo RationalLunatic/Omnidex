@@ -4,10 +4,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequestHandler;
-import ui.components.scalingcomponents.ScalingStackPane;
 import ui.components.scalingcomponents.ViewBindingsPack;
 import ui.features.beaconviews.*;
+import ui.features.gymnasiumviews.RoutineBuilderView;
 import ui.features.mainviews.*;
+import ui.features.vaultviews.CitationView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +22,11 @@ public class CenterPanes extends PanePack {
     private MonthView calendarMonthDisplay;
     private DayView  calendarDayDisplay;
     private GoalView goalView;
+    private ScratchView scratchView;
     private LiteratureView literatureView;
     private GoalCreatorView goalCreatorView;
+    private CitationView citationView;
+    private RoutineBuilderView routineBuilderView;
     private Map<PaneKeys, Node> centerPanes;
 
     public CenterPanes(Pane corePane, ViewRequestHandler commLink, ViewBindingsPack viewBindings) {
@@ -44,6 +48,9 @@ public class CenterPanes extends PanePack {
         goalView = new GoalView(getRequestHandler(), getViewBindings(), PaneKeys.GOALS);
         literatureView = new LiteratureView(getRequestHandler(), getViewBindings(), PaneKeys.LITERATURE);
         goalCreatorView = new GoalCreatorView(getRequestHandler(), getViewBindings(), PaneKeys.GOAL_CREATOR);
+        scratchView = new ScratchView(getRequestHandler(), getViewBindings(), PaneKeys.SCRATCH);
+        citationView = new CitationView(getRequestHandler(), getViewBindings(), PaneKeys.CITATION);
+        routineBuilderView = new RoutineBuilderView(getRequestHandler(), getViewBindings(), PaneKeys.EXERCISE_ROUTINE_BUILDER);
     }
 
     private void mapPanes() {
@@ -57,6 +64,9 @@ public class CenterPanes extends PanePack {
         centerPanes.put(PaneKeys.GOALS, goalView);
         centerPanes.put(PaneKeys.LITERATURE, literatureView);
         centerPanes.put(PaneKeys.GOAL_CREATOR, goalCreatorView);
+        centerPanes.put(PaneKeys.SCRATCH, scratchView);
+        centerPanes.put(PaneKeys.CITATION, citationView);
+        centerPanes.put(PaneKeys.EXERCISE_ROUTINE_BUILDER, routineBuilderView);
     }
 
     public void switchPane(PaneKeys key) {

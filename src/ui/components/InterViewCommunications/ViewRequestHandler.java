@@ -14,4 +14,5 @@ public abstract class ViewRequestHandler {
     public void handleRequest(ViewRequest request) {
         successor.handleRequest(request);
     }
+    public String handleDataRequest(ViewRequest request) { return successor.handleDataRequest(request); }
 }

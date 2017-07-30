@@ -6,12 +6,14 @@ import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.ScalingVBox;
 import ui.components.scalingcomponents.ViewBindingsPack;
 import ui.features.beaconviews.GenreView;
+import ui.features.gymnasiumviews.RoutineBuilderWest;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class WestPanes extends PanePack {
     private GenreView genreView;
+    private RoutineBuilderWest routineBuilderView;
     private Map<PaneKeys, ScalingVBox> westViewMap;
 
     public WestPanes(Pane corePane, ViewRequestHandler requestHandler, ViewBindingsPack viewBindings) {
@@ -22,8 +24,11 @@ public class WestPanes extends PanePack {
 
     private void init() {
         genreView = new GenreView(getViewBindings());
+        routineBuilderView = new RoutineBuilderWest(getViewBindings());
         westViewMap = new HashMap<>();
         westViewMap.put(PaneKeys.GENRES, genreView);
+        westViewMap.put(PaneKeys.EXERCISES, routineBuilderView);
+
     }
 
     public ScalingVBox getWestPane(PaneKeys key) {
@@ -38,6 +43,6 @@ public class WestPanes extends PanePack {
 
     @Override
     public Pane getPane(PaneKeys key) {
-        return null;
+        return westViewMap.get(key);
     }
 }

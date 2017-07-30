@@ -11,6 +11,11 @@ import java.time.LocalDate;
 public class BeaconView extends ScalingStackPane {
 
     private ScalingVBox mainContainer;
+    private ScalingHBox dailyAffirmation;
+    private ScalingHBox agenda;
+    private ScalingVBox agendaImmediate;
+    private ScalingVBox agendaGoals;
+    private ScalingVBox agendaHighlights;
     private ScalingHBox topRow;
     private ScalingHBox bottomRow;
     private ScalingButton monthLink;
@@ -34,6 +39,11 @@ public class BeaconView extends ScalingStackPane {
         mainContainer = new ScalingVBox(getViewBindings());
         topRow = new ScalingHBox(getViewBindings());
         bottomRow = new ScalingHBox(getViewBindings());
+        agenda = new ScalingHBox(getViewBindings());
+        agendaImmediate = new ScalingVBox(getViewBindings());
+        agendaHighlights = new ScalingVBox(getViewBindings());
+        agendaGoals = new ScalingVBox(getViewBindings());
+        dailyAffirmation = new ScalingHBox(getViewBindings());
     }
 
     private void initButtons() {

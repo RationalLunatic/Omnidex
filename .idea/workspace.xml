@@ -2,75 +2,84 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/DBIOLibrarian.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/InventoryCategories.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/PaneKeys$PaneLocation.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/mainpanes/PanePack.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/scalingcomponents/ScalingTabPane.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/DayView.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GenreView.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GoalView.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/LiteratureView.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/DBIOLibrarian.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/InventoryCategories.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/skeletonkey/Multitudes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/skeletonkey/QuaternalParadigms.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/PanePack.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingScrollPane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingTabPane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/GenreView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/GoalCreatorView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/GoalView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/LiteratureView.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/omnidex.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/DayView.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/main/MainView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/main/MainView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/StringFormatUtility.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/StringFormatUtility.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gameengine/CharacterStats.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gameengine/CoreStat.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gameengine/LevelingValue.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gameengine/Skill.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/Appointment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/CalendarEvent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/Chore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/CircuitTraining.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/ExerciseCategories.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/ExerciseSet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/PersonalInformation.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/PhysicalExercise.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/Quote.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/ExerciseSubcategories.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/MLACitation.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/resources/sqlite/ScratchCategories.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/displaycomponents/ExerciseOptionsDisplay.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/displaycomponents/SimpleListTextDisplay.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/editablelabel/ScalingInputBox.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/editablelabel/ScalingInputBoxBehavior.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/editablelabel/ScalingInputBoxSkin.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/inputcomponents/EditableLabel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/inputcomponents/LabeledInputBox.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestKeys.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/ScratchView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderEast.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderWest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/features/vaultviews/CitationView.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/editablelabel/ScalingEditableLabel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/editablelabel/ScalingEditableLabelBehavior$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/editablelabel/ScalingEditableLabelBehavior.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/editablelabel/ScalingEditableLabelSkin.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ui/components/EditableLabel/ScalingEditableLabel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ui/components/EditableLabel/ScalingEditableLabelBehavior.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ui/components/EditableLabel/ScalingEditableLabelSkin.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/DBCore.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/DBCore.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/DBIOTaskTable.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/DBIOTaskTable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/DBIOLibrarian.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/DBIOLibrarian.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/SQLiteJDBC.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/resources/sqlite/SQLiteJDBC.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/PaneKeys$PaneLocation.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/PaneKeys$PaneLocation.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/PaneKeys.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/PaneKeys.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/interviewcommunications/MainViewCommLink.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/interviewcommunications/MainViewCommLink.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/interviewcommunications/ViewRequest.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/interviewcommunications/ViewRequest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/interviewcommunications/ViewRequestHandler.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/interviewcommunications/ViewRequestHandler.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/mainpanes/CenterPanes.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/mainpanes/CenterPanes.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/mainpanes/NorthPanes.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/mainpanes/NorthPanes.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/mainpanes/WestPanes.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/mainpanes/WestPanes.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/scalingcomponents/ScalingHBox.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/scalingcomponents/ScalingHBox.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/components/scalingcomponents/ScalingVBox.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/components/scalingcomponents/ScalingVBox.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/AcademyView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/AcademyView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/DayView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/DayView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GenreView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GenreView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GoalCreatorView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GoalCreatorView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GoalView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/GoalView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/HourTile$1.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/HourTile$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/HourTile.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/HourTile.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/LiteratureView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/LiteratureView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/BeaconView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/BeaconView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/GymnasiumView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/GymnasiumView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/SanctuaryView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/SanctuaryView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/VaultView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/mainviews/VaultView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/StringFormatUtility.java" afterPath="$PROJECT_DIR$/src/resources/StringFormatUtility.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/omnidex.db" afterPath="$PROJECT_DIR$/omnidex.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/sqlite/DBCore.java" afterPath="$PROJECT_DIR$/src/resources/sqlite/DBCore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/sqlite/DBIOTaskTable.java" afterPath="$PROJECT_DIR$/src/resources/sqlite/DBIOTaskTable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/sqlite/DBIOLibrarian.java" afterPath="$PROJECT_DIR$/src/resources/sqlite/DBIOLibrarian.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java" afterPath="$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/MainViewCommLink.java" afterPath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/MainViewCommLink.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/ViewRequest.java" afterPath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/ViewRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/ViewRequestHandler.java" afterPath="$PROJECT_DIR$/src/ui/components/InterViewCommunications/ViewRequestHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/PaneKeys.java" afterPath="$PROJECT_DIR$/src/ui/components/PaneKeys.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingHBox.java" afterPath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingHBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingVBox.java" afterPath="$PROJECT_DIR$/src/ui/components/ScalingComponents/ScalingVBox.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/mainpanes/CenterPanes.java" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/CenterPanes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/mainpanes/NorthPanes.java" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/NorthPanes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/components/mainpanes/WestPanes.java" afterPath="$PROJECT_DIR$/src/ui/components/mainpanes/WestPanes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/mainviews/AcademyView.java" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/AcademyView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/beaconviews/DayView.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/DayView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/beaconviews/GenreView.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/GenreView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/beaconviews/GoalCreatorView.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/GoalCreatorView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/beaconviews/GoalView.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/GoalView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/beaconviews/HourTile.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/HourTile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/beaconviews/LiteratureView.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/LiteratureView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/mainviews/BeaconView.java" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/BeaconView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/mainviews/GymnasiumView.java" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/GymnasiumView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ui/features/mainviews/VaultView.java" afterPath="$PROJECT_DIR$/src/ui/features/mainviews/VaultView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/DayTile.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/DayTile.class" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/HourTile$1.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/HourTile$1.class" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/HourTile.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/HourTile.class" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/MonthTile.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/MonthTile.class" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/Omnidex/ui/features/MonthView.class" afterPath="$PROJECT_DIR$/out/production/Omnidex/ui/features/beaconviews/MonthView.class" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/features/DayTile.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/DayTile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/features/DayView.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/DayView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/features/HourTile.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/HourTile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/features/MonthTile.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/MonthTile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ui/features/MonthView.java" afterPath="$PROJECT_DIR$/src/ui/features/beaconviews/MonthView.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -130,34 +139,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DBIOLibrarian.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/resources/sqlite/DBIOLibrarian.java">
+      <file leaf-file-name="RoutineBuilderView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="80" column="89" selection-start-line="80" selection-start-column="89" selection-end-line="80" selection-end-column="89" />
+            <state relative-caret-position="203">
+              <caret line="108" column="11" selection-start-line="108" selection-start-column="11" selection-end-line="108" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3373#3374#0" expanded="true" />
+                <element signature="e#3426#3427#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScalingInputBox.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/editablelabel/ScalingInputBox.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-493">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StringFormatUtility.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/StringFormatUtility.java">
+      <file leaf-file-name="LabeledInputBox.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/inputcomponents/LabeledInputBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-              <folding>
-                <element signature="e#1028#1029#0" expanded="true" />
-                <element signature="e#1067#1068#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="425">
+              <caret line="30" column="97" selection-start-line="30" selection-start-column="97" selection-end-line="30" selection-end-column="97" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoalCreatorView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/GoalCreatorView.java">
+      <file leaf-file-name="RoutineBuilderWest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderWest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="121" column="41" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
+            <state relative-caret-position="491">
+              <caret line="64" column="20" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -165,11 +185,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScalingScrollPane.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingScrollPane.java">
+      <file leaf-file-name="ExerciseOptionsDisplay.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/displaycomponents/ExerciseOptionsDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+            <state relative-caret-position="340">
+              <caret line="20" column="114" selection-start-line="20" selection-start-column="114" selection-end-line="20" selection-end-column="114" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -177,74 +197,57 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoalView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/GoalView.java">
+      <file leaf-file-name="ViewRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="52" column="96" selection-start-line="52" selection-start-column="96" selection-end-line="52" selection-end-column="96" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="493">
+              <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaneKeys.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/components/PaneKeys.java">
+      <file leaf-file-name="MainViewCommLink.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/MainViewCommLink.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="81" column="18" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewRequestHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-              <folding>
-                <element signature="e#666#667#0" expanded="true" />
-                <element signature="e#697#698#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CenterPanes.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/CenterPanes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="58" column="64" selection-start-line="58" selection-start-column="64" selection-end-line="58" selection-end-column="64" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Multitudes.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/skeletonkey/Multitudes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScalingButton.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java">
+      <file leaf-file-name="ViewRequestKeys.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestKeys.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="72" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
+            <state relative-caret-position="85">
+              <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SQLiteJDBC.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java">
+      <file leaf-file-name="SimpleListTextDisplay.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ui/components/displaycomponents/SimpleListTextDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="40" column="53" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+            <state relative-caret-position="457">
+              <caret line="88" column="44" selection-start-line="88" selection-start-column="44" selection-end-line="88" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1173#1174#0" expanded="true" />
-                <element signature="e#1234#1235#0" expanded="true" />
-                <element signature="e#1302#1303#0" expanded="true" />
-                <element signature="e#1354#1355#0" expanded="true" />
+                <element signature="e#2384#2385#0" expanded="true" />
+                <element signature="e#2453#2454#0" expanded="true" />
+                <element signature="e#2492#2493#0" expanded="true" />
+                <element signature="e#2554#2555#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -255,8 +258,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -277,58 +280,65 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ui/features/MonthTile.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingStackPane.java" />
-        <option value="$PROJECT_DIR$/src/resources/dbmanager/JDBCExample.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/CreateSQLiteJDBC.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/TableSQLiteJDBC.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/InsertSQLiteJDBC.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/SelectSQLiteJDBC.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/testpackage/SelectSQLiteJDBC.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/DBTaskTable.java" />
-        <option value="$PROJECT_DIR$/src/engine/components/schedule/ToDoListTask.java" />
-        <option value="$PROJECT_DIR$/src/main/ApplicationMaster.java" />
-        <option value="$PROJECT_DIR$/src/ui/custombindings/StrLenBinding.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabel.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingLabel.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/DayTile.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/DayView.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/HourTile.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/beaconviews/MonthView.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingTab.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingVBox.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingHBox.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/CircuitTraining.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/PersonalInformation.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/CalendarEvent.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/Appointment.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/Chore.java" />
         <option value="$PROJECT_DIR$/src/ui/features/mainviews/BeaconView.java" />
         <option value="$PROJECT_DIR$/src/ui/features/mainviews/VaultView.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/mainviews/GymnasiumView.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/mainviews/AcademyView.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/testpackage/DBIOLibrarian.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/DBIOTaskTable.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/RequestKeys.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequest.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/MainViewCommLink.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/mainpanes/NorthPanes.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/mainpanes/WestPanes.java" />
-        <option value="$PROJECT_DIR$/src/main/MainView.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/DBCore.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingTabPane.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingScrollPane.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/mainpanes/PanePack.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/beaconviews/LiteratureView.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/beaconviews/GenreView.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/InventoryCategories.java" />
-        <option value="$PROJECT_DIR$/src/skeletonkey/QuaternalParadigms.java" />
-        <option value="$PROJECT_DIR$/src/skeletonkey/Multitudes.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/PaneKeys.java" />
-        <option value="$PROJECT_DIR$/src/ui/components/mainpanes/CenterPanes.java" />
-        <option value="$PROJECT_DIR$/src/ui/features/beaconviews/GoalView.java" />
-        <option value="$PROJECT_DIR$/src/resources/StringFormatUtility.java" />
-        <option value="$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/Quote.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/vaultviews/BilbliographerView.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/MLACitation.java" />
+        <option value="$PROJECT_DIR$/src/resources/css/BibliographicCategories.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/MLAPeriodicalCitation.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/MLACitation.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/vaultviews/BibliographerView.java" />
         <option value="$PROJECT_DIR$/src/ui/features/beaconviews/GoalCreatorView.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/vaultviews/CitationView.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/beaconviews/ScratchView.java" />
+        <option value="$PROJECT_DIR$/src/main/MainView.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/displaycomponents/ScrollingTextDisplay.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/inputcomponents/TagSelector.java" />
+        <option value="$PROJECT_DIR$/src/gameengine/Stats.java" />
+        <option value="$PROJECT_DIR$/src/gameengine/LevelingValue.java" />
+        <option value="$PROJECT_DIR$/src/gameengine/CharacterStats.java" />
+        <option value="$PROJECT_DIR$/src/gameengine/CoreStat.java" />
+        <option value="$PROJECT_DIR$/src/gameengine/Skill.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/beaconviews/HourTile.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/beaconviews/DayView.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderEast.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/displaycomponents/InteractiveListTextDisplay.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/PaneKeys.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/mainviews/GymnasiumView.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/mainpanes/CenterPanes.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/inputcomponents/EditableLabel.java" />
+        <option value="$PROJECT_DIR$/src/resources/sqlite/InventoryCategories.java" />
         <option value="$PROJECT_DIR$/src/resources/sqlite/DBIOLibrarian.java" />
+        <option value="$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/ExerciseCategories.java" />
+        <option value="$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/ExerciseSubcategories.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/mainpanes/WestPanes.java" />
+        <option value="$PROJECT_DIR$/src/resources/sqlite/DBCore.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/displaycomponents/RoutineOptionsDisplay.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestKeys.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequest.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestHandler.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/interviewcommunications/MainViewCommLink.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/inputcomponents/LabeledInputBox.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/displaycomponents/ExerciseOptionsDisplay.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderWest.java" />
+        <option value="$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderView.java" />
+        <option value="$PROJECT_DIR$/src/ui/components/displaycomponents/SimpleListTextDisplay.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
@@ -426,7 +436,59 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="vaultviews" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="features" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="mainviews" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="features" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gymnasiumviews" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -596,7 +658,59 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="inputcomponents" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="editablelabel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="displaycomponents" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -676,11 +790,77 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="sqlite" />
+              <option name="myItemId" value="property_files" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="testpackage" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="datatypes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="datatypes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bibliographicdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -699,6 +879,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Omnidex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gameengine" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -746,20 +944,20 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\RationalLunatic\Omnidex\src\resources\sqlite\testpackage" />
+      <recent name="E:\RationalLunatic\Omnidex\src\ui\components\editablelabel" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="resources" />
+      <recent name="engine.components.schedule" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\RationalLunatic\Omnidex\src\resources\css" />
       <recent name="E:\RationalLunatic\Omnidex\src\resources\property_files" />
       <recent name="E:\RationalLunatic\Omnidex\src\main" />
       <recent name="E:\RationalLunatic\Omnidex\src\ui\components\ui\features" />
       <recent name="E:\RationalLunatic\Omnidex\src\ui\uicomponents" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="resources" />
-      <recent name="engine.components.schedule" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\RationalLunatic\Omnidex\src\resources\sqlite\testpackage" />
-      <recent name="E:\RationalLunatic\Omnidex\src\ui\components\editablelabel" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -1083,7 +1281,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1117,320 +1315,174 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/engine/components/schedule/ToDoListTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/testpackage/InsertSQLiteJDBC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="36" selection-start-line="16" selection-start-column="12" selection-end-line="19" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/testpackage/SelectSQLiteJDBC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="55" selection-start-line="27" selection-start-column="55" selection-end-line="27" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabelBehavior.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="37" column="35" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Launcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/ApplicationMaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/custombindings/StrLenBinding.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/custombindings/ScaledDoubleBinding.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/DayTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/DayView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding>
-            <element signature="e#4489#4490#0" expanded="false" />
-            <element signature="e#4562#4563#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/HourTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding>
-            <element signature="e#4407#4408#0" expanded="false" />
-            <element signature="e#4448#4449#0" expanded="false" />
-            <element signature="e#4499#4500#0" expanded="false" />
-            <element signature="e#4537#4538#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/MonthTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/MonthView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingTab.java" />
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingVBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="70" selection-start-line="7" selection-start-column="4" selection-end-line="14" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingHBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingLabel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="113" selection-start-line="17" selection-start-column="113" selection-end-line="17" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/VaultView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="33" column="50" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/GymnasiumView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="34" column="57" selection-start-line="34" selection-start-column="57" selection-end-line="34" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/AcademyView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/editablelabel/ScalingEditableLabel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="30" column="93" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/RequestKeys.java" />
-    <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/EastPanes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/SouthPanes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/MainViewCommLink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="55" column="49" selection-start-line="55" selection-start-column="49" selection-end-line="55" selection-end-column="49" />
-          <folding>
-            <element signature="e#1374#1375#0" expanded="false" />
-            <element signature="e#1396#1397#0" expanded="false" />
-            <element signature="e#2113#2114#0" expanded="false" />
-            <element signature="e#2169#2170#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/NorthPanes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="48" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
-          <folding>
-            <element signature="e#3189#3190#0" expanded="false" />
-            <element signature="e#3225#3226#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/WestPanes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="62" selection-start-line="35" selection-start-column="62" selection-end-line="35" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#949#950#0" expanded="false" />
-            <element signature="e#992#993#0" expanded="false" />
-            <element signature="e#1219#1220#0" expanded="false" />
-            <element signature="e#1246#1247#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/MainView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/DBCore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="74" column="37" selection-start-line="74" selection-start-column="37" selection-end-line="74" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/sqlite/DBIOTaskTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2023">
-          <caret line="127" column="4" selection-start-line="127" selection-start-column="4" selection-end-line="135" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingAnchorPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="36" column="72" selection-start-line="14" selection-start-column="4" selection-end-line="36" selection-end-column="72" />
+        <state relative-caret-position="151">
+          <caret line="111" column="8" selection-start-line="111" selection-start-column="8" selection-end-line="124" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingTabPane.java">
+    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingScrollPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-          <folding>
-            <element signature="e#1413#1414#0" expanded="true" />
-            <element signature="e#1448#1449#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/BeaconView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
+        <state relative-caret-position="306">
+          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/PanePack.java">
+    <entry file="file://$PROJECT_DIR$/src/resources/css/BibliographicCategories.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="34" column="24" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="24" />
+        <state relative-caret-position="85">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/MLAPeriodicalCitation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/vaultviews/BibliographerView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="130" column="1" selection-start-line="13" selection-start-column="4" selection-end-line="130" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/MLACitation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#546#547#0" expanded="false" />
+            <element signature="e#610#611#0" expanded="false" />
+            <element signature="e#664#665#0" expanded="false" />
+            <element signature="e#701#702#0" expanded="false" />
+            <element signature="e#734#735#0" expanded="false" />
+            <element signature="e#786#787#0" expanded="false" />
+            <element signature="e#830#831#0" expanded="false" />
+            <element signature="e#863#864#0" expanded="false" />
+            <element signature="e#892#893#0" expanded="false" />
+            <element signature="e#936#937#0" expanded="false" />
+            <element signature="e#972#973#0" expanded="false" />
+            <element signature="e#1010#1011#0" expanded="false" />
+            <element signature="e#1044#1045#0" expanded="false" />
+            <element signature="e#1098#1099#0" expanded="false" />
+            <element signature="e#1144#1145#0" expanded="false" />
+            <element signature="e#1185#1186#0" expanded="false" />
+            <element signature="e#1222#1223#0" expanded="false" />
+            <element signature="e#1282#1283#0" expanded="false" />
+            <element signature="e#1334#1335#0" expanded="false" />
+            <element signature="e#1378#1379#0" expanded="false" />
+            <element signature="e#1418#1419#0" expanded="false" />
+            <element signature="e#1484#1485#0" expanded="false" />
+            <element signature="e#1542#1543#0" expanded="false" />
+            <element signature="e#1576#1577#0" expanded="false" />
+            <element signature="e#1606#1607#0" expanded="false" />
+            <element signature="e#1652#1653#0" expanded="false" />
+            <element signature="e#1690#1691#0" expanded="false" />
+            <element signature="e#1723#1724#0" expanded="false" />
+            <element signature="e#1752#1753#0" expanded="false" />
+            <element signature="e#1796#1797#0" expanded="false" />
+            <element signature="e#1832#1833#0" expanded="false" />
+            <element signature="e#1868#1869#0" expanded="false" />
+            <element signature="e#1900#1901#0" expanded="false" />
+            <element signature="e#1950#1951#0" expanded="false" />
+            <element signature="e#1992#1993#0" expanded="false" />
+            <element signature="e#2041#2042#0" expanded="false" />
+            <element signature="e#2079#2080#0" expanded="false" />
+            <element signature="e#2148#2149#0" expanded="false" />
+            <element signature="e#2202#2203#0" expanded="false" />
+            <element signature="e#2237#2238#0" expanded="false" />
+            <element signature="e#2268#2269#0" expanded="false" />
+            <element signature="e#2316#2317#0" expanded="false" />
+            <element signature="e#2356#2357#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/LiteratureView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="57" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+        <state relative-caret-position="85">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/GenreView.java">
+    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/GoalCreatorView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="82" column="126" selection-start-line="82" selection-start-column="126" selection-end-line="82" selection-end-column="126" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2392#2393#0" expanded="true" />
-            <element signature="e#2457#2458#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="561">
+          <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/InventoryCategories.java">
+    <entry file="file://$PROJECT_DIR$/src/main/ApplicationMaster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        <state relative-caret-position="119">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/property_files/layout_data.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/property_files/css_keys.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/css/debug.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/vaultviews/CitationView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1379">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/displaycomponents/ScrollingTextDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/inputcomponents/TagSelector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/ScratchView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1615">
+          <caret line="109" column="107" selection-start-line="109" selection-start-column="107" selection-end-line="109" selection-end-column="107" />
           <folding />
         </state>
       </provider>
@@ -1443,111 +1495,320 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/skeletonkey/QuaternalParadigms.java">
+    <entry file="file://$PROJECT_DIR$/src/gameengine/LevelingValue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+        <state relative-caret-position="221">
+          <caret line="13" column="74" selection-start-line="13" selection-start-column="74" selection-end-line="13" selection-end-column="74" />
+          <folding>
+            <element signature="e#243#244#0" expanded="false" />
+            <element signature="e#278#279#0" expanded="false" />
+            <element signature="e#444#445#0" expanded="false" />
+            <element signature="e#493#494#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gameengine/CoreStat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#315#316#0" expanded="false" />
+            <element signature="e#342#343#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gameengine/CharacterStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#205#206#0" expanded="false" />
+            <element signature="e#227#228#0" expanded="false" />
+            <element signature="e#466#467#0" expanded="false" />
+            <element signature="e#522#523#0" expanded="false" />
+            <element signature="e#565#566#0" expanded="false" />
+            <element signature="e#612#613#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gameengine/Skill.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#207#208#0" expanded="false" />
+            <element signature="e#240#241#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/DayView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1715">
+          <caret line="140" column="77" selection-start-line="140" selection-start-column="77" selection-end-line="140" selection-end-column="77" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/skeletonkey/Multitudes.java">
+    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/HourTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        <state relative-caret-position="850">
+          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/datatypes/CircuitTraining.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/datatypes/ExerciseSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/SanctuaryView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="65" column="82" selection-start-line="62" selection-start-column="7" selection-end-line="65" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderEast.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="4" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#262#263#0" expanded="false" />
+            <element signature="e#297#298#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/displaycomponents/InteractiveListTextDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/MainView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="984">
+          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/components/PaneKeys.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        <state relative-caret-position="102">
+          <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/mainviews/GymnasiumView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="60" column="78" selection-start-line="60" selection-start-column="78" selection-end-line="60" selection-end-column="78" />
           <folding>
-            <element signature="e#666#667#0" expanded="true" />
-            <element signature="e#697#698#0" expanded="true" />
+            <element signature="e#1825#1826#0" expanded="true" />
+            <element signature="e#1903#1904#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/CenterPanes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="58" column="64" selection-start-line="58" selection-start-column="64" selection-end-line="58" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/GoalView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="52" column="96" selection-start-line="52" selection-start-column="96" selection-end-line="52" selection-end-column="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="72" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
+        <state relative-caret-position="561">
+          <caret line="68" column="79" selection-start-line="68" selection-start-column="79" selection-end-line="68" selection-end-column="79" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/components/scalingcomponents/ScalingScrollPane.java">
+    <entry file="file://$PROJECT_DIR$/src/ui/components/inputcomponents/EditableLabel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+        <state relative-caret-position="304">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/StringFormatUtility.java">
+    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/InventoryCategories.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-          <folding>
-            <element signature="e#1028#1029#0" expanded="true" />
-            <element signature="e#1067#1068#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="40" column="53" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1173#1174#0" expanded="true" />
-            <element signature="e#1234#1235#0" expanded="true" />
-            <element signature="e#1302#1303#0" expanded="true" />
-            <element signature="e#1354#1355#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/features/beaconviews/GoalCreatorView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="121" column="41" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/sqlite/DBIOLibrarian.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="80" column="89" selection-start-line="80" selection-start-column="89" selection-end-line="80" selection-end-column="89" />
+        <state relative-caret-position="357">
+          <caret line="301" column="102" selection-start-line="301" selection-start-column="102" selection-end-line="301" selection-end-column="102" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/datatypes/ExerciseCategories.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/mainpanes/WestPanes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/SQLiteJDBC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="53" column="67" selection-start-line="53" selection-start-column="67" selection-end-line="53" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/sqlite/DBCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6188">
+          <caret line="367" column="5" selection-start-line="367" selection-start-column="5" selection-end-line="367" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/datatypes/bibliographicdata/ExerciseSubcategories.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/displaycomponents/RoutineOptionsDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestKeys.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/ViewRequestHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/interviewcommunications/MainViewCommLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="81" column="18" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/inputcomponents/LabeledInputBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="30" column="97" selection-start-line="30" selection-start-column="97" selection-end-line="30" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/displaycomponents/ExerciseOptionsDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="114" selection-start-line="20" selection-start-column="114" selection-end-line="20" selection-end-column="114" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderWest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="64" column="20" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/editablelabel/ScalingInputBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-493">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/features/gymnasiumviews/RoutineBuilderView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="108" column="11" selection-start-line="108" selection-start-column="11" selection-end-line="108" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3373#3374#0" expanded="true" />
+            <element signature="e#3426#3427#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/components/displaycomponents/SimpleListTextDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="88" column="44" selection-start-line="88" selection-start-column="44" selection-end-line="88" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2384#2385#0" expanded="true" />
+            <element signature="e#2453#2454#0" expanded="true" />
+            <element signature="e#2492#2493#0" expanded="true" />
+            <element signature="e#2554#2555#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

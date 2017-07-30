@@ -7,19 +7,19 @@ import javafx.css.PseudoClass;
 import javafx.scene.text.Text;
 
 /**
- * The Skin Class for ScalingEditableLabel
+ * The Skin Class for ScalingInputBox
  *
- * @sa ScalingEditableLabel, ScalingEditableLabelBehavior
+ * @sa ScalingInputBox, ScalingInputBoxBehavior
  */
-public class ScalingEditableLabelSkin extends TextFieldSkin {
+public class ScalingInputBoxSkin extends TextFieldSkin {
 
-    private ScalingEditableLabel editableLabel;
+    private ScalingInputBox editableLabel;
     private Boolean editableState;
 
-    public ScalingEditableLabelSkin(final ScalingEditableLabel editableLabel) {
-        this(editableLabel, new ScalingEditableLabelBehavior(editableLabel));
+    public ScalingInputBoxSkin(final ScalingInputBox editableLabel) {
+        this(editableLabel, new ScalingInputBoxBehavior(editableLabel));
     }
-    public ScalingEditableLabelSkin(final ScalingEditableLabel editableLabel, final ScalingEditableLabelBehavior editableLabelBehavior) {
+    public ScalingInputBoxSkin(final ScalingInputBox editableLabel, final ScalingInputBoxBehavior editableLabelBehavior) {
         super(editableLabel, editableLabelBehavior);
         this.editableLabel = editableLabel;
         init();

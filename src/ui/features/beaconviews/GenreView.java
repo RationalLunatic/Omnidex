@@ -5,7 +5,7 @@ import javafx.scene.control.TreeView;
 import resources.StringFormatUtility;
 import resources.sqlite.InventoryCategories;
 import resources.sqlite.SQLiteJDBC;
-import ui.components.editablelabel.ScalingEditableLabel;
+import ui.components.editablelabel.ScalingInputBox;
 import ui.components.scalingcomponents.*;
 import ui.custombindings.ScaledDoubleBinding;
 
@@ -21,7 +21,7 @@ public class GenreView extends ScalingVBox {
     private TreeItem<ScalingLabel> nonfictionItem;
     private ScalingLabel fiction;
     private ScalingLabel nonfiction;
-    private ScalingEditableLabel genreInputBox;
+    private ScalingInputBox genreInputBox;
     private ScalingButton addNewGenre;
     private Map<TreeItem<ScalingLabel>, InventoryCategories> itemCategory;
 
@@ -113,7 +113,7 @@ public class GenreView extends ScalingVBox {
         ViewBindingsPack buttonBindings = new ViewBindingsPack(getViewBindings().widthProperty(), buttonHeight);
         genreInputContainer = new ScalingVBox(getViewBindings());
         addNewGenre = new ScalingButton("Submit New Genre", buttonBindings);
-        genreInputBox = new ScalingEditableLabel(getViewBindings().widthProperty());
+        genreInputBox = new ScalingInputBox(getViewBindings().widthProperty());
         genreInputContainer.getChildren().addAll(genreInputBox, addNewGenre);
     }
 

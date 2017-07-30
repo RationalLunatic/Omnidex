@@ -1,5 +1,6 @@
 package ui.features.beaconviews;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
 import resources.sqlite.InventoryCategories;
@@ -33,7 +34,7 @@ public class LiteratureView extends ScalingTabPane {
         ScalingVBox bookListContainer = new ScalingVBox(getViewBindings());
         for(String childName : SQLiteJDBC.getInstance().getChildrenOfLibraryItem(parentName)) {
             bookListContainer.getChildren().add(
-                    new ScalingLabel(getViewBindings().widthProperty(), childName, 0.4)
+                    new Label(childName)
             );
         }
         parentPane.getChildren().add(bookListContainer);

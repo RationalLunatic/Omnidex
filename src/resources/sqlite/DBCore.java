@@ -1,9 +1,9 @@
 package resources.sqlite;
 
+import resources.StringFormatUtility;
+
 import java.sql.*;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class DBCore {
     protected enum StatementStatus {
@@ -16,6 +16,7 @@ public class DBCore {
     private Connection dbConnection;
     private String cumulativeStatement;
     private StatementStatus currentStatementStatus;
+    private int tagID;
 
     public DBCore() {
         connectionEstablished = false;
@@ -24,6 +25,7 @@ public class DBCore {
         establishConnection();
         initializeDatabase();
         closeConnection();
+        tagID = getGeneratedID("TAGS");
     }
 
     public void establishConnection() {
@@ -37,6 +39,7 @@ public class DBCore {
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
                 connectionEstablished = false;
+                dbConnection = null;
             }
         } else {
             System.out.println("Connection already established.");
@@ -44,9 +47,10 @@ public class DBCore {
     }
 
     public void closeConnection() {
-        if(connectionEstablished) {
+        if(dbConnection != null) {
             try {
                 dbConnection.close();
+                dbConnection = null;
                 connectionEstablished = false;
                 System.out.println("Closed database successfully");
             } catch (SQLException e) {
@@ -60,9 +64,66 @@ public class DBCore {
     private void initializeDatabase() {
         createTaskTable();
         createInventoryTable();
+        createQuoteTable();
+        createTagTable();
+        createQuoteTagRelationTable();
+        createExerciseTable();
+        createRoutineTable();
+        createRoutineExerciseRelationTable();
     }
 
-    private void generateTableEssentials(String tableName) {
+    private void createExerciseTable() {
+        openTableStatement();
+        setTableName("EXERCISES");
+        addTableColumn("TITLE TEXT NOT NULL");
+        addTableColumn("DESCRIPTION TEXT NOT NULL");
+        addTableColumn("CATEGORY TEXT NOT NULL");
+        addTableColumn("SUBCATEGORY TEXT NOT NULL");
+        addTableColumn("COMPLETED_REPS INT NOT NULL");
+        createTable();
+    }
+
+    private void createRoutineTable() {
+        openTableStatement();
+        setTableName("ROUTINES");
+        addTableColumn("TITLE TEXT NOT NULL");
+        createTable();
+    }
+
+    private void createRoutineExerciseRelationTable() {
+        openTableStatement();
+        setTableName("ROUTINE_EXERCISE_RELATIONS");
+        addTableColumn("ROUTINE_ID INT NOT NULL");
+        addTableColumn("EXERCISE_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createTagTable() {
+        openTableStatement();
+        setTableName("TAGS");
+        addTableColumn("TITLE TEXT NOT NULL");
+        createTable();
+    }
+
+    private void createQuoteTagRelationTable() {
+        openTableStatement();
+        setTableName("QUOTE_TAGS");
+        addTableColumn("QUOTE_ID    INT     NOT NULL");
+        addTableColumn("TAG_ID      INT     NOT NULL");
+        createTable();
+    }
+
+    private void createQuoteTable() {
+        openTableStatement();
+        setTableName("QUOTES");
+        addTableColumn("AUTHOR      TEXT    NOT NULL");
+        addTableColumn("SOURCE      TEXT    NOT NULL");
+        addTableColumn("QUOTE       TEXT    NOT NULL");
+        addTableColumn("CONSTRAINT UNIQUE_QUOTE UNIQUE(QUOTE)");
+        createTable();
+    }
+
+    private void generateCommonTableEssentials(String tableName) {
         openTableStatement();
         setTableName(tableName.toUpperCase());
         addTableColumn("NAME           TEXT    NOT NULL");
@@ -70,14 +131,14 @@ public class DBCore {
     }
 
     private void createInventoryTable() {
-        generateTableEssentials("INVENTORY");
+        generateCommonTableEssentials("INVENTORY");
         addTableColumn("CATEGORY   TEXT   NOT NULL");
         addTableColumn("PARENT   TEXT");
         createTable();
     }
 
     private void createTaskTable() {
-        generateTableEssentials("TASK");
+        generateCommonTableEssentials("TASK");
         addTableColumn("SCHEDULE   DATETIME");
         addTableColumn("COMPLETED   BOOLEAN");
         createTable();
@@ -199,6 +260,114 @@ public class DBCore {
             e.printStackTrace();
         }
     }
+
+    public void createTag(String tag) {
+        establishConnection();
+        if(isConnectionEstablished()) {
+            Statement stmt = null;
+            if(getStatementStatus() == StatementStatus.EMPTY) {
+                try {
+                    updateTagID();
+                    stmt = getConnection().createStatement();
+                    tag = StringFormatUtility.addSingleQuotes(tag);
+                    String sql = "INSERT INTO TAGS (ID,TITLE) " +
+                            "VALUES (" + tagID + ", " + tag + ");";
+                    stmt.executeUpdate(sql);
+                    System.out.println("Successfully inserted tag item CoreDB Librarian");
+                    System.out.println(tag);
+                } catch (SQLException e) {
+                    System.out.println("Failed to insert quote");
+                    e.printStackTrace();
+                } finally {
+                    closeDownDBAction(stmt);
+                }
+            } else {
+                invalidStatementMessage();
+            }
+        } else {
+            notConnectedMessage("addQuoteToLibrary DBIOLibrarian");
+        }
+        closeConnection();
+    }
+
+    public void deleteTag(String tag) {
+        establishConnection();
+        Statement stmt = null;
+        try {
+            stmt = getConnection().createStatement();
+            String sql = "DELETE FROM TAGS WHERE TITLE='" + tag + "';";
+            stmt.executeUpdate(sql);
+            System.out.println("Successfully deleted '" + tag + "' from tags");
+        } catch (SQLException e) {
+            System.out.println("Failed to delete library item from inventory");
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt);
+        }
+    }
+
+    public boolean hasTag(String tag) {
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = getConnection().createStatement();
+            String sql = "SELECT * FROM TAGS WHERE TITLE='" + tag + "';";
+            rs = stmt.executeQuery(sql);
+            boolean result = rs.next();
+            System.out.println(tag + " " + result);
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+        closeConnection();
+        return false;
+    }
+
+    public List<String> getTags() {
+        List<String> tags = new ArrayList<>();
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = getConnection().createStatement();
+            String sql = "SELECT * FROM TAGS;";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+                tags.add(rs.getString("TITLE"));
+            }
+            return tags;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+        closeConnection();
+        return tags;
+    }
+
+    public int getTagID(String tag) {
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = getConnection().createStatement();
+            String sql = "SELECT * FROM TAGS WHERE TITLE='" + tag + "';";
+            rs = stmt.executeQuery(sql);
+            if(rs.next()) return rs.getInt("ID");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+        closeConnection();
+        return -1;
+    }
+
+    private void updateTagID() { tagID++; }
 
     public void appendStatement(String statement) { cumulativeStatement += statement;}
     public void resetCumulativeStatement() { cumulativeStatement = ""; }

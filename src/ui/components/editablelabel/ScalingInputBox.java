@@ -1,6 +1,5 @@
 package ui.components.editablelabel;
 
-import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,27 +10,27 @@ import ui.custombindings.ScaledDoubleBinding;
 
 import java.net.URL;
 
-public class ScalingEditableLabel extends TextField {
+public class ScalingInputBox extends TextField {
     private IntegerProperty clicksThreshold;
     private StringProperty baseText;
 
-    public ScalingEditableLabel(ScaledDoubleBinding width) {
+    public ScalingInputBox(ScaledDoubleBinding width) {
         this(width, "");
         this.prefWidthProperty().bind(width);
     }
 
-    public ScalingEditableLabel(ScaledDoubleBinding width, String text) {
+    public ScalingInputBox(ScaledDoubleBinding width, String text) {
         super(text);
         this.prefWidthProperty().bind(width);
         init();
     }
 
-    public ScalingEditableLabel(ScaledDoubleBinding width, double desiredScalingPercentage) {
+    public ScalingInputBox(ScaledDoubleBinding width, double desiredScalingPercentage) {
         this(width, "");
         this.prefWidthProperty().bind(new ScaledDoubleBinding(width, desiredScalingPercentage));
     }
 
-    public ScalingEditableLabel(ScaledDoubleBinding width, String text, double desiredScalingPercentage) {
+    public ScalingInputBox(ScaledDoubleBinding width, String text, double desiredScalingPercentage) {
         super(text);
         this.prefWidthProperty().bind(new ScaledDoubleBinding(width, desiredScalingPercentage));
         init();
@@ -45,12 +44,12 @@ public class ScalingEditableLabel extends TextField {
     }
 
     @Override
-    protected Skin<?> createDefaultSkin() { return new ScalingEditableLabelSkin(this); }
+    protected Skin<?> createDefaultSkin() { return new ScalingInputBoxSkin(this); }
 
 
     @Override
     public String getUserAgentStylesheet() {
-        URL pathToCSS = ScalingEditableLabel.class.getResource("editablelabel.css");
+        URL pathToCSS = ScalingInputBox.class.getResource("editablelabel.css");
         if ( pathToCSS != null ) {
             return pathToCSS.toExternalForm();
         } else {
