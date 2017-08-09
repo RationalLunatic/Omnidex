@@ -33,6 +33,10 @@ public class ViewRequest {
         this.requestType = requestType;
     }
 
+    public String getListUpdate() {
+        return listUpdate;
+    }
+
     public PaneKeys getTargetView() {
         return targetView;
     }

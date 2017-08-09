@@ -5,7 +5,9 @@ import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.ScalingVBox;
 import ui.components.scalingcomponents.ViewBindingsPack;
+import ui.features.academyviews.TrainingView;
 import ui.features.beaconviews.GenreView;
+import ui.features.beaconviews.TasksAndDeadlinesView;
 import ui.features.gymnasiumviews.RoutineBuilderWest;
 
 import java.util.HashMap;
@@ -14,21 +16,26 @@ import java.util.Map;
 public class WestPanes extends PanePack {
     private GenreView genreView;
     private RoutineBuilderWest routineBuilderView;
+    private TasksAndDeadlinesView tasksAndDeadlinesView;
+    private TrainingView trainingView;
     private Map<PaneKeys, ScalingVBox> westViewMap;
 
     public WestPanes(Pane corePane, ViewRequestHandler requestHandler, ViewBindingsPack viewBindings) {
         super(corePane, viewBindings, requestHandler);
         init();
-        corePane.getChildren().add(genreView);
+        corePane.getChildren().add(tasksAndDeadlinesView);
     }
 
     private void init() {
         genreView = new GenreView(getViewBindings());
         routineBuilderView = new RoutineBuilderWest(getViewBindings());
+        tasksAndDeadlinesView = new TasksAndDeadlinesView(getViewBindings());
+        trainingView = new TrainingView(getViewBindings());
         westViewMap = new HashMap<>();
         westViewMap.put(PaneKeys.GENRES, genreView);
         westViewMap.put(PaneKeys.EXERCISES, routineBuilderView);
-
+        westViewMap.put(PaneKeys.TASKS_AND_DEADLINES, tasksAndDeadlinesView);
+        westViewMap.put(PaneKeys.TRAINING, trainingView);
     }
 
     public ScalingVBox getWestPane(PaneKeys key) {

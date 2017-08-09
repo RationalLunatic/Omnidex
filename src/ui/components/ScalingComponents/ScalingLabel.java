@@ -4,28 +4,27 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
+import resources.ResourceManager;
 import ui.custombindings.ScaledDoubleBinding;
 import ui.custombindings.StrLenBinding;
 
-/**
- * Created by shaev_000 on 5/9/2016.
- */
 public class ScalingLabel extends Label {
     public ScalingLabel(ScaledDoubleBinding width, String text, double desiredScalingPercentage) {
         super(text);
-        this.prefWidthProperty().bind(new ScaledDoubleBinding(width.getDoubleProperty(), desiredScalingPercentage));
-        ObjectProperty<Font> fontProperty = new SimpleObjectProperty<>();
-        this.fontProperty().bind(fontProperty);
-        fontProperty.set(Font.font(this.prefWidthProperty().get() / (this.textProperty().get().length()) / 4 - 6));
+        this.setAlignment(Pos.TOP_CENTER);
+        ScaledDoubleBinding boundWidth = new ScaledDoubleBinding(width.getDoubleProperty(), desiredScalingPercentage);
+        this.prefWidthProperty().bind(boundWidth);
         Label reference = this;
-        width.addListener(new ChangeListener<Number>() {
+        boundWidth.addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldWidth, Number newWidth)
             {
-                double textSize = newWidth.doubleValue() / (reference.textProperty().get().length()) / 4 - 6; // Trial and error number, sorry.....  Still need to find a better solution for this.
-                fontProperty.set(Font.font(textSize));
+                double textSize = newWidth.doubleValue() / (reference.textProperty().get().length()) ;
+                int size = (int)Math.floor(textSize);
+                reference.setStyle("-fx-font-size: " + size + "px;");
             }
         });
     }

@@ -4,6 +4,7 @@ import javafx.scene.layout.BorderPane;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.interviewcommunications.MainViewCommLink;
 import ui.components.mainpanes.CenterPanes;
+import ui.components.mainpanes.EastPanes;
 import ui.components.mainpanes.NorthPanes;
 import ui.components.mainpanes.WestPanes;
 import ui.components.scalingcomponents.CenterParentScalingStackPane;
@@ -26,6 +27,7 @@ public class MainView extends BorderPane {
     private CenterPanes centerPanes;
     private NorthPanes northPanes;
     private WestPanes westPanes;
+    private EastPanes eastPanes;
     private boolean debugMode;
     private MainViewCommLink commLink;
     private DirectDoubleBinding width;
@@ -44,10 +46,12 @@ public class MainView extends BorderPane {
         initCenterPanes();
         initNorthPanes();
         initWestPanes();
+        initEastPanes();
         setScalingPanes();
         commLink.addCenterPanes(centerPanes, center);
         commLink.addNorthPanes(northPanes, north);
         commLink.addWestPanes(westPanes, west);
+        commLink.addEastPanes(eastPanes, east);
         debugMode = false;
         toggleBorders();
     }
@@ -72,6 +76,13 @@ public class MainView extends BorderPane {
         ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 1);
         ViewBindingsPack westPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
         westPanes = new WestPanes(west, commLink, westPanesBindingPack);
+    }
+
+    private void initEastPanes() {
+        ScaledDoubleBinding widthBinding = new ScaledDoubleBinding(width, 0.125);
+        ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 1);
+        ViewBindingsPack eastPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
+        eastPanes = new EastPanes(east, commLink, eastPanesBindingPack);
     }
 
     private void loadResources() {

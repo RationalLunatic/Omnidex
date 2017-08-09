@@ -119,7 +119,7 @@ public class DayView extends ScalingStackPane {
     }
 
     private void initTitle() {
-        dayTitle = new ScalingLabel(viewBindings.widthProperty(), "Init Title", 0.4);
+        dayTitle = new ScalingLabel(viewBindings.widthProperty(), "Init Title", 0.175);
         dayTitle.setAlignment(Pos.CENTER);
         dayTitle.prefWidthProperty().bind(this.prefWidthProperty());
     }

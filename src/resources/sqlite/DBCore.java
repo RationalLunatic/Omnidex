@@ -62,6 +62,7 @@ public class DBCore {
     }
 
     private void initializeDatabase() {
+        // TODO: This really needs to be refactored.....
         createTaskTable();
         createInventoryTable();
         createQuoteTable();
@@ -70,6 +71,133 @@ public class DBCore {
         createExerciseTable();
         createRoutineTable();
         createRoutineExerciseRelationTable();
+        createBasicTaskTable();
+        createDailyTable();
+        createHabitTable();
+        createDeadlineTable();
+        createProjectTable();
+        createActionPlanTable();
+        createGoalTable();
+        createProjectTaskRelationsTable();
+        createProjectDeadlineRelationsTable();
+        createActionPlanTaskRelationsTable();
+        createActionPlanDeadlineRelationsTable();
+        createActionPlanProjectRelationsTable();
+        createGoalTaskRelationsTable();
+        createGoalDeadlineRelationsTable();
+        createGoalProjectRelationsTable();
+        createGoalPlanRelationsTable();
+    }
+
+    private void createBasicTaskTable() {
+        generateCommonTableEssentials("BASIC_TASK");
+        createTable();
+    }
+
+    private void createDailyTable() {
+        generateCommonTableEssentials("DAILY");
+        addTableColumn("SCHEDULED_TIME  TIME");
+        createTable();
+    }
+
+    private void createHabitTable() {
+        generateCommonTableEssentials("HABIT");
+        addTableColumn("REPETITIONS INT NOT NULL");
+        addTableColumn("GOOD_HABIT BOOLEAN NOT NULL");
+        createTable();
+    }
+
+    private void createDeadlineTable() {
+        generateCommonTableEssentials("DEADLINE");
+        addTableColumn("SCHEDULED_DATETIME  DATETIME NOT_NULL");
+        createTable();
+    }
+
+    private void createProjectTable() {
+        generateCommonTableEssentials("PROJECT");
+        createTable();
+    }
+
+    private void createActionPlanTable() {
+        generateCommonTableEssentials("ACTION_PLAN");
+        createTable();
+    }
+
+    private void createGoalTable() {
+        generateCommonTableEssentials("GOAL");
+        createTable();
+    }
+
+    private void createProjectTaskRelationsTable() {
+        openTableStatement();
+        setTableName("PROJECT_TASK_RELATIONS");
+        addTableColumn("PROJECT_ID INT NOT NULL");
+        addTableColumn("TASK_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createProjectDeadlineRelationsTable() {
+        openTableStatement();
+        setTableName("PROJECT_DEADLINE_RELATIONS");
+        addTableColumn("PROJECT_ID INT NOT NULL");
+        addTableColumn("DEADLINE_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createActionPlanTaskRelationsTable() {
+        openTableStatement();
+        setTableName("PLAN_TASK_RELATIONS");
+        addTableColumn("PLAN_ID INT NOT NULL");
+        addTableColumn("TASK_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createActionPlanDeadlineRelationsTable() {
+        openTableStatement();
+        setTableName("PLAN_DEADLINE_RELATIONS");
+        addTableColumn("PLAN_ID INT NOT NULL");
+        addTableColumn("DEADLINE_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createActionPlanProjectRelationsTable() {
+        openTableStatement();
+        setTableName("PLAN_PROJECT_RELATIONS");
+        addTableColumn("PLAN_ID INT NOT NULL");
+        addTableColumn("PROJECT_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createGoalTaskRelationsTable() {
+        openTableStatement();
+        setTableName("GOAL_TASK_RELATIONS");
+        addTableColumn("GOAL_ID INT NOT NULL");
+        addTableColumn("TASK_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createGoalDeadlineRelationsTable() {
+        openTableStatement();
+        setTableName("GOAL_DEADLINE_RELATIONS");
+        addTableColumn("GOAL_ID INT NOT NULL");
+        addTableColumn("DEADLINE_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createGoalProjectRelationsTable() {
+        openTableStatement();
+        setTableName("GOAL_PROJECT_RELATIONS");
+        addTableColumn("GOAL_ID INT NOT NULL");
+        addTableColumn("PROJECT_ID INT NOT NULL");
+        createTable();
+    }
+
+    private void createGoalPlanRelationsTable() {
+        openTableStatement();
+        setTableName("GOAL_PLAN_RELATIONS");
+        addTableColumn("GOAL_ID INT NOT NULL");
+        addTableColumn("PLAN_ID INT NOT NULL");
+        createTable();
     }
 
     private void createExerciseTable() {
@@ -95,6 +223,10 @@ public class DBCore {
         setTableName("ROUTINE_EXERCISE_RELATIONS");
         addTableColumn("ROUTINE_ID INT NOT NULL");
         addTableColumn("EXERCISE_ID INT NOT NULL");
+        addTableColumn("EXERCISE_REPS INT NOT_NULL");
+        addTableColumn("EXERCISE_SETS INT NOT_NULL");
+        addTableColumn("EXERCISE_NAME TEXT NOT_NULL");
+        addTableColumn("ROUTINE_NAME TEXT NOT_NULL");
         createTable();
     }
 
@@ -126,7 +258,7 @@ public class DBCore {
     private void generateCommonTableEssentials(String tableName) {
         openTableStatement();
         setTableName(tableName.toUpperCase());
-        addTableColumn("NAME           TEXT    NOT NULL");
+        addTableColumn("TITLE           TEXT    NOT NULL");
         addTableColumn("DESCRIPTION    TEXT    NOT NULL");
     }
 
@@ -226,11 +358,7 @@ public class DBCore {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = getConnection().createStatement();
-            String sql = "SELECT MAX(id) AS max_id FROM " + tableName.toUpperCase();
-            rs = stmt.executeQuery(sql);
-            int numRecords = rs.getInt("max_id");
-            return numRecords + 1;
+            return executeGetGeneratedID(tableName, stmt, rs);
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
@@ -267,14 +395,7 @@ public class DBCore {
             Statement stmt = null;
             if(getStatementStatus() == StatementStatus.EMPTY) {
                 try {
-                    updateTagID();
-                    stmt = getConnection().createStatement();
-                    tag = StringFormatUtility.addSingleQuotes(tag);
-                    String sql = "INSERT INTO TAGS (ID,TITLE) " +
-                            "VALUES (" + tagID + ", " + tag + ");";
-                    stmt.executeUpdate(sql);
-                    System.out.println("Successfully inserted tag item CoreDB Librarian");
-                    System.out.println(tag);
+                    executeCreateTag(tag, stmt);
                 } catch (SQLException e) {
                     System.out.println("Failed to insert quote");
                     e.printStackTrace();
@@ -294,10 +415,7 @@ public class DBCore {
         establishConnection();
         Statement stmt = null;
         try {
-            stmt = getConnection().createStatement();
-            String sql = "DELETE FROM TAGS WHERE TITLE='" + tag + "';";
-            stmt.executeUpdate(sql);
-            System.out.println("Successfully deleted '" + tag + "' from tags");
+            executeDeleteTag(tag, stmt);
         } catch (SQLException e) {
             System.out.println("Failed to delete library item from inventory");
             e.printStackTrace();
@@ -311,12 +429,7 @@ public class DBCore {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = getConnection().createStatement();
-            String sql = "SELECT * FROM TAGS WHERE TITLE='" + tag + "';";
-            rs = stmt.executeQuery(sql);
-            boolean result = rs.next();
-            System.out.println(tag + " " + result);
-            return result;
+            return executeHasTag(tag, stmt, rs);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -327,25 +440,18 @@ public class DBCore {
     }
 
     public List<String> getTags() {
-        List<String> tags = new ArrayList<>();
         establishConnection();
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = getConnection().createStatement();
-            String sql = "SELECT * FROM TAGS;";
-            rs = stmt.executeQuery(sql);
-            while(rs.next()) {
-                tags.add(rs.getString("TITLE"));
-            }
-            return tags;
+            return executeGetTags(stmt, rs);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeDownDBAction(stmt, rs);
         }
         closeConnection();
-        return tags;
+        return new ArrayList<>();
     }
 
     public int getTagID(String tag) {
@@ -353,11 +459,7 @@ public class DBCore {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = getConnection().createStatement();
-            String sql = "SELECT * FROM TAGS WHERE TITLE='" + tag + "';";
-            rs = stmt.executeQuery(sql);
-            if(rs.next()) return rs.getInt("ID");
-
+            return executeGetTagID(tag, stmt, rs);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -367,8 +469,61 @@ public class DBCore {
         return -1;
     }
 
-    private void updateTagID() { tagID++; }
+    private int executeGetGeneratedID(String tableName, Statement stmt, ResultSet rs) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = "SELECT MAX(id) AS max_id FROM " + tableName.toUpperCase();
+        rs = stmt.executeQuery(sql);
+        int numRecords = rs.getInt("max_id");
+        return numRecords + 1;
+    }
 
+    private void executeCreateTag(String tag, Statement stmt) throws SQLException {
+        updateTagID();
+        stmt = getConnection().createStatement();
+        tag = StringFormatUtility.addSingleQuotes(tag);
+        String sql = "INSERT INTO TAGS (ID,TITLE) " +
+                "VALUES (" + tagID + ", " + tag + ");";
+        stmt.executeUpdate(sql);
+        System.out.println("Successfully inserted tag item CoreDB Librarian");
+        System.out.println(tag);
+    }
+
+    private void executeDeleteTag(String tag, Statement stmt) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = "DELETE FROM TAGS WHERE TITLE='" + tag + "';";
+        stmt.executeUpdate(sql);
+        System.out.println("Successfully deleted '" + tag + "' from tags");
+    }
+
+    private boolean executeHasTag(String tag, Statement stmt, ResultSet rs) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = "SELECT * FROM TAGS WHERE TITLE='" + tag + "';";
+        rs = stmt.executeQuery(sql);
+        boolean result = rs.next();
+        System.out.println(tag + " " + result);
+        return result;
+    }
+
+    private List<String> executeGetTags(Statement stmt, ResultSet rs) throws SQLException {
+        List<String> tags = new ArrayList<>();
+        stmt = getConnection().createStatement();
+        String sql = "SELECT * FROM TAGS;";
+        rs = stmt.executeQuery(sql);
+        while(rs.next()) {
+            tags.add(rs.getString("TITLE"));
+        }
+        return tags;
+    }
+
+    private int executeGetTagID(String tag, Statement stmt, ResultSet rs) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = "SELECT * FROM TAGS WHERE TITLE='" + tag + "';";
+        rs = stmt.executeQuery(sql);
+        if(rs.next()) return rs.getInt("ID");
+        return -1;
+    }
+
+    private void updateTagID() { tagID++; }
     public void appendStatement(String statement) { cumulativeStatement += statement;}
     public void resetCumulativeStatement() { cumulativeStatement = ""; }
     public String getCumulativeStatement() { return cumulativeStatement; }
@@ -384,5 +539,14 @@ public class DBCore {
     }
     public void invalidStatementMessage() {
         System.out.println("Invalid Statement Operation");
+    }
+    public boolean checkForSQLInjection(String statement) {
+        String[] toCheck = statement.split("\\s+");
+        for(String s : toCheck) {
+            if(s.contains("SELECT") || s.contains("INSERT") || s.contains("DELETE") || s.contains("ALTER") || s.contains("UPDATE")) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,7 +1,9 @@
 package resources.sqlite;
 
 import engine.components.schedule.ToDoListTask;
+import resources.datatypes.ExerciseRoutineRelation;
 import resources.datatypes.Quote;
+import ui.components.inputcomponents.ExerciseOptionsInput;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,11 +14,13 @@ import java.util.Map;
 public class SQLiteJDBC {
     private DBIOTaskTable taskIO;
     private DBIOLibrarian libraryIO;
+    private DBIOPathfinder pathfinderIO;
     private static SQLiteJDBC sInstance;
 
     private SQLiteJDBC() {
         taskIO = new DBIOTaskTable();
         libraryIO = new DBIOLibrarian();
+        pathfinderIO = new DBIOPathfinder();
     }
 
     public static SQLiteJDBC getInstance() {
@@ -24,6 +28,10 @@ public class SQLiteJDBC {
             sInstance = new SQLiteJDBC();
         }
         return sInstance;
+    }
+
+    public DBIOPathfinder getPathfinderIO() {
+        return pathfinderIO;
     }
 
     public void addTask(String taskName, String taskDesc, String taskDate) {
@@ -52,6 +60,26 @@ public class SQLiteJDBC {
 
     public void addToLibrary(String name, String desc, String category, String parent) {
         libraryIO.addElementToCategory(name, desc, category, parent);
+    }
+
+    public List<String> getExercisesByCategory(String category) {
+        return libraryIO.getExercisesByCategory(category);
+    }
+
+    public void addToExercises(String name, String desc, String category, String subcategory) {
+        libraryIO.addExercise(name, desc, category, subcategory);
+    }
+
+    public void addToRoutines(String routineName, List<ExerciseOptionsInput> exerciseData) {
+        libraryIO.addNewRoutine(routineName, exerciseData);
+    }
+
+    public List<String> getRoutines() {
+        return libraryIO.getRoutines();
+    }
+
+    public List<ExerciseRoutineRelation> getRoutineExercises(String routine) {
+        return libraryIO.getRoutineExercises(routine);
     }
 
     public void addQuoteToLibrary(String author, String source, String quote, List<String> tags) {

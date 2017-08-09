@@ -9,8 +9,7 @@ import resources.datatypes.ExerciseCategories;
 import resources.datatypes.bibliographicdata.ExerciseSubcategories;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.PaneKeys;
-import ui.components.displaycomponents.ExerciseOptionsDisplay;
-import ui.components.displaycomponents.SimpleListTextDisplay;
+import ui.components.inputcomponents.ExerciseOptionsInput;
 import ui.components.inputcomponents.EditableLabel;
 import ui.components.inputcomponents.LabeledInputBox;
 import ui.components.interviewcommunications.ViewRequest;
@@ -35,8 +34,9 @@ public class RoutineBuilderView extends ScalingStackPane {
     private ScalingButton submit;
     private EditableLabel routineName;
     private ScalingButton addNewExercise;
-    private ListView<ExerciseOptionsDisplay> routineExercises;
-    private ObservableList<ExerciseOptionsDisplay> routineExerciseOptionBoxes;
+    private ListView<ExerciseOptionsInput> routineExercises;
+    private ObservableList<ExerciseOptionsInput> routineExerciseOptionBoxes;
+    private ScalingButton submitRoutine;
 
     public RoutineBuilderView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
@@ -96,18 +96,25 @@ public class RoutineBuilderView extends ScalingStackPane {
         ScaledDoubleBinding buttonHeight = new ScaledDoubleBinding(getViewBindings().heightProperty(), 0.15);
         ViewBindingsPack buttonPack = new ViewBindingsPack(getViewBindings().widthProperty(), buttonHeight);
         addNewExercise = new ScalingButton("Add New Exercise", buttonPack);
+        submitRoutine = new ScalingButton("Submit Routine", buttonPack);
         routineExercises = new ListView<>();
         routineExerciseOptionBoxes = FXCollections.observableArrayList();
         routineExercises.setItems(routineExerciseOptionBoxes);
         addNewExercise.setOnMouseClicked(e -> addNewExerciseToRoutine());
-        createRoutineOptions.getChildren().addAll(routineName, addNewExercise, routineExercises);
+        submitRoutine.setOnMouseClicked(e -> saveRoutine());
+        createRoutineOptions.getChildren().addAll(routineName, addNewExercise, routineExercises, submitRoutine);
         createRoutineOptions.setAlignment(Pos.CENTER);
+    }
+
+    private void saveRoutine() {
+        SQLiteJDBC.getInstance().addToRoutines(routineName.getText(), routineExerciseOptionBoxes);
+        getRequestSender().handleRequest(new ViewRequest(PaneKeys.EXERCISES, ViewRequestKeys.LIST_UPDATE, exerciseName.getText()));
     }
 
     private void addNewExerciseToRoutine() {
         String exerciseName = getRequestSender().handleDataRequest(new ViewRequest(PaneKeys.EXERCISES, ViewRequestKeys.DATA_REQUEST));
         if(!exerciseName.isEmpty()) {
-            ExerciseOptionsDisplay display = new ExerciseOptionsDisplay(exerciseName, getViewBindings());
+            ExerciseOptionsInput display = new ExerciseOptionsInput(exerciseName, getViewBindings());
             routineExerciseOptionBoxes.add(display);
         }
     }
@@ -140,7 +147,7 @@ public class RoutineBuilderView extends ScalingStackPane {
     }
 
     private void saveExercise() {
-        SQLiteJDBC.getInstance().addToLibrary(exerciseName.getText(), describeExercise.getInput(),
+        SQLiteJDBC.getInstance().addToExercises(exerciseName.getText(), describeExercise.getInput(),
                 selectCategory.getSelectionModel().getSelectedItem().toString(), selectSubcategory.getSelectionModel().getSelectedItem().toString());
         getRequestSender().handleRequest(new ViewRequest(PaneKeys.EXERCISES, ViewRequestKeys.LIST_UPDATE, exerciseName.getText()));
     }

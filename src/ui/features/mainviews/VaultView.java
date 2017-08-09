@@ -4,20 +4,10 @@ import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.*;
+import ui.features.AbstractCenterDisplay;
 
 
-
-public class VaultView extends ScalingStackPane {
-    private ScalingHBox topRow;
-    private ScalingHBox bottomRow;
-    private ScalingVBox mainContainer;
-    private ScalingButton bibliographicArchive;
-    private ScalingButton chronographicArchive;
-    private ScalingButton lexicographicArchive;
-    private ScalingButton mnemonicArchive;
-    private ScalingButton citationArchive;
-    private ViewRequestHandler commLink;
-    private ViewBindingsPack viewBindings;
+public class VaultView extends AbstractCenterDisplay {
 
     public VaultView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
@@ -25,44 +15,24 @@ public class VaultView extends ScalingStackPane {
     }
 
     private void init() {
-        initContainers();
-        initButtons();
-        initButtonText();
-        initButtonBehaviors();
-        initDisplay();
+        initUIElements();
+        initUIBehaviors();
     }
 
-    private void initContainers() {
-        topRow = new ScalingHBox(getViewBindings());
-        bottomRow = new ScalingHBox(getViewBindings());
-        mainContainer = new ScalingVBox(getViewBindings());
+    private void initUIElements() {
+        setTitle("The Vault");
+        createButtonBar("Historical Archives");
+        createButtonBar("Literary Archives");
+        addButtonToButtonBar("The Chronograph", "Historical Archives");
+        addButtonToButtonBar("The Archaeologist", "Historical Archives");
+        addButtonToButtonBar("The Bibliographic Archive", "Literary Archives");
+        addButtonToButtonBar("The Citation Archive", "Literary Archives");
+        addButtonToButtonBar("The Lexicographic Archive", "Literary Archives");
     }
 
-    private void initButtons() {
-        bibliographicArchive = new ScalingButton(getViewBindings());
-        chronographicArchive = new ScalingButton(getViewBindings());
-        lexicographicArchive = new ScalingButton(getViewBindings());
-        mnemonicArchive = new ScalingButton(getViewBindings());
-        citationArchive = new ScalingButton(getViewBindings());
-    }
-
-    private void initButtonText() {
-        bibliographicArchive.setText("Bibliographic Archive");
-        chronographicArchive.setText("Chronographic Archive");
-        lexicographicArchive.setText("Lexicographic Archive");
-        mnemonicArchive.setText("Mnemonic Archive");
-        citationArchive.setText("Citation Archive");
-    }
-
-    private void initButtonBehaviors() {
-        // TODO: e -> SendViewRequest(PaneKeys.VIEWKEY)
-        citationArchive.setOnMouseClicked(e -> getRequestSender().handleRequest(new ViewRequest(PaneKeys.CITATION)));
-    }
-
-    private void initDisplay() {
-        topRow.getChildren().addAll(bibliographicArchive, chronographicArchive);
-        bottomRow.getChildren().addAll(mnemonicArchive, citationArchive, lexicographicArchive);
-        mainContainer.getChildren().addAll(topRow, bottomRow);
-        this.getChildren().add(mainContainer);
+    private void initUIBehaviors() {
+        setButtonOnClick("The Bibliographic Archive", e -> sendViewRequest(new ViewRequest(PaneKeys.BIBLIOGRAPHY)));
+        setButtonOnClick("The Citation Archive", e -> sendViewRequest(new ViewRequest(PaneKeys.CITATION)));
+        setButtonOnClick("The Lexicographic Archive", e -> sendViewRequest(new ViewRequest(PaneKeys.VOCABULARY)));
     }
 }

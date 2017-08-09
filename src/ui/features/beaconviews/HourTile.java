@@ -58,10 +58,10 @@ public class HourTile extends ScalingStackPane {
     }
 
     private void initUIElements() {
-        this.hourInfo = new ScalingInputBox(viewBindings.widthProperty(), 0.8);
-        this.hourLabel = new ScalingLabel(viewBindings.widthProperty(), "10:00 A.M.", 0.2);
-        this.completeTask = new ScalingButton("Complete Task", viewBindings, 0.3);
-        this.removeTask = new ScalingButton("Remove Task", viewBindings, 0.3);
+        this.hourInfo = new ScalingInputBox(viewBindings.widthProperty(), 0.6);
+        this.hourLabel = new ScalingLabel(viewBindings.widthProperty(), "10:00 A.M.", 0.15);
+        this.completeTask = new ScalingButton("Complete Task", viewBindings, 0.15);
+        this.removeTask = new ScalingButton("Remove Task", viewBindings, 0.15);
     }
 
     private void initHourInfo() {

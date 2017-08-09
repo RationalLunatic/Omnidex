@@ -51,34 +51,10 @@ public class ScalingInputBoxSkin extends TextFieldSkin {
     private void updateVisibleText() {
         String baseText = editableLabel.getBaseText();
         if ( !editableState ) {
-            editableLabel.setText(calculateClipString(baseText));
+            editableLabel.setText(baseText);
         } else {
             editableLabel.setText(baseText);
             editableLabel.positionCaret(baseText.length());
-        }
-    }
-
-    /**
-     * Truncates text to fit into the editablelabel
-     *
-     * @param text The text that needs to be truncated
-     * @return The truncated text with an appended "..."
-     */
-    private String calculateClipString(String text) {
-        double labelWidth = editableLabel.getWidth();
-
-        Text layoutText = new Text(text);
-        layoutText.setFont(editableLabel.getFont());
-
-        if ( layoutText.getLayoutBounds().getWidth() < labelWidth ) {
-            return text;
-        } else {
-            layoutText.setText(text+"...");
-            while ( layoutText.getLayoutBounds().getWidth() > labelWidth ) {
-                text = text.substring(0, text.length()-1);
-                layoutText.setText(text+"...");
-            }
-            return text+"...";
         }
     }
 }

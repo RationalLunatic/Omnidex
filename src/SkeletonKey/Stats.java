@@ -3,21 +3,21 @@ package skeletonkey;
 public enum Stats {
     STRENGTH,
     DEXTERITY,
-    VITALITY,
     PERCEPTION,
+    VITALITY,
 
     INTELLIGENCE,
     CUNNING,
-    WISDOM,
     CHARISMA,
+    WISDOM,
 
     DISCIPLINE,
     NERVE,
-    WILLPOWER,
     COURAGE,
+    WILLPOWER,
 
     CREATIVITY,
-    INSTINCT,
-    AWARENESS,
-    EMPATHY
+    EMPATHY,
+    FAITH,
+    AWARENESS
 }

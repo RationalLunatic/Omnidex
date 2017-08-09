@@ -1,15 +1,15 @@
 package skeletonkey;
 
 public enum Attributes {
-    VIGOR,
-    VITALITY,
+    INTENSITY,
+    CONSTANCY,
 
-    THEORY,
     PRAXIS,
+    THEORY,
 
-    INITIATIVE,
-    DRIVE,
+    ALACRITY,
+    RESOLUTION,
 
-    WAKE,
-    DREAM
+    VISION,
+    INSIGHT
 }

@@ -4,6 +4,7 @@ import engine.components.schedule.Deadline;
 import javafx.animation.SequentialTransition;
 import javafx.animation.StrokeTransition;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -108,8 +109,8 @@ public class DayTile extends ScalingStackPane {
         left.prefWidthProperty().bind(cornerScale);
         mid.prefWidthProperty().bind(centerScale);
         right.prefWidthProperty().bind(cornerScale);
-        mid.getChildren().add(new ScalingLabel(centerScale, StringFormatUtility.capitalize(date.getDayOfWeek().toString()), 1));
-        right.getChildren().add(new ScalingLabel(cornerScale,"" + date.getDayOfMonth(), 1));
+        mid.getChildren().add(new Label(StringFormatUtility.capitalize(date.getDayOfWeek().toString())));
+        right.getChildren().add(new Label(""+date.getDayOfMonth()));
         topRow.getChildren().addAll(left, mid, right);
         mid.setAlignment(Pos.CENTER);
         right.setAlignment(Pos.CENTER_LEFT);

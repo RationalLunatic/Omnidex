@@ -2,10 +2,12 @@ package ui.components.inputcomponents;
 
 import javafx.beans.property.StringProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
 import ui.components.editablelabel.ScalingInputBox;
 import ui.components.scalingcomponents.ViewBindingsPack;
 import ui.custombindings.ScaledDoubleBinding;
@@ -32,6 +34,10 @@ public class EditableLabel extends Group {
         init();
     }
 
+    public void setFont(Font font) {
+        textDisplay.fontProperty().set(font);
+    }
+
     private void init() {
         initWidth();
         initElements();
@@ -43,6 +49,7 @@ public class EditableLabel extends Group {
         inputBox = new ScalingInputBox(labelWidth, "Click to Enter Text");
         textDisplay.prefWidthProperty().bind(labelWidth);
         textDisplay.textProperty().bind(inputBox.textProperty());
+        textDisplay.setAlignment(Pos.TOP_CENTER);
         this.getChildren().addAll(textDisplay, inputBox);
         showText();
     }
@@ -86,4 +93,9 @@ public class EditableLabel extends Group {
 
     public String getText() { return textDisplay.getText(); }
     public StringProperty textProperty() { return inputBox.textProperty(); }
+    public void setText(String text) {
+        inputBox.baseTextProperty().setValue(text);
+        inputBox.textProperty().setValue(text);
+        inputBox.setText(text);
+    }
 }

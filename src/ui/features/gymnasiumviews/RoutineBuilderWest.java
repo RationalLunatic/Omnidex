@@ -53,7 +53,7 @@ public class RoutineBuilderWest extends ScalingVBox {
     public void loadExercises() {
         for(ExerciseCategories category : ExerciseCategories.values()) {
             exerciseLists.get(category).clear();
-            for(String exercise : SQLiteJDBC.getInstance().getItemsOfLibraryCategory(category.toString())) {
+            for(String exercise : SQLiteJDBC.getInstance().getExercisesByCategory(category.toString())) {
                 exerciseLists.get(category).addLine(exercise);
             }
         }

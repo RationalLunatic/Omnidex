@@ -34,6 +34,10 @@ public class LabeledInputBox extends ScalingHBox {
         this.setAlignment(Pos.CENTER);
     }
 
+    public void setText(String value) {
+        inputField.setText(value);
+        inputField.setBaseText(value);
+    }
     public String getInput() { return inputField.getText(); }
     public boolean isEmpty() { return inputField.getText().isEmpty(); }
 }

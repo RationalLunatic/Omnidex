@@ -2,11 +2,15 @@ package ui.components.displaycomponents;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Callback;
 import resources.ResourceManager;
 import ui.components.scalingcomponents.ScalingVBox;
 import ui.components.scalingcomponents.ViewBindingsPack;
@@ -26,6 +30,14 @@ public class SimpleListTextDisplay extends ScalingVBox {
         init(listTitle);
     }
 
+    public void setOnClickBehavior(EventHandler<MouseEvent> eventHandler) {
+        listView.setOnMouseClicked(eventHandler);
+    }
+
+    public String getTextOfSelected() {
+        return listView.getSelectionModel().getSelectedItem();
+    }
+
     private void init(String title) {
         initEssentials();
         initTitle(title);
@@ -40,6 +52,12 @@ public class SimpleListTextDisplay extends ScalingVBox {
         this.getChildren().add(listTitleLabel);
     }
     private void initList() {
+        listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new CenterAlignedListCell();
+            }
+        });
         listView.setItems(data);
         this.getChildren().add(listView);
         linesToDisplay = new ArrayList<>();
@@ -70,7 +88,7 @@ public class SimpleListTextDisplay extends ScalingVBox {
     }
 
     public void clear() {
-        data.clear();
+        listView.getItems().clear();
         linesToDisplay = new ArrayList<>();
     }
 
@@ -82,10 +100,26 @@ public class SimpleListTextDisplay extends ScalingVBox {
     }
 
     public String getSelectedItem() {
+        if(listView.getSelectionModel().getSelectedItem() == null) return "";
         return listView.getSelectionModel().getSelectedItem();
     }
 
     public boolean isItemSelected() {
         return !listView.getSelectionModel().isEmpty();
+    }
+
+    public ListView getListView() { return listView; }
+
+    private class CenterAlignedListCell extends ListCell<String> {
+        @Override
+        public void updateItem(String item, boolean empty) {
+            this.setAlignment(Pos.CENTER);
+            super.updateItem(item, empty);
+            if (item != null) {
+                setText(item);
+            } else {
+                setText("");
+            }
+        }
     }
 }

@@ -4,18 +4,9 @@ import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.*;
+import ui.features.AbstractCenterDisplay;
 
-public class GymnasiumView extends ScalingStackPane {
-    private ScalingHBox topRow;
-    private ScalingHBox bottomRow;
-    private ScalingVBox mainContainer;
-    private ScalingButton trainingDesigner;
-    private ScalingButton praxisScheduler;
-    private ScalingButton gym;
-    private ScalingButton temple;
-    private ScalingButton study;
-    private ViewRequestHandler commLink;
-    private ViewBindingsPack viewBindings;
+public class GymnasiumView extends AbstractCenterDisplay {
 
     public GymnasiumView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
@@ -23,48 +14,19 @@ public class GymnasiumView extends ScalingStackPane {
     }
 
     private void init() {
-        initContainers();
-        initButtons();
-        initButtonText();
-        initButtonBehaviors();
-        initDisplay();
+        initUIElements();
+        initBehaviors();
     }
 
-    private void initContainers() {
-        topRow = new ScalingHBox(getViewBindings());
-        bottomRow = new ScalingHBox(getViewBindings());
-        mainContainer = new ScalingVBox(getViewBindings());
+    private void initUIElements() {
+        setTitle("Gymnasium");
+        createButtonBar("The Quartermaster");
+        createButtonBar("The Mentor");
+        addButtonToButtonBar("Exercise Routine Designer", "The Quartermaster");
+        addButtonToButtonBar("Full Recall Course Constructor", "The Mentor");
     }
 
-    private void initButtons() {
-        trainingDesigner = new ScalingButton(getViewBindings());
-        praxisScheduler = new ScalingButton(getViewBindings());
-        gym = new ScalingButton(getViewBindings());
-        temple = new ScalingButton(getViewBindings());
-        study = new ScalingButton(getViewBindings());
-    }
+    private void initBehaviors() {
 
-    private void initButtonText() {
-        trainingDesigner.setText("Routine Builder");
-        praxisScheduler.setText("Praxis Scheduler");
-        gym.setText("The Gym");
-        temple.setText("The Temple");
-        study.setText("The Study");
-    }
-
-    private void initButtonBehaviors() {
-        trainingDesigner.setOnMouseClicked(e -> openRoutineBuilder() );
-    }
-
-    private void openRoutineBuilder() {
-        getRequestSender().handleRequest(new ViewRequest(PaneKeys.EXERCISE_ROUTINE_BUILDER));
-        getRequestSender().handleRequest(new ViewRequest(PaneKeys.EXERCISES));
-    }
-
-    private void initDisplay() {
-        topRow.getChildren().addAll(trainingDesigner, praxisScheduler);
-        bottomRow.getChildren().addAll(gym, temple, study);
-        mainContainer.getChildren().addAll(topRow, bottomRow);
-        this.getChildren().add(mainContainer);
     }
 }

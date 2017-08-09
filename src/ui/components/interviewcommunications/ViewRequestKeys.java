@@ -3,5 +3,6 @@ package ui.components.interviewcommunications;
 public enum ViewRequestKeys {
     LIST_UPDATE,
     VIEW_UPDATE,
-    DATA_REQUEST
+    DATA_REQUEST,
+    DELETE_REQUEST
 }
