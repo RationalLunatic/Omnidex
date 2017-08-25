@@ -3,7 +3,7 @@ package ui.features.beaconviews;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import resources.StringFormatUtility;
-import resources.sqlite.InventoryCategories;
+import resources.sqlite.sqlenumerations.InventoryCategories;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.editablelabel.ScalingInputBox;
 import ui.components.scalingcomponents.*;

@@ -5,44 +5,44 @@ import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.*;
+import ui.features.AbstractCenterDisplay;
 
 import java.time.LocalDate;
 
 
-public class AcademyView extends ScalingStackPane {
-    private ScalingVBox mainContainer;
-    private ScalingLabel academyTitle;
-    private ScalingButton curriculumLink;
-    private ScalingButton classDesignerLink;
-    private ScalingButton skillCreator;
+public class AcademyView extends AbstractCenterDisplay {
+
 
     public AcademyView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
-        mainContainer = new ScalingVBox(viewBindings);
         init();
     }
 
     private void init() {
-        academyTitle = new ScalingLabel(getViewBindings().widthProperty(), "Welcome to the Academy", 1.0);
-        curriculumLink = new ScalingButton(getViewBindings());
-        curriculumLink.setText("Curriculum Manager");
-        curriculumLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.MONTH)));
-        classDesignerLink = new ScalingButton(getViewBindings());
-        classDesignerLink.setText("Character Class Designer");
-        classDesignerLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.DAY, LocalDate.now())));
-        skillCreator = new ScalingButton(getViewBindings());
-        skillCreator.setText("Skill Manager");
-        skillCreator.setOnMouseClicked(e -> openSkillManager());
-        mainContainer.getChildren().add(academyTitle);
-        mainContainer.getChildren().add(curriculumLink);
-        mainContainer.getChildren().add(classDesignerLink);
-        mainContainer.getChildren().add(skillCreator);
-        this.getChildren().add(mainContainer);
+        initUIElements();
+        initUIBehavior();
+    }
+
+    private void initUIElements() {
+        setTitle("The Academy");
+        createButtonBar("Character Class Paradigm Manager");
+        createButtonBar("Library of Alexandria");
+        addButtonToButtonBar("Open Skill Manager", "Character Class Paradigm Manager");
+        addButtonToButtonBar("Open Language Learner", "Library of Alexandria");
+    }
+
+    private void initUIBehavior() {
+        setButtonOnClick("Open Skill Manager", e -> openSkillManager());
+        setButtonOnClick("Open Language Learner", e -> openLanguageLearner());
     }
 
     private void openSkillManager() {
         sendViewRequest(new ViewRequest(PaneKeys.SKILL));
         sendViewRequest(new ViewRequest(PaneKeys.QUEST));
         sendViewRequest(new ViewRequest(PaneKeys.TRAINING));
+    }
+
+    private void openLanguageLearner() {
+        sendViewRequest(new ViewRequest(PaneKeys.LANGUAGE_LEARNER));
     }
 }

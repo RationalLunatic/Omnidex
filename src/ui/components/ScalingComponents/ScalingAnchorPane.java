@@ -1,6 +1,5 @@
 package ui.components.scalingcomponents;
 
-import javafx.beans.binding.DoubleBinding;
 import javafx.scene.layout.AnchorPane;
 import resources.ResourceManager;
 import ui.components.PaneKeys;
@@ -8,9 +7,6 @@ import ui.components.interviewcommunications.SubViewCommLink;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
 
-/**
- * Created by shaev_000 on 5/9/2016.
- */
 public class ScalingAnchorPane extends AnchorPane {
     private ViewRequestHandler requestSender;
     private ViewRequestHandler requestReceiver;

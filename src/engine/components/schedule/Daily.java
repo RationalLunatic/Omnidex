@@ -5,8 +5,8 @@ import java.time.LocalTime;
 public class Daily extends BasicTask {
     private LocalTime scheduledTime;
 
-    public Daily(String title, String description, LocalTime scheduledTime) {
-        super(title, description);
+    public Daily(String title, String description, int duration, LocalTime scheduledTime) {
+        super(title, description, duration);
         this.scheduledTime = scheduledTime;
     }
 

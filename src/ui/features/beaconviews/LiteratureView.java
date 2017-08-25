@@ -2,8 +2,7 @@ package ui.features.beaconviews;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TreeItem;
-import resources.sqlite.InventoryCategories;
+import resources.sqlite.sqlenumerations.InventoryCategories;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequestHandler;

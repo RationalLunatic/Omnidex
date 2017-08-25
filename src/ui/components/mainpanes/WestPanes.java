@@ -9,6 +9,7 @@ import ui.features.academyviews.TrainingView;
 import ui.features.beaconviews.GenreView;
 import ui.features.beaconviews.TasksAndDeadlinesView;
 import ui.features.gymnasiumviews.RoutineBuilderWest;
+import ui.features.vaultviews.VocabularySubjectView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class WestPanes extends PanePack {
     private RoutineBuilderWest routineBuilderView;
     private TasksAndDeadlinesView tasksAndDeadlinesView;
     private TrainingView trainingView;
+    private VocabularySubjectView subjectView;
     private Map<PaneKeys, ScalingVBox> westViewMap;
 
     public WestPanes(Pane corePane, ViewRequestHandler requestHandler, ViewBindingsPack viewBindings) {
@@ -31,11 +33,13 @@ public class WestPanes extends PanePack {
         routineBuilderView = new RoutineBuilderWest(getViewBindings());
         tasksAndDeadlinesView = new TasksAndDeadlinesView(getViewBindings());
         trainingView = new TrainingView(getViewBindings());
+        subjectView = new VocabularySubjectView(getViewBindings(), getRequestHandler());
         westViewMap = new HashMap<>();
         westViewMap.put(PaneKeys.GENRES, genreView);
         westViewMap.put(PaneKeys.EXERCISES, routineBuilderView);
         westViewMap.put(PaneKeys.TASKS_AND_DEADLINES, tasksAndDeadlinesView);
         westViewMap.put(PaneKeys.TRAINING, trainingView);
+        westViewMap.put(PaneKeys.SUBJECT_LIST, subjectView);
     }
 
     public ScalingVBox getWestPane(PaneKeys key) {

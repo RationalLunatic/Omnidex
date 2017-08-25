@@ -4,7 +4,7 @@ public enum Stats {
     STRENGTH,
     DEXTERITY,
     PERCEPTION,
-    VITALITY,
+    CONSTITUTION,
 
     INTELLIGENCE,
     CUNNING,

@@ -5,9 +5,11 @@ import javafx.scene.layout.Pane;
 import ui.components.PaneKeys;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.ViewBindingsPack;
+import ui.features.academyviews.LanguageLearnerView;
 import ui.features.academyviews.SkillView;
 import ui.features.beaconviews.*;
 import ui.features.gymnasiumviews.RoutineBuilderView;
+import ui.features.gymnasiumviews.WordFallChallengeView;
 import ui.features.mainviews.*;
 import ui.features.vaultviews.BibliographyView;
 import ui.features.vaultviews.CitationView;
@@ -36,6 +38,8 @@ public class CenterPanes extends PanePack {
     private SkillView skillView;
     private BibliographyView bibliographyView;
     private VocabularyView vocabularyView;
+    private LanguageLearnerView languageLearnerView;
+    private WordFallChallengeView wordFallChallengeView;
     private Map<PaneKeys, Node> centerPanes;
 
     public CenterPanes(Pane corePane, ViewRequestHandler commLink, ViewBindingsPack viewBindings) {
@@ -66,6 +70,8 @@ public class CenterPanes extends PanePack {
         skillView = new SkillView(getRequestHandler(), getViewBindings(), PaneKeys.SKILL);
         bibliographyView = new BibliographyView(getRequestHandler(), getViewBindings(), PaneKeys.BIBLIOGRAPHY);
         vocabularyView = new VocabularyView(getRequestHandler(), getViewBindings(), PaneKeys.VOCABULARY);
+        languageLearnerView = new LanguageLearnerView(getRequestHandler(), getViewBindings(), PaneKeys.LANGUAGE_LEARNER);
+        wordFallChallengeView = new WordFallChallengeView(getRequestHandler(), getViewBindings(), PaneKeys.WORDFALL);
     }
 
     private void mapPanes() {
@@ -88,6 +94,8 @@ public class CenterPanes extends PanePack {
         centerPanes.put(PaneKeys.SKILL, skillView);
         centerPanes.put(PaneKeys.BIBLIOGRAPHY, bibliographyView);
         centerPanes.put(PaneKeys.VOCABULARY, vocabularyView);
+        centerPanes.put(PaneKeys.LANGUAGE_LEARNER, languageLearnerView);
+        centerPanes.put(PaneKeys.WORDFALL, wordFallChallengeView);
     }
 
     public void switchPane(PaneKeys key) {

@@ -13,7 +13,9 @@ import ui.components.scalingcomponents.CenterParentScalingStackPane;
 import ui.components.scalingcomponents.ScalingHBox;
 import ui.components.scalingcomponents.ScalingVBox;
 import ui.features.beaconviews.*;
+import ui.features.gymnasiumviews.RoutineBuilderEast;
 import ui.features.gymnasiumviews.RoutineBuilderWest;
+import ui.features.vaultviews.VocabularyView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -125,10 +127,18 @@ public class MainViewCommLink extends ViewRequestHandler {
             return;
         }
 
+        if(request.getRequestType() == ViewRequestKeys.LIST_UPDATE && request.getTargetView() == PaneKeys.ROUTINES) {
+            RoutineBuilderEast routineBuilderEast = (RoutineBuilderEast) actionToLocationRouter.get(request.getTargetView().getLocation()).getPane(PaneKeys.ROUTINES);
+            routineBuilderEast.reload();
+            return;
+        }
+
         actionToLocationRouter.get(request.getTargetView().getLocation()).switchPane(request.getTargetView());
         if(request.getTargetView() == PaneKeys.DAY) {
             setDate(request);
         }
+
+
 
     }
 
@@ -137,6 +147,12 @@ public class MainViewCommLink extends ViewRequestHandler {
         if(request.getRequestType() == ViewRequestKeys.DATA_REQUEST && request.getTargetView() == PaneKeys.EXERCISES) {
             RoutineBuilderWest view = (RoutineBuilderWest)actionToLocationRouter.get(request.getTargetView().getLocation()).getPane(PaneKeys.EXERCISES);
             return view.getSelectedExercise();
+        } else  if(request.getRequestType() == ViewRequestKeys.DATA_REQUEST && request.getTargetView() == PaneKeys.ROUTINES) {
+            RoutineBuilderEast view = (RoutineBuilderEast)actionToLocationRouter.get(request.getTargetView().getLocation()).getPane(PaneKeys.ROUTINES);
+            return view.getSelectedRoutine();
+        } else  if(request.getRequestType() == ViewRequestKeys.DATA_REQUEST && request.getTargetView() == PaneKeys.VOCABULARY) {
+            VocabularyView view = (VocabularyView)actionToLocationRouter.get(request.getTargetView().getLocation()).getPane(PaneKeys.VOCABULARY);
+            return view.getSelectedWord();
         }
         return "";
     }

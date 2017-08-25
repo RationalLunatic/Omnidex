@@ -1,30 +1,33 @@
 package resources.sqlite;
 
-import resources.StringFormatUtility;
+import resources.ResourceManager;
+import resources.sqlite.sqlenumerations.LibrarianTables;
+import resources.datatypes.SQLColumn;
+import resources.sqlite.sqlenumerations.PathfinderRelationTables;
+import resources.sqlite.sqlenumerations.PathfinderTables;
+import resources.sqlite.sqlenumerations.SageTables;
 
 import java.sql.*;
 import java.util.*;
 
 public class DBCore {
-    protected enum StatementStatus {
-        SETTING_TABLE_NAME,
-        ADDING_TABLE_COLUMNS,
-        EMPTY
-    }
-
     private boolean connectionEstablished;
     private Connection dbConnection;
     private String cumulativeStatement;
-    private StatementStatus currentStatementStatus;
     private int tagID;
+    private ResourceManager bundleLoader;
 
     public DBCore() {
-        connectionEstablished = false;
-        cumulativeStatement = "";
-        currentStatementStatus = StatementStatus.EMPTY;
+        init();
         establishConnection();
         initializeDatabase();
         closeConnection();
+    }
+
+    private void init() {
+        bundleLoader = new ResourceManager();
+        connectionEstablished = false;
+        cumulativeStatement = "";
         tagID = getGeneratedID("TAGS");
     }
 
@@ -62,15 +65,36 @@ public class DBCore {
     }
 
     private void initializeDatabase() {
-        // TODO: This really needs to be refactored.....
         createTaskTable();
-        createInventoryTable();
-        createQuoteTable();
-        createTagTable();
-        createQuoteTagRelationTable();
-        createExerciseTable();
-        createRoutineTable();
-        createRoutineExerciseRelationTable();
+        createSageTables();
+        createLibrarianTables();
+        createPathfinderTables();
+        createPathfinderRelationTables();
+    }
+
+    private void createSageTables() {
+        for(SageTables table : SageTables.values()) {
+            openTableStatement();
+            setTableName(table.toString());
+            for(SQLColumn column : table.getColumns()) {
+                addTableColumn(column.getColumnDefinition());
+            }
+            createTable();
+        }
+    }
+
+    private void createLibrarianTables() {
+        for(LibrarianTables table : LibrarianTables.values()) {
+            openTableStatement();
+            setTableName(table.toString());
+            for(SQLColumn column : table.getColumns()) {
+                addTableColumn(column.getColumnDefinition());
+            }
+            createTable();
+        }
+    }
+
+    private void createPathfinderTables() {
         createBasicTaskTable();
         createDailyTable();
         createHabitTable();
@@ -78,195 +102,63 @@ public class DBCore {
         createProjectTable();
         createActionPlanTable();
         createGoalTable();
-        createProjectTaskRelationsTable();
-        createProjectDeadlineRelationsTable();
-        createActionPlanTaskRelationsTable();
-        createActionPlanDeadlineRelationsTable();
-        createActionPlanProjectRelationsTable();
-        createGoalTaskRelationsTable();
-        createGoalDeadlineRelationsTable();
-        createGoalProjectRelationsTable();
-        createGoalPlanRelationsTable();
     }
 
     private void createBasicTaskTable() {
-        generateCommonTableEssentials("BASIC_TASK");
+        generateCommonTableEssentials(PathfinderTables.BASIC_TASK.toString());
         createTable();
     }
 
     private void createDailyTable() {
-        generateCommonTableEssentials("DAILY");
-        addTableColumn("SCHEDULED_TIME  TIME");
+        generateCommonTableEssentials(PathfinderTables.DAILY.toString());
+        addTableColumn(bundleLoader.scheduledTimeColumn());
+        addTableColumn(bundleLoader.durationInMinutesColumn());
         createTable();
     }
 
     private void createHabitTable() {
-        generateCommonTableEssentials("HABIT");
-        addTableColumn("REPETITIONS INT NOT NULL");
-        addTableColumn("GOOD_HABIT BOOLEAN NOT NULL");
+        generateCommonTableEssentials(PathfinderTables.HABIT.toString());
+        addTableColumn(bundleLoader.repetitionsColumn());
+        addTableColumn(bundleLoader.goodHabitColumn());
         createTable();
     }
 
     private void createDeadlineTable() {
-        generateCommonTableEssentials("DEADLINE");
-        addTableColumn("SCHEDULED_DATETIME  DATETIME NOT_NULL");
+        generateCommonTableEssentials(PathfinderTables.DEADLINE.toString());
+        addTableColumn(bundleLoader.scheduledDateTimeColumn());
         createTable();
     }
 
     private void createProjectTable() {
-        generateCommonTableEssentials("PROJECT");
+        generateCommonTableEssentials(PathfinderTables.PROJECT.toString());
         createTable();
     }
 
     private void createActionPlanTable() {
-        generateCommonTableEssentials("ACTION_PLAN");
+        generateCommonTableEssentials(PathfinderTables.ACTION_PLAN.toString());
         createTable();
     }
 
     private void createGoalTable() {
-        generateCommonTableEssentials("GOAL");
+        generateCommonTableEssentials(PathfinderTables.GOAL.toString());
         createTable();
     }
 
-    private void createProjectTaskRelationsTable() {
-        openTableStatement();
-        setTableName("PROJECT_TASK_RELATIONS");
-        addTableColumn("PROJECT_ID INT NOT NULL");
-        addTableColumn("TASK_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createProjectDeadlineRelationsTable() {
-        openTableStatement();
-        setTableName("PROJECT_DEADLINE_RELATIONS");
-        addTableColumn("PROJECT_ID INT NOT NULL");
-        addTableColumn("DEADLINE_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createActionPlanTaskRelationsTable() {
-        openTableStatement();
-        setTableName("PLAN_TASK_RELATIONS");
-        addTableColumn("PLAN_ID INT NOT NULL");
-        addTableColumn("TASK_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createActionPlanDeadlineRelationsTable() {
-        openTableStatement();
-        setTableName("PLAN_DEADLINE_RELATIONS");
-        addTableColumn("PLAN_ID INT NOT NULL");
-        addTableColumn("DEADLINE_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createActionPlanProjectRelationsTable() {
-        openTableStatement();
-        setTableName("PLAN_PROJECT_RELATIONS");
-        addTableColumn("PLAN_ID INT NOT NULL");
-        addTableColumn("PROJECT_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createGoalTaskRelationsTable() {
-        openTableStatement();
-        setTableName("GOAL_TASK_RELATIONS");
-        addTableColumn("GOAL_ID INT NOT NULL");
-        addTableColumn("TASK_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createGoalDeadlineRelationsTable() {
-        openTableStatement();
-        setTableName("GOAL_DEADLINE_RELATIONS");
-        addTableColumn("GOAL_ID INT NOT NULL");
-        addTableColumn("DEADLINE_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createGoalProjectRelationsTable() {
-        openTableStatement();
-        setTableName("GOAL_PROJECT_RELATIONS");
-        addTableColumn("GOAL_ID INT NOT NULL");
-        addTableColumn("PROJECT_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createGoalPlanRelationsTable() {
-        openTableStatement();
-        setTableName("GOAL_PLAN_RELATIONS");
-        addTableColumn("GOAL_ID INT NOT NULL");
-        addTableColumn("PLAN_ID INT NOT NULL");
-        createTable();
-    }
-
-    private void createExerciseTable() {
-        openTableStatement();
-        setTableName("EXERCISES");
-        addTableColumn("TITLE TEXT NOT NULL");
-        addTableColumn("DESCRIPTION TEXT NOT NULL");
-        addTableColumn("CATEGORY TEXT NOT NULL");
-        addTableColumn("SUBCATEGORY TEXT NOT NULL");
-        addTableColumn("COMPLETED_REPS INT NOT NULL");
-        createTable();
-    }
-
-    private void createRoutineTable() {
-        openTableStatement();
-        setTableName("ROUTINES");
-        addTableColumn("TITLE TEXT NOT NULL");
-        createTable();
-    }
-
-    private void createRoutineExerciseRelationTable() {
-        openTableStatement();
-        setTableName("ROUTINE_EXERCISE_RELATIONS");
-        addTableColumn("ROUTINE_ID INT NOT NULL");
-        addTableColumn("EXERCISE_ID INT NOT NULL");
-        addTableColumn("EXERCISE_REPS INT NOT_NULL");
-        addTableColumn("EXERCISE_SETS INT NOT_NULL");
-        addTableColumn("EXERCISE_NAME TEXT NOT_NULL");
-        addTableColumn("ROUTINE_NAME TEXT NOT_NULL");
-        createTable();
-    }
-
-    private void createTagTable() {
-        openTableStatement();
-        setTableName("TAGS");
-        addTableColumn("TITLE TEXT NOT NULL");
-        createTable();
-    }
-
-    private void createQuoteTagRelationTable() {
-        openTableStatement();
-        setTableName("QUOTE_TAGS");
-        addTableColumn("QUOTE_ID    INT     NOT NULL");
-        addTableColumn("TAG_ID      INT     NOT NULL");
-        createTable();
-    }
-
-    private void createQuoteTable() {
-        openTableStatement();
-        setTableName("QUOTES");
-        addTableColumn("AUTHOR      TEXT    NOT NULL");
-        addTableColumn("SOURCE      TEXT    NOT NULL");
-        addTableColumn("QUOTE       TEXT    NOT NULL");
-        addTableColumn("CONSTRAINT UNIQUE_QUOTE UNIQUE(QUOTE)");
-        createTable();
+    private void createPathfinderRelationTables() {
+        for(PathfinderRelationTables relation : PathfinderRelationTables.values()) {
+            openTableStatement();
+            setTableName(relation.toString());
+            addTableColumn(relation.getFirstRelation().toString() + " INT NOT NULL");
+            addTableColumn(relation.getSecondRelation().toString() + " INT NOT NULL");
+            createTable();
+        }
     }
 
     private void generateCommonTableEssentials(String tableName) {
         openTableStatement();
         setTableName(tableName.toUpperCase());
-        addTableColumn("TITLE           TEXT    NOT NULL");
-        addTableColumn("DESCRIPTION    TEXT    NOT NULL");
-    }
-
-    private void createInventoryTable() {
-        generateCommonTableEssentials("INVENTORY");
-        addTableColumn("CATEGORY   TEXT   NOT NULL");
-        addTableColumn("PARENT   TEXT");
-        createTable();
+        addTableColumn(bundleLoader.titleColumn());
+        addTableColumn(bundleLoader.descriptionColumn());
     }
 
     private void createTaskTable() {
@@ -277,53 +169,17 @@ public class DBCore {
     }
 
     private void openTableStatement() {
-        if(currentStatementStatus == StatementStatus.EMPTY) {
-            cumulativeStatement = "CREATE TABLE IF NOT EXISTS ";
-            currentStatementStatus = StatementStatus.SETTING_TABLE_NAME;
-        } else {
-            invalidStatementMessage();
-        }
+        cumulativeStatement = "CREATE TABLE IF NOT EXISTS ";
     }
 
     private void setTableName(String tableName) {
-        if(currentStatementStatus == StatementStatus.SETTING_TABLE_NAME) {
-            cumulativeStatement += tableName.toUpperCase() + " ";
-            cumulativeStatement += "(ID INT PRIMARY KEY NOT NULL";
-            currentStatementStatus = StatementStatus.ADDING_TABLE_COLUMNS;
-        } else {
-            invalidStatementMessage();
-        }
+        cumulativeStatement += tableName.toUpperCase() + " ";
+        cumulativeStatement += "(ID INT PRIMARY KEY NOT NULL";
     }
 
     private void addTableColumn(String column) {
         column = column.toUpperCase();
-        if(currentStatementStatus == StatementStatus.ADDING_TABLE_COLUMNS) {
-            if(columnValid(column)) cumulativeStatement += ", " + column;
-            else System.out.println(column + " is invalid");
-        } else {
-            invalidStatementMessage();
-        }
-    }
-
-    private boolean columnValid(String column) {
-        String[] breakdownByWord = column.split("\\s+");
-        if(breakdownByWord.length != 2 && breakdownByWord.length != 4) {
-            return false;
-        } else if(breakdownByWord.length == 2) {
-            return isValidDataType(breakdownByWord[1]);
-        } else if (!breakdownByWord[2].equals("NOT") || !breakdownByWord[3].equals("NULL")) {
-            return false;
-        } else {
-            return isValidDataType(breakdownByWord[1]);
-        }
-    }
-
-    private boolean isValidDataType(String dataType) {
-        Set<String> validTypes = new HashSet<>();
-        String[] validDataTypes = {"TEXT", "REAL", "INTEGER", "NUMERIC", "NONE", "INT", "DATE", "DATETIME",
-                "DOUBLE", "FLOAT", "BOOLEAN"};
-        validTypes.addAll(Arrays.asList(validDataTypes));
-        return validTypes.contains(dataType);
+        cumulativeStatement += ", " + column;
     }
 
     private void createTable() {
@@ -335,17 +191,11 @@ public class DBCore {
                 String sql = cumulativeStatement.toUpperCase() + ")";
                 stmt.executeUpdate(sql);
                 cumulativeStatement = "";
-                currentStatementStatus = StatementStatus.EMPTY;
                 System.out.println("Table created successfully");
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             } finally {
-                try {
-                    if(stmt != null) stmt.close();
-                    closeConnection();
-                } catch(SQLException e) {
-                    e.printStackTrace();
-                }
+                closeDownDBAction(stmt);
             }
         } else {
             notConnectedMessage("createTable");
@@ -353,7 +203,6 @@ public class DBCore {
     }
 
     protected int getGeneratedID(String tableName) {
-
         establishConnection();
         Statement stmt = null;
         ResultSet rs = null;
@@ -390,38 +239,12 @@ public class DBCore {
     }
 
     public void createTag(String tag) {
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            if(getStatementStatus() == StatementStatus.EMPTY) {
-                try {
-                    executeCreateTag(tag, stmt);
-                } catch (SQLException e) {
-                    System.out.println("Failed to insert quote");
-                    e.printStackTrace();
-                } finally {
-                    closeDownDBAction(stmt);
-                }
-            } else {
-                invalidStatementMessage();
-            }
-        } else {
-            notConnectedMessage("addQuoteToLibrary DBIOLibrarian");
-        }
-        closeConnection();
+        updateTagID();
+        insertInto(LibrarianTables.TAGS.toString(), "ID, TITLE", tagID + ", " + tag);
     }
 
     public void deleteTag(String tag) {
-        establishConnection();
-        Statement stmt = null;
-        try {
-            executeDeleteTag(tag, stmt);
-        } catch (SQLException e) {
-            System.out.println("Failed to delete library item from inventory");
-            e.printStackTrace();
-        } finally {
-            closeDownDBAction(stmt);
-        }
+        deleteFromWhere(LibrarianTables.TAGS.toString(), "TITLE='" + tag + "'");
     }
 
     public boolean hasTag(String tag) {
@@ -455,44 +278,18 @@ public class DBCore {
     }
 
     public int getTagID(String tag) {
-        establishConnection();
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            return executeGetTagID(tag, stmt, rs);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeDownDBAction(stmt, rs);
-        }
-        closeConnection();
-        return -1;
+        return getRowID(LibrarianTables.TAGS.toString(), "TITLE='" + tag + "'");
     }
 
     private int executeGetGeneratedID(String tableName, Statement stmt, ResultSet rs) throws SQLException {
         stmt = getConnection().createStatement();
-        String sql = "SELECT MAX(id) AS max_id FROM " + tableName.toUpperCase();
+        String sql = "SELECT * FROM " + tableName.toUpperCase() + " ORDER BY ID DESC LIMIT 1;";
         rs = stmt.executeQuery(sql);
-        int numRecords = rs.getInt("max_id");
-        return numRecords + 1;
-    }
-
-    private void executeCreateTag(String tag, Statement stmt) throws SQLException {
-        updateTagID();
-        stmt = getConnection().createStatement();
-        tag = StringFormatUtility.addSingleQuotes(tag);
-        String sql = "INSERT INTO TAGS (ID,TITLE) " +
-                "VALUES (" + tagID + ", " + tag + ");";
-        stmt.executeUpdate(sql);
-        System.out.println("Successfully inserted tag item CoreDB Librarian");
-        System.out.println(tag);
-    }
-
-    private void executeDeleteTag(String tag, Statement stmt) throws SQLException {
-        stmt = getConnection().createStatement();
-        String sql = "DELETE FROM TAGS WHERE TITLE='" + tag + "';";
-        stmt.executeUpdate(sql);
-        System.out.println("Successfully deleted '" + tag + "' from tags");
+        if(rs.next()) {
+            int numRecords = rs.getInt("ID");
+            return numRecords + 1;
+        }
+        return -1;
     }
 
     private boolean executeHasTag(String tag, Statement stmt, ResultSet rs) throws SQLException {
@@ -515,38 +312,260 @@ public class DBCore {
         return tags;
     }
 
-    private int executeGetTagID(String tag, Statement stmt, ResultSet rs) throws SQLException {
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM TAGS WHERE TITLE='" + tag + "';";
-        rs = stmt.executeQuery(sql);
-        if(rs.next()) return rs.getInt("ID");
+    protected int getRowID(String table, String condition) {
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            return executeGetRowID(table, condition, stmt, rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+        closeConnection();
         return -1;
     }
 
+    private int executeGetRowID(String table, String condition, Statement stmt, ResultSet rs) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.selectAllFromWhere(table, condition);
+        rs = stmt.executeQuery(sql);
+        if(rs.next()) {
+            System.out.println("Success: Found ID: " + sql);
+            return rs.getInt("ID");
+        }
+        return -1;
+    }
+
+    protected void insertInto(String tableName, String valueTypes, String actualValues) {
+        establishConnection();
+        Statement stmt = null;
+        try {
+            executeInsertInto(stmt, tableName, valueTypes, actualValues);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt);
+        }
+        closeConnection();
+    }
+
+    protected void executeInsertInto(Statement stmt, String tableName, String valueTypes, String actualValues) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.insertInto(tableName, valueTypes, actualValues);
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+        System.out.println("Success: " + sql);
+    }
+
+    protected void deleteFromWhere(String tableName, String condition) {
+        establishConnection();
+        Statement stmt = null;
+        try {
+            executeDeleteFromWhere(stmt, tableName, condition);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt);
+        }
+        closeConnection();
+    }
+
+    private void executeDeleteFromWhere(Statement stmt, String tableName, String condition) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.deleteFromWhere(tableName, condition);
+        stmt.executeUpdate(sql);
+        System.out.println("Success: " + sql);
+    }
+
+    protected List<String> getFromWhere(String tableName, String condition, String columnToCollect) {
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            return executeGetFromWhere(tableName, condition, columnToCollect, stmt, rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+        closeConnection();
+        return new ArrayList<>();
+    }
+
+    private List<String> executeGetFromWhere(String tableName, String condition, String columnToCollect, Statement stmt, ResultSet rs) throws SQLException {
+        List<String> toReturn = new ArrayList<>();
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.selectAllFromWhere(tableName, condition);
+        rs = stmt.executeQuery(sql);
+        while(rs.next()) {
+            toReturn.add(rs.getString(columnToCollect));
+        }
+        return toReturn;
+    }
+
+    protected boolean rowExists(String tableName, String condition) {
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            return executeRowExists(tableName, condition, stmt, rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+        closeConnection();
+        return false;
+    }
+
+    private boolean executeRowExists(String tableName, String condition, Statement stmt, ResultSet rs) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.selectAllFromWhere(tableName, condition);
+        rs = stmt.executeQuery(sql);
+        return rs.next();
+    }
+
+    protected List<String> getAllFrom(String tableName, String columnToCollect) {
+        establishConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            return executeGetAllFrom(tableName, columnToCollect, stmt, rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeDownDBAction(stmt, rs);
+        }
+        closeConnection();
+        return new ArrayList<>();
+    }
+
+    private List<String> executeGetAllFrom(String tableName, String columnToCollect, Statement stmt, ResultSet rs) throws SQLException {
+        List<String> toReturn = new ArrayList<>();
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.selectAllFrom(tableName);
+        rs = stmt.executeQuery(sql);
+        while(rs.next()) {
+            toReturn.add(rs.getString(columnToCollect));
+        }
+        return toReturn;
+    }
+
+    protected <T, E> List<T> getAllDBList(E table) {
+        List<T> toReturn = new ArrayList<>();
+        establishConnection();
+        if(isConnectionEstablished()) {
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                return executeGetAllDBList(table,stmt, rs);
+            } catch(SQLException e) {
+                e.printStackTrace();
+            } finally {
+                closeDownDBAction(stmt, rs);
+            }
+        }
+        return toReturn;
+    }
+
+    private <T, E> List<T> executeGetAllDBList(E table, Statement stmt, ResultSet rs) throws SQLException {
+        List<T> toReturn = new ArrayList<>();
+        stmt = getConnection().createStatement();
+        String sql = getBundleLoader().selectAllFrom(table.toString());
+        rs = stmt.executeQuery(sql);
+        while(rs.next()) {
+            if(table instanceof PathfinderTables) {
+                PathfinderTables pathfinderTable = (PathfinderTables) table;
+                SQLResultBuilder resultBuilder = new SQLResultBuilder(rs, pathfinderTable);
+                toReturn.add(resultBuilder.getResult());
+            } else if(table instanceof LibrarianTables) {
+                LibrarianTables librarianTable = (LibrarianTables) table;
+                SQLResultBuilder resultBuilder = new SQLResultBuilder(rs, librarianTable);
+                toReturn.add(resultBuilder.getResult());
+            }
+        }
+        return toReturn;
+    }
+
+    protected <T, E> List<T> getAllFromWhereDBList(E table, String condition) {
+        List<T> toReturn = new ArrayList<>();
+        establishConnection();
+        if(isConnectionEstablished()) {
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                return executeGetAllFromWhereDBList(table, condition, stmt, rs);
+            } catch(SQLException e) {
+                e.printStackTrace();
+            } finally {
+                closeDownDBAction(stmt, rs);
+            }
+        }
+        return toReturn;
+    }
+
+    private <T, E> List<T> executeGetAllFromWhereDBList(E table, String condition, Statement stmt, ResultSet rs) throws SQLException {
+        List<T> toReturn = new ArrayList<>();
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.selectAllFromWhere(table.toString(), condition);
+        rs = stmt.executeQuery(sql);
+        while(rs.next()) {
+            if(table instanceof PathfinderTables) {
+                PathfinderTables pathfinderTable = (PathfinderTables) table;
+                SQLResultBuilder resultBuilder = new SQLResultBuilder(rs, pathfinderTable);
+                if(resultBuilder.getResult() != null) toReturn.add(resultBuilder.getResult());
+            } else if(table instanceof LibrarianTables) {
+                LibrarianTables librarianTable = (LibrarianTables) table;
+                SQLResultBuilder resultBuilder = new SQLResultBuilder(rs, librarianTable);
+                if(resultBuilder.getResult() != null) toReturn.add(resultBuilder.getResult());
+            }
+        }
+        return toReturn;
+    }
+
+    protected <T, E> T getRowWhere(E table, String condition) {
+        establishConnection();
+        if(isConnectionEstablished()) {
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                return executeGetRowWhere(table, condition, stmt, rs);
+            } catch(SQLException e) {
+                e.printStackTrace();
+            } finally {
+                closeDownDBAction(stmt, rs);
+            }
+        }
+        return null;
+    }
+
+    private <T, E> T executeGetRowWhere(E table, String condition, Statement stmt, ResultSet rs) throws SQLException {
+        stmt = getConnection().createStatement();
+        String sql = bundleLoader.selectAllFromWhere(table.toString(), condition);
+        rs = stmt.executeQuery(sql);
+        if(rs.next()) {
+            if(table instanceof PathfinderTables) {
+                PathfinderTables pathfinderTable = (PathfinderTables) table;
+                SQLResultBuilder resultBuilder = new SQLResultBuilder(rs, pathfinderTable);
+                return resultBuilder.getResult();
+            } else if(table instanceof LibrarianTables) {
+                LibrarianTables librarianTable = (LibrarianTables) table;
+                SQLResultBuilder resultBuilder = new SQLResultBuilder(rs, librarianTable);
+                return resultBuilder.getResult();
+            }
+        }
+        return null;
+    }
+
+    protected ResourceManager getBundleLoader() { return bundleLoader; }
     private void updateTagID() { tagID++; }
-    public void appendStatement(String statement) { cumulativeStatement += statement;}
-    public void resetCumulativeStatement() { cumulativeStatement = ""; }
-    public String getCumulativeStatement() { return cumulativeStatement; }
     public Connection getConnection() {
         return dbConnection;
     }
-    public StatementStatus getStatementStatus() { return currentStatementStatus; }
-    public void setStatementStatus(StatementStatus status) { currentStatementStatus = status; }
     public boolean isConnectionEstablished() { return connectionEstablished; }
-
     public void notConnectedMessage(String command) {
         System.out.println("Not connected to a database: " + command);
-    }
-    public void invalidStatementMessage() {
-        System.out.println("Invalid Statement Operation");
-    }
-    public boolean checkForSQLInjection(String statement) {
-        String[] toCheck = statement.split("\\s+");
-        for(String s : toCheck) {
-            if(s.contains("SELECT") || s.contains("INSERT") || s.contains("DELETE") || s.contains("ALTER") || s.contains("UPDATE")) {
-                return true;
-            }
-        }
-        return false;
     }
 }

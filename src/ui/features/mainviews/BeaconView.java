@@ -1,7 +1,9 @@
 package ui.features.mainviews;
 
+import engine.components.schedule.Daily;
 import javafx.geometry.Pos;
 import resources.StringFormatUtility;
+import resources.sqlite.SQLiteJDBC;
 import ui.components.PaneKeys;
 import ui.components.displaycomponents.DigitalClockDisplay;
 import ui.components.displaycomponents.SimpleListTextDisplay;
@@ -11,6 +13,10 @@ import ui.components.scalingcomponents.*;
 import ui.custombindings.ScaledDoubleBinding;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BeaconView extends ScalingStackPane {
 
@@ -41,6 +47,7 @@ public class BeaconView extends ScalingStackPane {
         initButtonBehavior();
         initUIDisplays();
         addUIElementsToContainers();
+        initAgenda();
     }
 
     private void initContainers() {
@@ -107,12 +114,28 @@ public class BeaconView extends ScalingStackPane {
         initAgendaGoals();
     }
 
-    private void initAgendaHighlights() {
+    private List<Daily> sortDailies(List<Daily> dailies) {
+        Comparator<Daily> dailyComparator = (e1, e2) ->
+                (e1.getScheduledTime().compareTo(e2.getScheduledTime()));
+        return dailies.stream().sorted(dailyComparator).collect(Collectors.toList());
+    }
 
+    private void initAgendaHighlights() {
+        List<Daily> allDailies = sortDailies(SQLiteJDBC.getInstance().getPathfinderIO().getDailies());
+        for(Daily daily : allDailies) {
+            if(LocalTime.now().isAfter(daily.getScheduledTime()) && LocalTime.now().isBefore(daily.getScheduledTime().plusMinutes(daily.getDuration()))) {
+                agendaHighlights.addLine(daily.getTitle());
+            }
+        }
     }
 
     private void initAgendaImmediate() {
-
+        List<Daily> allDailies = sortDailies(SQLiteJDBC.getInstance().getPathfinderIO().getDailies());
+        for(Daily daily : allDailies) {
+            if(daily.getScheduledTime().isAfter(LocalTime.now())) {
+                agendaImmediate.addLine(daily.getTitle());
+            }
+        }
     }
 
     private void initAgendaGoals() {

@@ -7,7 +7,7 @@ public class ToDoListTask extends BasicTask {
     private LocalDateTime dateTime;
 
     public ToDoListTask(String title, String description, String dateTime) {
-        super(title, description);
+        super(title, description, 0);
         this.dateTime = LocalDateTime.parse(dateTime);
     }
 

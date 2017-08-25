@@ -33,6 +33,9 @@ public class VaultView extends AbstractCenterDisplay {
     private void initUIBehaviors() {
         setButtonOnClick("The Bibliographic Archive", e -> sendViewRequest(new ViewRequest(PaneKeys.BIBLIOGRAPHY)));
         setButtonOnClick("The Citation Archive", e -> sendViewRequest(new ViewRequest(PaneKeys.CITATION)));
-        setButtonOnClick("The Lexicographic Archive", e -> sendViewRequest(new ViewRequest(PaneKeys.VOCABULARY)));
+        setButtonOnClick("The Lexicographic Archive", e -> {
+            sendViewRequest(new ViewRequest(PaneKeys.VOCABULARY));
+            sendViewRequest(new ViewRequest(PaneKeys.SUBJECT_LIST));
+        });
     }
 }

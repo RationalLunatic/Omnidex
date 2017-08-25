@@ -61,7 +61,7 @@ public class StringFormatUtility {
         int hour = Integer.parseInt(time.substring(0, 2));
         if(time.contains("A.M.") && hour == 12) hour = 0;
         int minute = Integer.parseInt(time.substring(3, 5));
-        hour = (time.contains("A.M.")) ? hour : hour + 12;
+        if(hour != 12) hour = (time.contains("A.M.")) ? hour : hour + 12;
         String toConvert = "";
         if(hour >= 24) hour -= 24;
         if(hour < 10) toConvert += "0";
@@ -71,8 +71,8 @@ public class StringFormatUtility {
         return LocalTime.parse(toConvert);
     }
 
-    public static String addSingleQuotes(String word) {
-        return "'" + word + "'";
+    public static String addDoubleQuotes(String word) {
+        return "\"" + word + "\"";
     }
 
     public static String convertDate(LocalDate date) {

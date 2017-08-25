@@ -4,17 +4,30 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Labeled;
 import ui.components.PaneKeys;
+import ui.components.displaycomponents.SimpleListTextDisplay;
+import ui.components.editablelabel.ScalingInputBox;
+import ui.components.inputcomponents.LabeledInputBox;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.scalingcomponents.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractCenterDisplay extends ScalingStackPane {
     private ScalingLabel viewTitle;
     private ScalingVBox mainContainer;
+    private ScalingVBox buttonBarContainer;
+    private ScalingVBox inputFieldContainer;
+    private ScalingHBox choiceBoxContainer;
+    private ScalingHBox listViewContainer;
     private Map<String, ScalingHBox> buttonBars;
+    private Map<String, ChoiceBox> choiceBoxes;
+    private Map<String, LabeledInputBox> inputBoxes;
+    private Map<String, SimpleListTextDisplay> listViews;
 
     public AbstractCenterDisplay(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
@@ -22,13 +35,39 @@ public abstract class AbstractCenterDisplay extends ScalingStackPane {
     }
 
     private void init() {
-        buttonBars = new HashMap<>();
         viewTitle = new ScalingLabel(getViewBindings().widthProperty(), "", 0.6);
-        mainContainer = new ScalingVBox(getViewBindings());
-        mainContainer.getChildren().add(viewTitle);
+        initUIMaps();
+        initContainers();
+        addChildrenToContainers();
+        alignContainers();
+    }
+
+
+    private void alignContainers() {
+        choiceBoxContainer.setAlignment(Pos.TOP_CENTER);
         mainContainer.setAlignment(Pos.TOP_CENTER);
-        this.getChildren().add(mainContainer);
         this.setAlignment(Pos.TOP_CENTER);
+    }
+
+    private void addChildrenToContainers() {
+        mainContainer.getChildren().addAll(viewTitle, choiceBoxContainer, listViewContainer, inputFieldContainer, buttonBarContainer);
+        this.getChildren().add(mainContainer);
+    }
+
+    private void initContainers() {
+        listViewContainer = new ScalingHBox(getViewBindings());
+        choiceBoxContainer = new ScalingHBox(getViewBindings());
+        buttonBarContainer = new ScalingVBox(getViewBindings());
+        inputFieldContainer = new ScalingVBox(getViewBindings());
+        mainContainer = new ScalingVBox(getViewBindings());
+
+    }
+
+    private void initUIMaps() {
+        listViews = new HashMap<>();
+        buttonBars = new HashMap<>();
+        choiceBoxes = new HashMap<>();
+        inputBoxes = new HashMap<>();
     }
 
     public void setTitle(String title) {
@@ -41,19 +80,19 @@ public abstract class AbstractCenterDisplay extends ScalingStackPane {
 
     public void createButtonBar(String featureName) {
         ScalingHBox buttonBar = new ScalingHBox(getViewBindings());
-        ScalingVBox buttonBarContainer = new ScalingVBox(getViewBindings());
+        ScalingVBox barContainer = new ScalingVBox(getViewBindings());
         ScalingLabel buttonBarTitle = new ScalingLabel(getViewBindings().widthProperty(), featureName, 0.25);
-        buttonBarContainer.getChildren().addAll(buttonBarTitle, buttonBar);
-        buttonBarContainer.setAlignment(Pos.TOP_CENTER);
+        barContainer.getChildren().addAll(buttonBarTitle, buttonBar);
+        barContainer.setAlignment(Pos.TOP_CENTER);
         buttonBarContainer.setStyle("-fx-border-color: black; -fx-border-width: 2;");
         buttonBar.setAlignment(Pos.TOP_CENTER);
         buttonBars.put(featureName, buttonBar);
-        mainContainer.getChildren().add(buttonBarContainer);
+        buttonBarContainer.getChildren().add(barContainer);
     }
 
     public void addButtonToButtonBar(String buttonName, String buttonBar) {
         if(buttonBars.containsKey(buttonBar)) {
-            ScalingButton button = new ScalingButton(getViewBindings());
+            ScalingButton button = new ScalingButton(getViewBindings(), 1.0, 0.2);
             button.setText(buttonName);
             buttonBars.get(buttonBar).getChildren().add(button);
         }
@@ -69,4 +108,35 @@ public abstract class AbstractCenterDisplay extends ScalingStackPane {
             }
         }
     }
+
+    public <T> ChoiceBox createChoiceBox(String choiceBoxName, List<T> choiceBoxValues) {
+        ChoiceBox<T> choiceBox = new ChoiceBox<>();
+        for(T val : choiceBoxValues) {
+            choiceBox.getItems().add(val);
+        }
+        choiceBoxes.put(choiceBoxName, choiceBox);
+        choiceBoxContainer.getChildren().add(choiceBox);
+        return choiceBox;
+    }
+
+    public void createInputBox(String header) {
+        LabeledInputBox inputBox = new LabeledInputBox(header, getViewBindings(),  0.6);
+        inputBoxes.put(header, inputBox);
+        inputFieldContainer.getChildren().add(inputBox);
+    }
+
+    public String getInputOfBox(String header) {
+        return (inputBoxes.keySet().contains(header)) ? inputBoxes.get(header).getInput() : "";
+    }
+
+    public void createListView(String title) {
+        SimpleListTextDisplay listView = new SimpleListTextDisplay(title, getViewBindings());
+        listViews.put(title, listView);
+        listViewContainer.getChildren().add(listView);
+    }
+
+    public SimpleListTextDisplay getListView(String title) {
+        return listViews.get(title);
+    }
+
 }

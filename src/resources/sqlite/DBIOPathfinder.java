@@ -1,12 +1,14 @@
 package resources.sqlite;
 
 import engine.components.schedule.*;
-import org.sqlite.SQLiteException;
 import resources.StringFormatUtility;
+import resources.sqlite.sqlenumerations.PathfinderRelationTables;
+import resources.sqlite.sqlenumerations.PathfinderTables;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -15,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 public class DBIOPathfinder extends DBCore {
-
     private Map<PathfinderTables, Integer> tableIDs;
     private Map<PathfinderRelationTables, Integer> relationTableIDs;
     private Map<PathfinderRelationTables.RelationColumnNames, PathfinderTables> directRelationsToTables;
@@ -53,35 +54,36 @@ public class DBIOPathfinder extends DBCore {
         }
     }
 
-    private void executeCreateExpressionBasicTables(String title, String description, Statement stmt, LocalDateTime deadlineDate, LocalTime dailyTime, boolean goodHabit, PathfinderTables table) throws SQLException {
+    private void executeCreateExpressionBasicTables(String title, String description, Statement stmt, LocalDateTime deadlineDate, LocalTime dailyTime, boolean goodHabit, int duration, PathfinderTables table) throws SQLException {
         tableIDs.put(table, tableIDs.get(table) + 1);
         stmt = getConnection().createStatement();
-        description = StringFormatUtility.addSingleQuotes(description);
-        title = StringFormatUtility.addSingleQuotes(title);
+        description = StringFormatUtility.addDoubleQuotes(description);
+        title = StringFormatUtility.addDoubleQuotes(title);
         String sql = "INSERT INTO " + table.toString().toUpperCase();
         if(table == PathfinderTables.GOAL
-                || table == PathfinderTables.BASIC_TASK
                 || table == PathfinderTables.ACTION_PLAN
                 || table == PathfinderTables.PROJECT) {
             sql += " (ID, TITLE, DESCRIPTION) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ");";
+        } else if(table == PathfinderTables.BASIC_TASK) {
+            sql += " (ID, TITLE, DESCRIPTION) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ", " + duration + ");";
         } else if(table == PathfinderTables.DEADLINE) {
-            sql += " (ID, TITLE, DESCRIPTION, SCHEDULED_DATETIME) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ", '" + deadlineDate.toString() + "');";
+            sql += " (ID, TITLE, DESCRIPTION, SCHEDULED_DATETIME, DURATION_IN_MINUTES) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ", '" + deadlineDate.toString() + "', " + duration + ");";
         } else if(table == PathfinderTables.DAILY) {
-            sql += " (ID, TITLE, DESCRIPTION, SCHEDULED_TIME) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ", '" + dailyTime.toString() + ":00');";
+            sql += " (ID, TITLE, DESCRIPTION, SCHEDULED_TIME, DURATION_IN_MINUTES) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ", '" + dailyTime.toString() + ":00'" +  ", " + duration + ");";
         } else if(table == PathfinderTables.HABIT) {
             String isGoodHabit = (goodHabit) ? "TRUE" : "FALSE";
-            sql += "(ID, TITLE, DESCRIPTION, REPETITIONS, GOOD_HABIT) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ", " + "0, '" + isGoodHabit + "');";
+            sql += "(ID, TITLE, DESCRIPTION, REPETITIONS, GOOD_HABIT) VALUES (" + tableIDs.get(table) + ", " + title + ", " + description + ", " + "0, '" + isGoodHabit + ", " + duration + "');";
         }
         stmt.executeUpdate(sql);
         System.out.println("Success:  " + sql);
     }
 
-    private void addRowBasic(String title, String description, LocalDateTime date, LocalTime time, boolean goodHabit, PathfinderTables table) {
+    private void addRowBasic(String title, String description, LocalDateTime date, LocalTime time, boolean goodHabit, int duration, PathfinderTables table) {
         establishConnection();
         if(isConnectionEstablished()) {
             Statement stmt = null;
             try {
-                executeCreateExpressionBasicTables(title, description, stmt, date, time, goodHabit, table);
+                executeCreateExpressionBasicTables(title, description, stmt, date, time, goodHabit, duration, table);
             } catch(SQLException e) {
                 e.printStackTrace();
             } finally {
@@ -108,7 +110,7 @@ public class DBIOPathfinder extends DBCore {
 
     private int executeFindID(String title, PathfinderTables table, Statement stmt, ResultSet rs) throws SQLException {
         stmt = getConnection().createStatement();
-        title = StringFormatUtility.addSingleQuotes(title);
+        title = StringFormatUtility.addDoubleQuotes(title);
         String sql = "SELECT * FROM " + table.toString().toUpperCase() + " WHERE TITLE=" + title + ";";
         System.out.println(sql);
         rs = stmt.executeQuery(sql);
@@ -280,14 +282,29 @@ public class DBIOPathfinder extends DBCore {
 
     public void deleteProject(String projectTitle) {
         int projectID = findID(projectTitle, PathfinderTables.PROJECT);
-        int planID = findPlanIDOfParent(projectTitle, PathfinderTables.PROJECT);
+        int planID = findPlanIDOfParent(projectTitle, PathfinderTables.ACTION_PLAN);
         int goalID = findGoalIDOfParent(projectTitle, PathfinderTables.GOAL);
         if(planID == -1 && goalID == -1) {
             deleteUnrelatedComponent(projectID, PathfinderTables.PROJECT);
         } else {
             if(planID != -1) deleteRelatedComponent(planID, projectID, PathfinderRelationTables.PLAN_PROJECT_RELATIONS);
-            else if(goalID != -1) deleteRelatedComponent(planID, projectID, PathfinderRelationTables.GOAL_PROJECT_RELATIONS);
+            else if(goalID != -1) deleteRelatedComponent(goalID, projectID, PathfinderRelationTables.GOAL_PROJECT_RELATIONS);
         }
+    }
+
+    public void deletePlan(String planTitle) {
+        int planID = findID(planTitle, PathfinderTables.ACTION_PLAN);
+        int goalID = findGoalIDOfParent(planTitle, PathfinderTables.GOAL);
+        if(goalID == -1) {
+            deleteUnrelatedComponent(planID, PathfinderTables.ACTION_PLAN);
+        } else {
+            deleteRelatedComponent(goalID, planID, PathfinderRelationTables.GOAL_PLAN_RELATIONS);
+        }
+    }
+
+    public void deleteGoal(String goalTitle) {
+        int goalID = findID(goalTitle, PathfinderTables.GOAL);
+        deleteUnrelatedComponent(goalID, PathfinderTables.GOAL);
     }
 
     public void deleteHabit(String habitTitle) {
@@ -377,33 +394,6 @@ public class DBIOPathfinder extends DBCore {
         }
         return gatherTasks;
 
-    }
-
-    private BasicTask getTaskByID(int id) {
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                return executeFindTaskByID(id, stmt, rs);
-            } catch(SQLException e) {
-                e.printStackTrace();
-            } finally {
-                closeDownDBAction(stmt, rs);
-            }
-        }
-        return null;
-    }
-
-    private BasicTask executeFindTaskByID(int id, Statement stmt, ResultSet rs) throws SQLException {
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM BASIC_TASK WHERE ID=" + id + ";";
-        rs = stmt.executeQuery(sql);
-        if(rs.next()) {
-            return new BasicTask(rs.getString("TITLE"), rs.getString("DESCRIPTION"));
-        } else {
-            return null;
-        }
     }
 
     private List<Integer> findTaskIDs(int associatedID, PathfinderTables table) {
@@ -519,32 +509,32 @@ public class DBIOPathfinder extends DBCore {
         addRelation(goalTitle, planTitle, PathfinderRelationTables.GOAL_PLAN_RELATIONS);
     }
 
-    public void addRowDeadline(String title, String description, LocalDateTime date) {
-        addRowBasic(title, description, date, LocalTime.now(), false, PathfinderTables.DEADLINE);
+    public void addRowDeadline(String title, String description, LocalDateTime date, int duration) {
+        addRowBasic(title, description, date, LocalTime.now(), false, duration, PathfinderTables.DEADLINE);
     }
 
-    public void addRowDaily(String title, String description, LocalTime time) {
-        addRowBasic(title, description, LocalDateTime.now(), time, false, PathfinderTables.DAILY);
+    public void addRowDaily(String title, String description, LocalTime time, int duration) {
+        addRowBasic(title, description, LocalDateTime.now(), time, false, duration, PathfinderTables.DAILY);
     }
 
-    public void addRowHabit(String title, String description, boolean goodHabit) {
-        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), goodHabit, PathfinderTables.HABIT);
+    public void addRowHabit(String title, String description, boolean goodHabit, int duration) {
+        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), goodHabit, duration, PathfinderTables.HABIT);
     }
 
-    public void addRowTask(String title, String description) {
-        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, PathfinderTables.BASIC_TASK);
+    public void addRowTask(String title, String description, int duration) {
+        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, duration, PathfinderTables.BASIC_TASK);
     }
 
     public void addRowProject(String title, String description) {
-        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, PathfinderTables.PROJECT);
+        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, 0, PathfinderTables.PROJECT);
     }
 
     public void addRowGoal(String title, String description) {
-        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, PathfinderTables.GOAL);
+        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, 0, PathfinderTables.GOAL);
     }
 
     public void addRowPlan(String title, String description) {
-        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, PathfinderTables.ACTION_PLAN);
+        addRowBasic(title, description, LocalDateTime.now(), LocalTime.now(), false, 0, PathfinderTables.ACTION_PLAN);
     }
 
     private List<Deadline> getDeadlinesByRelationalID(int associatedID) {
@@ -555,33 +545,6 @@ public class DBIOPathfinder extends DBCore {
         }
         return gatherDeadlines;
 
-    }
-
-    private Deadline getDeadlineByID(int id) {
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                return executeFindDeadlineByID(id, stmt, rs);
-            } catch(SQLException e) {
-                e.printStackTrace();
-            } finally {
-                closeDownDBAction(stmt, rs);
-            }
-        }
-        return null;
-    }
-
-    private Deadline executeFindDeadlineByID(int id, Statement stmt, ResultSet rs) throws SQLException {
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM DEADLINE WHERE ID=" + id + ";";
-        rs = stmt.executeQuery(sql);
-        if(rs.next()) {
-            return new Deadline(rs.getString("TITLE"), rs.getString("DESCRIPTION"), LocalDateTime.parse(rs.getString("SCHEDULED_DATETIME")));
-        } else {
-            return null;
-        }
     }
 
     private List<Integer> findDeadlineIDs(int associatedID) {
@@ -655,62 +618,6 @@ public class DBIOPathfinder extends DBCore {
         return getDeadlinesByRelationalID(-1);
     }
 
-    public List<Habit> getHabits() {
-        List<Habit> emptyHabitList = new ArrayList<>();
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                return executeGetHabits(stmt, rs);
-            } catch(SQLException e) {
-                e.printStackTrace();
-            } finally {
-                closeDownDBAction(stmt, rs);
-            }
-        }
-        return emptyHabitList;
-    }
-
-    private List<Habit> executeGetHabits(Statement stmt, ResultSet rs) throws SQLException {
-        List<Habit> results = new ArrayList<>();
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM HABIT;";
-        rs = stmt.executeQuery(sql);
-        while(rs.next()) {
-            results.add(new Habit(rs.getString("TITLE"), rs.getString("DESCRIPTION"), rs.getBoolean("GOOD_HABIT"), rs.getInt("REPETITIONS")));
-        }
-        return results;
-    }
-
-    public List<Daily> getDailies() {
-        List<Daily> emptyDailyList = new ArrayList<>();
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                return executeGetDailies(stmt, rs);
-            } catch(SQLException e) {
-                e.printStackTrace();
-            } finally {
-                closeDownDBAction(stmt, rs);
-            }
-        }
-        return emptyDailyList;
-    }
-
-    private List<Daily> executeGetDailies(Statement stmt, ResultSet rs) throws SQLException {
-        List<Daily> results = new ArrayList<>();
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM DAILY;";
-        rs = stmt.executeQuery(sql);
-        while(rs.next()) {
-            results.add(new Daily(rs.getString("TITLE"), rs.getString("DESCRIPTION"), LocalTime.parse(rs.getString("SCHEDULED_TIME"))));
-        }
-        return results;
-    }
-
     private List<Integer> executeFindRelatedProjectIDs(int associatedID, Statement stmt, ResultSet rs) throws SQLException {
         List<Integer> results = new ArrayList<>();
         stmt = getConnection().createStatement();
@@ -741,32 +648,6 @@ public class DBIOPathfinder extends DBCore {
         return emptyIDList;
     }
 
-    private Project findProjectByID(int projectID) {
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                return executeFindProjectByID(projectID, stmt, rs);
-            } catch(SQLException e) {
-                e.printStackTrace();
-            } finally {
-                closeDownDBAction(stmt, rs);
-            }
-        }
-        return null;
-    }
-
-    private Project executeFindProjectByID(int projectID, Statement stmt, ResultSet rs) throws SQLException {
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM PROJECT WHERE ID=" + projectID + ";";
-        rs = stmt.executeQuery(sql);
-        if(rs.next()) {
-            return new Project(rs.getString("TITLE"), rs.getString("DESCRIPTION"));
-        }
-        return null;
-    }
-
     public List<Project> getPlanProjects(String planTitle) {
         int parentID = findID(planTitle, PathfinderTables.ACTION_PLAN);
         List<Project> relatedProjects = new ArrayList<>();
@@ -778,88 +659,61 @@ public class DBIOPathfinder extends DBCore {
     }
 
     public List<Project> getUnrelatedProjects() {
-        List<Project> emptyProjectList = new ArrayList<>();
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                return executeGetUnrelatedProjects(stmt, rs);
-            } catch(SQLException e) {
-                e.printStackTrace();
-            } finally {
-                closeDownDBAction(stmt, rs);
-            }
-        }
-        return emptyProjectList;
-    }
-
-    private List<Project> executeGetUnrelatedProjects(Statement stmt, ResultSet rs) throws SQLException {
-        List<Project> projects = new ArrayList<>();
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM PROJECT WHERE NOT EXISTS (" +
+        return getUnrelatedComponents(PathfinderTables.PROJECT, "NOT EXISTS (" +
                 "SELECT * FROM PLAN_PROJECT_RELATIONS WHERE PROJECT.ID = PLAN_PROJECT_RELATIONS.PROJECT_ID " +
-                "UNION SELECT * FROM GOAL_PROJECT_RELATIONS WHERE PROJECT.ID = GOAL_PROJECT_RELATIONS.PROJECT_ID)";
-        rs = stmt.executeQuery(sql);
-        while(rs.next()) {
-            projects.add(new Project(rs.getString("TITLE"), rs.getString("DESCRIPTION")));
-        }
-        return projects;
+                        "UNION SELECT * FROM GOAL_PROJECT_RELATIONS WHERE PROJECT.ID = GOAL_PROJECT_RELATIONS.PROJECT_ID)");
     }
 
     public List<ActionPlan> getUnrelatedPlans() {
-        List<ActionPlan> emptyPlans = new ArrayList<>();
+        return getUnrelatedComponents(PathfinderTables.ACTION_PLAN, "NOT EXISTS ( SELECT * FROM GOAL_PLAN_RELATIONS WHERE ACTION_PLAN.ID = GOAL_PLAN_RELATIONS.PLAN_ID )");
+    }
+
+    private <T> List<T> getUnrelatedComponents(PathfinderTables table, String condition) {
+        List<T> emptyList = new ArrayList<>();
         establishConnection();
         if(isConnectionEstablished()) {
             Statement stmt = null;
             ResultSet rs = null;
             try {
-                return executeGetUnrelatedPlans(stmt, rs);
+                return executeGetUnrelatedComponents(table, condition, stmt, rs);
             } catch(SQLException e) {
                 e.printStackTrace();
             } finally {
                 closeDownDBAction(stmt, rs);
             }
         }
-        return emptyPlans;
+        return emptyList;
     }
 
-    private List<ActionPlan> executeGetUnrelatedPlans(Statement stmt, ResultSet rs) throws SQLException {
-        List<ActionPlan> unrelatedPlans = new ArrayList<>();
+    private <T> List<T> executeGetUnrelatedComponents(PathfinderTables table, String condition, Statement stmt, ResultSet rs) throws SQLException {
+        List<T> toReturn = new ArrayList<>();
         stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM ACTION_PLAN WHERE NOT EXISTS ( SELECT * FROM GOAL_PLAN_RELATIONS WHERE ACTION_PLAN.ID = GOAL_PLAN_RELATIONS.PLAN_ID );";
+        String sql = getBundleLoader().selectAllFromWhere(table.toString(), condition);
+        System.out.println(sql);
         rs = stmt.executeQuery(sql);
         while(rs.next()) {
-            unrelatedPlans.add(new ActionPlan(rs.getString("TITLE"), rs.getString("DESCRIPTION")));
+            SQLResultBuilder resultBuilder = new SQLResultBuilder(rs, table);
+            toReturn.add(resultBuilder.getResult());
         }
-        return unrelatedPlans;
+        return toReturn;
     }
 
-    public List<Goal> getGoals() {
-        List<Goal> emptyGoals = new ArrayList<>();
-        establishConnection();
-        if(isConnectionEstablished()) {
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                return executeGetGoals(stmt, rs);
-            } catch(SQLException e) {
-                e.printStackTrace();
-            } finally {
-                closeDownDBAction(stmt, rs);
-            }
+    public List<Deadline> getDeadlinesByDate(LocalDate date) {
+        List<Deadline> allDeadlines = getDeadlines();
+        List<Deadline> deadlinesToReturn = new ArrayList<>();
+        for(Deadline deadline : allDeadlines) {
+            LocalDate toCompare = deadline.getSchedule().toLocalDate();
+            if(date.isEqual(toCompare)) deadlinesToReturn.add(deadline);
         }
-        return emptyGoals;
+        return deadlinesToReturn;
     }
 
-    private List<Goal> executeGetGoals(Statement stmt, ResultSet rs) throws SQLException {
-        List<Goal> goals = new ArrayList<>();
-        stmt = getConnection().createStatement();
-        String sql = "SELECT * FROM GOAL;";
-        rs = stmt.executeQuery(sql);
-        while(rs.next()) {
-            goals.add(new Goal(rs.getString("TITLE"), rs.getString("DESCRIPTION")));
-        }
-        return goals;
-    }
+    public List<Goal> getGoals() { return getAllDBList(PathfinderTables.GOAL); }
+    public List<Deadline> getDeadlines() { return getAllDBList(PathfinderTables.DEADLINE); }
+    public List<Daily> getDailies() { return getAllDBList(PathfinderTables.DAILY); }
+    public List<Habit> getHabits() { return getAllDBList(PathfinderTables.HABIT); }
+
+    private Project findProjectByID(int projectID) { return getRowWhere(PathfinderTables.PROJECT, "ID=" + projectID); }
+    private Deadline getDeadlineByID(int id) { return getRowWhere(PathfinderTables.DEADLINE, "ID=" + id);}
+    private BasicTask getTaskByID(int id) { return getRowWhere(PathfinderTables.BASIC_TASK, "ID=" + id);}
 }

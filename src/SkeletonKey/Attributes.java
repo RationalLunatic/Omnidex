@@ -2,7 +2,7 @@ package skeletonkey;
 
 public enum Attributes {
     INTENSITY,
-    CONSTANCY,
+    VITALITY,
 
     PRAXIS,
     THEORY,

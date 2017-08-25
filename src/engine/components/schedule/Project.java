@@ -8,7 +8,7 @@ public class Project extends BasicTask {
     private List<Deadline> timeSensitiveTasks;
 
     public Project(String title, String description) {
-        super(title, description);
+        super(title, description, 0);
         basicTasks = new ArrayList<>();
         timeSensitiveTasks = new ArrayList<>();
     }

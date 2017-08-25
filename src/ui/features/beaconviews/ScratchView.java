@@ -2,10 +2,9 @@ package ui.features.beaconviews;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import resources.StringFormatUtility;
 import resources.sqlite.SQLiteJDBC;
-import resources.sqlite.ScratchCategories;
+import resources.sqlite.sqlenumerations.ScratchCategories;
 import ui.components.PaneKeys;
 import ui.components.displaycomponents.SimpleListTextDisplay;
 import ui.components.inputcomponents.LabeledInputBox;

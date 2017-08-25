@@ -6,8 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.PaneKeys;
-import ui.components.PathfinderDeadlineDialog;
-import ui.components.PathfinderDialog;
+import ui.components.popupdialogs.PathfinderDeadlineDialog;
+import ui.components.popupdialogs.PathfinderDialog;
 import ui.components.displaycomponents.SimpleListTextDisplay;
 import ui.components.inputcomponents.EditableLabel;
 import ui.components.interviewcommunications.ViewRequest;
@@ -105,7 +105,7 @@ public class ProjectView extends ScalingStackPane {
         PathfinderDialog taskDialog = new PathfinderDialog("Task");
         Optional<BasicTask> result = taskDialog.showAndWait();
         if(result != null && result.isPresent()) {
-            SQLiteJDBC.getInstance().getPathfinderIO().addRowTask(result.get().getTitle(), result.get().getDescription());
+            SQLiteJDBC.getInstance().getPathfinderIO().addRowTask(result.get().getTitle(), result.get().getDescription(), 0);
             SQLiteJDBC.getInstance().getPathfinderIO().addProjectTaskRelation(projectTitle.getText(), result.get().getTitle());
             loadDisplayData();
         }
@@ -115,7 +115,7 @@ public class ProjectView extends ScalingStackPane {
         PathfinderDeadlineDialog deadlineDialog = new PathfinderDeadlineDialog("Deadline");
         Optional<Deadline> result = deadlineDialog.showAndWait();
         if(result != null && result.isPresent()) {
-            SQLiteJDBC.getInstance().getPathfinderIO().addRowDeadline(result.get().getTitle(), result.get().getDescription(), result.get().getSchedule());
+            SQLiteJDBC.getInstance().getPathfinderIO().addRowDeadline(result.get().getTitle(), result.get().getDescription(), result.get().getSchedule(), 0);
             SQLiteJDBC.getInstance().getPathfinderIO().addProjectDeadlineRelation(projectTitle.getText(), result.get().getTitle());
             loadDisplayData();
         }

@@ -2,6 +2,7 @@ package ui.components;
 
 public enum PaneKeys {
     LITERATURE (PaneLocation.CENTER),
+    LANGUAGE_LEARNER (PaneLocation.CENTER),
     GENRES (PaneLocation.WEST),
     EXERCISES (PaneLocation.WEST),
     ROUTINES (PaneLocation.EAST),
@@ -14,6 +15,8 @@ public enum PaneKeys {
     BIBLIOGRAPHY (PaneLocation.CENTER),
     CHRONOGRAPHY (PaneLocation.CENTER),
     VOCABULARY (PaneLocation.CENTER),
+    WORDFALL (PaneLocation.CENTER),
+    SUBJECT_LIST (PaneLocation.WEST),
     SCRIBE (PaneLocation.CENTER),
     PROJECT (PaneLocation.CENTER),
     PLAN (PaneLocation.CENTER),

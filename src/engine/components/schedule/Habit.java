@@ -4,8 +4,8 @@ public class Habit extends BasicTask {
     private int count;
     private boolean goodHabit;
 
-    public Habit(String title, String description, boolean goodHabit, int count) {
-        super(title, description);
+    public Habit(String title, String description, int duration, boolean goodHabit, int count) {
+        super(title, description, duration);
         this.goodHabit = goodHabit;
         this.count = count;
     }

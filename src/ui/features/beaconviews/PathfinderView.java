@@ -2,23 +2,20 @@ package ui.features.beaconviews;
 
 
 import engine.components.schedule.*;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.util.Pair;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.*;
 import ui.components.displaycomponents.DigitalClockDisplay;
 import ui.components.displaycomponents.SimpleListTextDisplay;
+import ui.components.inputcomponents.DoubleClickReader;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
 import ui.components.interviewcommunications.ViewRequestKeys;
+import ui.components.popupdialogs.PathfinderDailyDialog;
+import ui.components.popupdialogs.PathfinderDeadlineDialog;
+import ui.components.popupdialogs.PathfinderDialog;
+import ui.components.popupdialogs.PathfinderHabitDialog;
 import ui.components.scalingcomponents.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +40,7 @@ public class PathfinderView extends ScalingStackPane {
     private SimpleListTextDisplay plansDisplay;
     private SimpleListTextDisplay projectsDisplay;
     private DigitalClockDisplay clockDisplay;
+    private DoubleClickReader doubleClickReader;
 
     public PathfinderView(ViewRequestHandler commLink, ViewBindingsPack viewBindings, PaneKeys key) {
         super(commLink, viewBindings, key);
@@ -50,6 +48,7 @@ public class PathfinderView extends ScalingStackPane {
     }
 
     private void init() {
+        doubleClickReader = new DoubleClickReader();
         initContainers();
         initButtons();
         initButtonText();
@@ -105,13 +104,32 @@ public class PathfinderView extends ScalingStackPane {
         projectsDisplay = new SimpleListTextDisplay("Projects", getViewBindings());
         plansDisplay = new SimpleListTextDisplay("Plans", getViewBindings());
         goalsDisplay = new SimpleListTextDisplay("Goals", getViewBindings());
-        projectsDisplay.setOnClickBehavior(e -> getRequestSender().handleRequest(new ViewRequest(PaneKeys.PROJECT, ViewRequestKeys.VIEW_UPDATE, projectsDisplay.getTextOfSelected())));
-        plansDisplay.setOnClickBehavior(e -> getRequestSender().handleRequest(new ViewRequest(PaneKeys.PLAN, ViewRequestKeys.VIEW_UPDATE, plansDisplay.getTextOfSelected())));
-        goalsDisplay.setOnClickBehavior(e -> getRequestSender().handleRequest(new ViewRequest(PaneKeys.GOAL, ViewRequestKeys.VIEW_UPDATE, goalsDisplay.getTextOfSelected())));
+        projectsDisplay.setOnClickBehavior(e -> {
+            doubleClickReader.updateClicks();
+            if (doubleClickReader.isDoubleClick()) {
+                getRequestSender().handleRequest(new ViewRequest(PaneKeys.PROJECT, ViewRequestKeys.VIEW_UPDATE, projectsDisplay.getTextOfSelected()));
+            }
+        });
+        plansDisplay.setOnClickBehavior(e -> {
+            doubleClickReader.updateClicks();
+            if (doubleClickReader.isDoubleClick()) {
+                getRequestSender().handleRequest(new ViewRequest(PaneKeys.PLAN, ViewRequestKeys.VIEW_UPDATE, plansDisplay.getTextOfSelected()));
+            }
+        });
+
+        goalsDisplay.setOnClickBehavior(e -> {
+            doubleClickReader.updateClicks();
+            if (doubleClickReader.isDoubleClick()) {
+                getRequestSender().handleRequest(new ViewRequest(PaneKeys.GOAL, ViewRequestKeys.VIEW_UPDATE, goalsDisplay.getTextOfSelected()));
+            }
+        });
         clockDisplay = new DigitalClockDisplay(getViewBindings());
     }
 
     private void loadTextDisplayData() {
+        projectsDisplay.clear();
+        plansDisplay.clear();
+        goalsDisplay.clear();
         List<Project> projects = SQLiteJDBC.getInstance().getPathfinderIO().getUnrelatedProjects();
         for(Project project : projects) {
             projectsDisplay.addLine(project.getTitle());
@@ -130,7 +148,7 @@ public class PathfinderView extends ScalingStackPane {
     private void addTask() {
         BasicTask result = getResultsBasicDialog("Task").get();
         if(result != null) {
-            SQLiteJDBC.getInstance().getPathfinderIO().addRowTask(result.getTitle(), result.getDescription());
+            SQLiteJDBC.getInstance().getPathfinderIO().addRowTask(result.getTitle(), result.getDescription(), 0);
             getRequestSender().handleRequest(new ViewRequest(PaneKeys.TASKS_AND_DEADLINES, ViewRequestKeys.LIST_UPDATE));
         }
     }
@@ -138,7 +156,7 @@ public class PathfinderView extends ScalingStackPane {
     private void addDeadline() {
         Optional<Deadline> result = getResultsDeadlineDialog("Deadline");
         if(result != null) {
-            SQLiteJDBC.getInstance().getPathfinderIO().addRowDeadline(result.get().getTitle(), result.get().getDescription(), result.get().getSchedule());
+            SQLiteJDBC.getInstance().getPathfinderIO().addRowDeadline(result.get().getTitle(), result.get().getDescription(), result.get().getSchedule(), 0);
             getRequestSender().handleRequest(new ViewRequest(PaneKeys.TASKS_AND_DEADLINES, ViewRequestKeys.LIST_UPDATE));
         }
     }
@@ -146,7 +164,7 @@ public class PathfinderView extends ScalingStackPane {
     private void addHabit() {
         Optional<Habit> result = getResultsHabitDialog("Habit");
         if(result != null) {
-            SQLiteJDBC.getInstance().getPathfinderIO().addRowHabit(result.get().getTitle(), result.get().getDescription(), result.get().isGoodHabit());
+            SQLiteJDBC.getInstance().getPathfinderIO().addRowHabit(result.get().getTitle(), result.get().getDescription(), result.get().isGoodHabit(), 0);
             getRequestSender().handleRequest(new ViewRequest(PaneKeys.HABITS_AND_DAILIES, ViewRequestKeys.LIST_UPDATE));
         }
     }
@@ -154,7 +172,7 @@ public class PathfinderView extends ScalingStackPane {
     private void addDaily() {
         Optional<Daily> result = getResultsDailyDialog("Daily");
         if(result != null) {
-            SQLiteJDBC.getInstance().getPathfinderIO().addRowDaily(result.get().getTitle(), result.get().getDescription(),result.get().getScheduledTime());
+            SQLiteJDBC.getInstance().getPathfinderIO().addRowDaily(result.get().getTitle(), result.get().getDescription(),result.get().getScheduledTime(), 0);
             getRequestSender().handleRequest(new ViewRequest(PaneKeys.HABITS_AND_DAILIES, ViewRequestKeys.LIST_UPDATE));
         }
     }
@@ -239,6 +257,14 @@ public class PathfinderView extends ScalingStackPane {
     private void deleteScheduleComponent() {
         sendViewRequest(new ViewRequest(PaneKeys.TASKS_AND_DEADLINES, ViewRequestKeys.DELETE_REQUEST));
         sendViewRequest(new ViewRequest(PaneKeys.HABITS_AND_DAILIES, ViewRequestKeys.DELETE_REQUEST));
+        if(!projectsDisplay.getSelectedItem().isEmpty()) {
+            SQLiteJDBC.getInstance().getPathfinderIO().deleteProject(projectsDisplay.getSelectedItem());
+        } else if(!plansDisplay.getSelectedItem().isEmpty()) {
+            SQLiteJDBC.getInstance().getPathfinderIO().deletePlan(plansDisplay.getSelectedItem());
+        } else if(!goalsDisplay.getSelectedItem().isEmpty()) {
+            SQLiteJDBC.getInstance().getPathfinderIO().deleteGoal(goalsDisplay.getSelectedItem());
+        }
+        loadTextDisplayData();
     }
 }
 

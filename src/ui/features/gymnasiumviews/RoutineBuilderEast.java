@@ -2,9 +2,8 @@ package ui.features.gymnasiumviews;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import resources.datatypes.ExerciseRoutineRelation;
+import resources.datatypes.exercisedata.ExerciseRoutineRelation;
 import resources.sqlite.SQLiteJDBC;
-import sun.java2d.pipe.SpanShapeRenderer;
 import ui.components.displaycomponents.SimpleListTextDisplay;
 import ui.components.scalingcomponents.ScalingVBox;
 import ui.components.scalingcomponents.ViewBindingsPack;
@@ -47,8 +46,17 @@ public class RoutineBuilderEast extends ScalingVBox {
     }
 
     private void loadRoutines() {
+        routineList.clear();
         for(String routine : SQLiteJDBC.getInstance().getRoutines()) {
             routineList.addLine(routine);
         }
+    }
+
+    public void reload() { loadRoutines(); }
+
+    public String getSelectedRoutine() {
+        if(routineList.getSelectedItem() != null) {
+            return routineList.getSelectedItem();
+        } else return "";
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum QuaternalParadigms {
-    BODY(Stats.STRENGTH, Stats.DEXTERITY, Stats.PERCEPTION, Stats.VITALITY, Attributes.INTENSITY, Attributes.CONSTANCY),
+    BODY(Stats.STRENGTH, Stats.DEXTERITY, Stats.PERCEPTION, Stats.CONSTITUTION, Attributes.INTENSITY, Attributes.VITALITY),
     MIND(Stats.INTELLIGENCE, Stats.CUNNING, Stats.CHARISMA, Stats.WISDOM, Attributes.THEORY, Attributes.PRAXIS),
     SOUL(Stats.DISCIPLINE, Stats.NERVE, Stats.COURAGE, Stats.WILLPOWER, Attributes.ALACRITY, Attributes.RESOLUTION),
     SPIRIT(Stats.CREATIVITY, Stats.EMPATHY, Stats.FAITH, Stats.AWARENESS, Attributes.INSIGHT, Attributes.VISION);

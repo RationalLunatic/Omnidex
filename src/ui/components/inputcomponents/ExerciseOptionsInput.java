@@ -1,5 +1,6 @@
 package ui.components.inputcomponents;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import ui.components.inputcomponents.LabeledInputBox;
 import ui.components.scalingcomponents.ScalingHBox;
@@ -17,12 +18,14 @@ public class ExerciseOptionsInput extends ScalingHBox {
     }
 
     private void init(String exerciseName) {
+        this.setAlignment(Pos.CENTER);
         this.exerciseName = new Label(exerciseName);
         this.exerciseName.prefWidthProperty().bind(new ScaledDoubleBinding(getViewBindings().widthProperty(), 0.66));
-        repsPerSet = new LabeledInputBox("Reps: ", getViewBindings(), 0.33);
-        setsPerRoutine = new LabeledInputBox("Sets: ", getViewBindings(), 0.33);
-        repsPerSet.setText("0");
-        setsPerRoutine.setText("0");
+        this.exerciseName.setAlignment(Pos.CENTER);
+        repsPerSet = new LabeledInputBox("Reps: ", getViewBindings(), 0.25);
+        setsPerRoutine = new LabeledInputBox("Sets: ", getViewBindings(), 0.25);
+        repsPerSet.setText("1");
+        setsPerRoutine.setText("1");
         this.getChildren().addAll(this.exerciseName, repsPerSet, setsPerRoutine);
     }
 

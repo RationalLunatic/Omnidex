@@ -1,13 +1,13 @@
 package resources.sqlite;
 
 import engine.components.schedule.ToDoListTask;
-import resources.datatypes.ExerciseRoutineRelation;
+import resources.datatypes.exercisedata.ExerciseRoutineRelation;
 import resources.datatypes.Quote;
+import resources.sqlite.sqlenumerations.InventoryCategories;
 import ui.components.inputcomponents.ExerciseOptionsInput;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +32,11 @@ public class SQLiteJDBC {
 
     public DBIOPathfinder getPathfinderIO() {
         return pathfinderIO;
+    }
+    public DBIOLibrarian getLibraryIO() { return libraryIO; }
+
+    public void deleteExercise(String exerciseName) {
+        libraryIO.deleteExercise(exerciseName);
     }
 
     public void addTask(String taskName, String taskDesc, String taskDate) {
@@ -66,8 +71,12 @@ public class SQLiteJDBC {
         return libraryIO.getExercisesByCategory(category);
     }
 
-    public void addToExercises(String name, String desc, String category, String subcategory) {
-        libraryIO.addExercise(name, desc, category, subcategory);
+    public void addToExercises(String name, String desc, String category) {
+        libraryIO.addExercise(name, desc, category);
+    }
+
+    public void deleteRoutine(String routineName) {
+        libraryIO.deleteRoutine(routineName);
     }
 
     public void addToRoutines(String routineName, List<ExerciseOptionsInput> exerciseData) {

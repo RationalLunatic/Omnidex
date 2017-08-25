@@ -46,27 +46,23 @@ public class DBIOTaskTable extends DBCore {
         establishConnection();
         if(isConnectionEstablished()) {
             Statement stmt = null;
-            if(getStatementStatus() == StatementStatus.EMPTY) {
-                try {
-                    stmt = getConnection().createStatement();
-                    if(isValidTask(task)) {
-                        updateGeneratedID();
-                        String sql = "INSERT INTO TASK (ID,NAME,DESCRIPTION,SCHEDULE,COMPLETED) " +
-                                "VALUES (" + generatedID + ", " + task + ", 0);";
-                        stmt.executeUpdate(sql);
-                        System.out.println("Successfully inserted task");
-                    } else {
-                        System.out.println("Task Invalid");
-                        System.out.println(task);
-                    }
-                } catch (SQLException e) {
-                    System.out.println("Failed to insert task");
-                    e.printStackTrace();
-                } finally {
-                    closeDownDBAction(stmt);
+            try {
+                stmt = getConnection().createStatement();
+                if(isValidTask(task)) {
+                    updateGeneratedID();
+                    String sql = "INSERT INTO TASK (ID,NAME,DESCRIPTION,SCHEDULE,COMPLETED) " +
+                            "VALUES (" + generatedID + ", " + task + ", 0);";
+                    stmt.executeUpdate(sql);
+                    System.out.println("Successfully inserted task");
+                } else {
+                    System.out.println("Task Invalid");
+                    System.out.println(task);
                 }
-            } else {
-                invalidStatementMessage();
+            } catch (SQLException e) {
+                System.out.println("Failed to insert task");
+                e.printStackTrace();
+            } finally {
+                closeDownDBAction(stmt);
             }
         } else {
             notConnectedMessage("insertTask");

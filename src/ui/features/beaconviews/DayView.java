@@ -1,19 +1,21 @@
 package ui.features.beaconviews;
 
 import engine.components.schedule.ToDoListTask;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import resources.StringFormatUtility;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.PaneKeys;
-import ui.components.scalingcomponents.ScalingButton;
-import ui.components.scalingcomponents.ScalingLabel;
-import ui.components.scalingcomponents.ScalingStackPane;
+import ui.components.displaycomponents.ScalingTimeDisplay;
+import ui.components.scalingcomponents.*;
 import ui.components.interviewcommunications.ViewRequest;
 import ui.components.interviewcommunications.ViewRequestHandler;
-import ui.components.scalingcomponents.ViewBindingsPack;
+import ui.custombindings.ScaledDoubleBinding;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,61 +25,72 @@ import java.util.Map;
 
 
 public class DayView extends ScalingStackPane {
-    private VBox mainContainer;
-    private VBox hourDisplay;
-    private HBox dayTitleContainer;
-    private HBox returnButtonContainer;
+    private ScalingVBox mainContainer;
+    private ScalingHBox dayTitleContainer;
+    private ScalingHBox returnButtonContainer;
     private Button returnButton;
     private ScalingLabel dayTitle;
     private ScalingButton previous;
     private ScalingButton next;
+    private Slider timeScale;
+    private ScalingTimeDisplay timeDisplay;
     private LocalDate today;
     private ViewBindingsPack viewBindings;
-    private Map<Integer, HourTile> hourMap;
-    private Map<Integer, ToDoListTask> taskList;
+
 
     public DayView(ViewRequestHandler commLink, ViewBindingsPack viewBindings) {
         super(commLink, viewBindings, PaneKeys.DAY);
-        this.hourMap = new HashMap<>();
         this.viewBindings = viewBindings;
         this.today = LocalDate.now();
         this.setAlignment(Pos.CENTER);
         init(commLink);
-        updateDayData();
     }
 
     private void init(ViewRequestHandler commLink) {
         initElements();
-        loadDayData();
-        for(int i = 0; i < 24; i++) {
-            LocalTime currentHour = LocalTime.of(i, 0);
-            LocalDateTime currentDateTime = LocalDateTime.of(today, currentHour);
-            HourTile currentHourTile = new HourTile(commLink, viewBindings, PaneKeys.HOUR, currentDateTime);
-            if(taskList.keySet().contains(currentHour.getHour())) {
-                currentHourTile.setTaskDescription(taskList.get(currentHour.getHour()).getDescription());
-            }
-            hourMap.put(i, currentHourTile);
-            hourDisplay.getChildren().add(currentHourTile);
-        }
-
-        mainContainer.getChildren().add(dayTitleContainer);
-        mainContainer.getChildren().add(hourDisplay);
-        mainContainer.getChildren().add(returnButtonContainer);
+        addElementsToMainContainer();
         this.getChildren().add(mainContainer);
+    }
+
+    private void addElementsToMainContainer() {
+        mainContainer.getChildren().add(dayTitleContainer);
+        mainContainer.getChildren().add(timeScale);
+        mainContainer.getChildren().add(timeDisplay);
+        mainContainer.getChildren().add(returnButtonContainer);
     }
 
     private void initElements() {
         initContainers();
         initButtons();
         initTitle();
+        initScalingTimeDisplay();
+        initTimeScaleSlider();
         addChildrenToContainers();
         alignContainers();
+    }
+
+    private void initScalingTimeDisplay() {
+        timeDisplay = new ScalingTimeDisplay(getRequestSender(), getViewBindings(), getPersonalKey(), today);
+    }
+
+    private void initTimeScaleSlider() {
+        timeScale = new Slider();
+        timeScale.setMajorTickUnit(1.0);
+        timeScale.setMin(0);
+        timeScale.setMax(timeDisplay.getValidMinuteScales().size()-1);
+        timeScale.setValue(timeDisplay.getCurrentIndex());
+        timeScale.showTickMarksProperty().set(true);
+        timeScale.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                timeDisplay.setIndexOfMinutesPerTick(newValue.intValue());
+            }
+        });
     }
 
     private void alignContainers() {
         dayTitleContainer.setAlignment(Pos.CENTER);
         returnButtonContainer.setAlignment(Pos.CENTER);
-        hourDisplay.prefHeightProperty().bind(this.prefHeightProperty());
         mainContainer.prefHeightProperty().bind(this.prefHeightProperty());
     }
 
@@ -89,61 +102,42 @@ public class DayView extends ScalingStackPane {
     }
 
     private void initContainers() {
-        mainContainer = new VBox();
-        hourDisplay = new VBox();
-        dayTitleContainer = new HBox();
-        returnButtonContainer = new HBox();
+        mainContainer = new ScalingVBox(getViewBindings());
+        dayTitleContainer = new ScalingHBox(getViewBindings());
+        returnButtonContainer = new ScalingHBox(getViewBindings());
     }
 
     private void initButtons() {
+        ScaledDoubleBinding buttonHeightBinding = new ScaledDoubleBinding(getViewBindings().heightProperty(), 0.25);
+        ViewBindingsPack buttonBindingsPack = new ViewBindingsPack(getViewBindings().widthProperty(), buttonHeightBinding);
         returnButton = new Button("Return");
         returnButton.setOnMouseClicked(e -> returnToMonthView());
-        previous = new ScalingButton("Previous", viewBindings);
+        previous = new ScalingButton("Previous", buttonBindingsPack);
         previous.setOnMouseClicked(e -> loadPreviousDay());
-        next = new ScalingButton("Next", viewBindings);
+        next = new ScalingButton("Next", buttonBindingsPack);
         next.setOnMouseClicked(e -> loadNextDay());
     }
 
     private void loadPreviousDay() {
         LocalDate yesterday = today.minusDays(1);
         setDate(yesterday);
-        loadDayData();
-        updateDayData();
+        initScalingTimeDisplay();
+        mainContainer.getChildren().clear();
+        addElementsToMainContainer();
     }
 
     private void loadNextDay() {
         LocalDate tomorrow = today.plusDays(1);
         setDate(tomorrow);
-        loadDayData();
-        updateDayData();
+        initScalingTimeDisplay();
+        mainContainer.getChildren().clear();
+        addElementsToMainContainer();
     }
 
     private void initTitle() {
         dayTitle = new ScalingLabel(viewBindings.widthProperty(), "Init Title", 0.175);
         dayTitle.setAlignment(Pos.CENTER);
         dayTitle.prefWidthProperty().bind(this.prefWidthProperty());
-    }
-
-    private void loadDayData() {
-        taskList = SQLiteJDBC.getInstance().getTasksForDay(today);
-    }
-
-    private void clearDayData() {
-        for(int i = 0; i < 24; i++) {
-            hourMap.get(i).setTaskDescription("");
-        }
-    }
-
-    private void updateDayData() {
-        clearDayData();
-        for(int i = 0; i < 24; i++) {
-            LocalTime currentHour = LocalTime.of(i, 0);
-            LocalDateTime newDateTime = LocalDateTime.of(today, currentHour);
-            hourMap.get(i).updateDateTime(newDateTime);
-        }
-        for(int hour : taskList.keySet()) {
-            hourMap.get(hour).setTaskDescription(taskList.get(hour).getDescription());
-        }
     }
 
     public void setDate(LocalDate date) {
