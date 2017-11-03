@@ -30,6 +30,8 @@ public class MainViewCommLink extends ViewRequestHandler {
     private ScalingVBox west;
     private EastPanes eastPanes;
     private ScalingVBox east;
+    private SouthPanes southPanes;
+    private ScalingHBox south;
     private Map<PaneKeys.PaneLocation, PanePack> actionToLocationRouter;
 
     public MainViewCommLink() {
@@ -58,6 +60,12 @@ public class MainViewCommLink extends ViewRequestHandler {
         this.eastPanes = eastPanes;
         this.east = east;
         actionToLocationRouter.put(PaneKeys.PaneLocation.EAST, eastPanes);
+    }
+
+    public void addSouthPanes(SouthPanes southPanes, ScalingHBox south) {
+        this.southPanes = southPanes;
+        this.south = south;
+        actionToLocationRouter.put(PaneKeys.PaneLocation.SOUTH, southPanes);
     }
 
 

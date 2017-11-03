@@ -27,11 +27,6 @@ public class BeaconView extends ScalingStackPane {
     private SimpleListTextDisplay agendaImmediate;
     private SimpleListTextDisplay agendaGoals;
     private SimpleListTextDisplay agendaHighlights;
-    private ScalingHBox topRow;
-    private ScalingHBox bottomRow;
-    private ScalingButton monthLink;
-    private ScalingButton todayLink;
-    private ScalingButton pathfinderLink;
     private ScalingLabel dateLabel;
     private DigitalClockDisplay clockDisplay;
 
@@ -42,9 +37,6 @@ public class BeaconView extends ScalingStackPane {
 
     private void init() {
         initContainers();
-        initButtons();
-        initButtonText();
-        initButtonBehavior();
         initUIDisplays();
         addUIElementsToContainers();
         initAgenda();
@@ -52,8 +44,6 @@ public class BeaconView extends ScalingStackPane {
 
     private void initContainers() {
         mainContainer = new ScalingVBox(getViewBindings());
-        topRow = new ScalingHBox(getViewBindings());
-        bottomRow = new ScalingHBox(getViewBindings());
         agenda = new ScalingHBox(getViewBindings());
         agendaImmediate = new SimpleListTextDisplay("Current Agenda", getViewBindings());
         agendaHighlights = new SimpleListTextDisplay("Immediate Action", getViewBindings());
@@ -62,38 +52,9 @@ public class BeaconView extends ScalingStackPane {
         dateDisplay = new ScalingHBox(getViewBindings());
     }
 
-    private void initButtons() {
-        ScaledDoubleBinding buttonHeightBinding = new ScaledDoubleBinding(getViewBindings().heightProperty(), 0.15);
-        ViewBindingsPack buttonPack = new ViewBindingsPack(getViewBindings().widthProperty(), buttonHeightBinding);
-        pathfinderLink = new ScalingButton(buttonPack);
-        monthLink = new ScalingButton(buttonPack);
-        todayLink = new ScalingButton(buttonPack);
-    }
-
-    private void initButtonText() {
-        pathfinderLink.setText("Open Pathfinder");
-        monthLink.setText("Calendar");
-        todayLink.setText("Daily Planner");
-    }
-
-    private void pathfinderRequests() {
-        sendViewRequest(new ViewRequest(PaneKeys.PATHFINDER));
-        sendViewRequest(new ViewRequest(PaneKeys.HABITS_AND_DAILIES));
-        sendViewRequest(new ViewRequest(PaneKeys.TASKS_AND_DEADLINES));
-    }
-
-    private void initButtonBehavior() {
-        pathfinderLink.setOnMouseClicked(e -> pathfinderRequests());
-        monthLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.MONTH)));
-        todayLink.setOnMouseClicked(e -> sendViewRequest(new ViewRequest(PaneKeys.DAY, LocalDate.now())));
-    }
-
     private void addUIElementsToContainers() {
-        topRow.getChildren().add(pathfinderLink);
-        bottomRow.getChildren().add(monthLink);
-        bottomRow.getChildren().add(todayLink);
         agenda.getChildren().addAll(agendaHighlights, agendaImmediate, agendaGoals);
-        mainContainer.getChildren().addAll(dateDisplay, clockDisplay, dailyAffirmation, agenda, topRow, bottomRow);
+        mainContainer.getChildren().addAll(dateDisplay, clockDisplay, dailyAffirmation, agenda);
         mainContainer.setAlignment(Pos.TOP_CENTER);
         this.getChildren().add(mainContainer);
         this.setAlignment(Pos.TOP_CENTER);

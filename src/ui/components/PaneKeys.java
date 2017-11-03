@@ -32,7 +32,8 @@ public enum PaneKeys {
     BEACON (PaneLocation.CENTER),
     ACADEMY (PaneLocation.CENTER),
     VAULT (PaneLocation.CENTER),
-    GYMNASIUM (PaneLocation.CENTER);
+    GYMNASIUM (PaneLocation.CENTER),
+    BEACON_BUTTONS (PaneLocation.SOUTH);
 
     private final PaneLocation location;
     PaneKeys(PaneLocation location) {

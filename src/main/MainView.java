@@ -1,12 +1,11 @@
 package main;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import resources.sqlite.SQLiteJDBC;
 import ui.components.interviewcommunications.MainViewCommLink;
-import ui.components.mainpanes.CenterPanes;
-import ui.components.mainpanes.EastPanes;
-import ui.components.mainpanes.NorthPanes;
-import ui.components.mainpanes.WestPanes;
+import ui.components.mainpanes.*;
 import ui.components.scalingcomponents.CenterParentScalingStackPane;
 import ui.components.scalingcomponents.ScalingHBox;
 import ui.components.scalingcomponents.ScalingVBox;
@@ -28,6 +27,7 @@ public class MainView extends BorderPane {
     private NorthPanes northPanes;
     private WestPanes westPanes;
     private EastPanes eastPanes;
+    private SouthPanes southPanes;
     private boolean debugMode;
     private MainViewCommLink commLink;
     private DirectDoubleBinding width;
@@ -47,18 +47,21 @@ public class MainView extends BorderPane {
         initNorthPanes();
         initWestPanes();
         initEastPanes();
+        initSouthPanes();
         setScalingPanes();
         commLink.addCenterPanes(centerPanes, center);
         commLink.addNorthPanes(northPanes, north);
         commLink.addWestPanes(westPanes, west);
         commLink.addEastPanes(eastPanes, east);
+        commLink.addSouthPanes(southPanes, south);
         debugMode = false;
         toggleBorders();
+        initBehaviors();
     }
 
     private void initCenterPanes() {
         ScaledDoubleBinding widthBinding = new ScaledDoubleBinding(width, bundleLoader.centerPaneScalingFactor());
-        ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, bundleLoader.centerPaneScalingFactor());
+        ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 1);
         ViewBindingsPack centerPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
         center = new CenterParentScalingStackPane(centerPanesBindingPack);
         centerPanes = new CenterPanes(center, commLink, centerPanesBindingPack);
@@ -83,6 +86,13 @@ public class MainView extends BorderPane {
         ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 1);
         ViewBindingsPack eastPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
         eastPanes = new EastPanes(east, commLink, eastPanesBindingPack);
+    }
+
+    private void initSouthPanes() {
+        ScaledDoubleBinding widthBinding = new ScaledDoubleBinding(width, 1);
+        ScaledDoubleBinding heightBinding = new ScaledDoubleBinding(height, 0.125);
+        ViewBindingsPack southPanesBindingPack = new ViewBindingsPack(widthBinding, heightBinding);
+        southPanes = new SouthPanes(south, commLink, southPanesBindingPack);
     }
 
     private void loadResources() {
@@ -132,6 +142,27 @@ public class MainView extends BorderPane {
             showBorders();
         } else {
             hideBorders();
+        }
+    }
+
+    private void initBehaviors() {
+        //this.setOnMouseMoved(e -> toggleEdgeDisplays(e));
+    }
+
+    private void toggleEdgeDisplays(MouseEvent e) {
+        if (e.getScreenY() < this.getHeight()/8) {
+            this.setTop(north);
+        } else if (e.getScreenY() > this.getHeight() * 7 / 8) {
+            this.setBottom(south);
+        } else if (e.getScreenX() > this.getWidth() * 7 / 8) {
+            this.setRight(east);
+        } else if (e.getScreenX() < this.getWidth() / 8) {
+            this.setLeft(west);
+        } else {
+            this.setTop(null);
+            this.setBottom(null);
+            this.setRight(null);
+            this.setLeft(null);
         }
     }
 
